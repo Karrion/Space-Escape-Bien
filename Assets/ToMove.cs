@@ -18,7 +18,7 @@ public class ToMove : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(agent.remainingDistance);
+        //Debug.Log(agent.remainingDistance);
         if (Waypointreached == false)
         {
             agent.destination = goal.position;
