@@ -52,6 +52,7 @@ public class Mirilla : MonoBehaviour {
         else {
             camara.transform.position = new Vector3(camara.transform.position.x, camara.transform.position.y, camaraLejos.transform.position.z);
             mirillaRenderer.enabled = false;
+			mirillaPequeñaRenderer.enabled = false;
         }
         Vector3 pos = Input.mousePosition;
         // pos.z = transform.position.z - Camera.main.transform.position.z;

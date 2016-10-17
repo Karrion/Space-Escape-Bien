@@ -52,6 +52,7 @@ public class script : MonoBehaviour
                     currentPatrol = agent.destination;
                     line.SetPosition(0, transform.position);
                     line.SetPosition(1, hit.transform.position);
+					agent.destination = player.transform.position;
                     return mode;
                     }
                 }
@@ -72,7 +73,8 @@ public class script : MonoBehaviour
 
         if (CanSeePlayer().Equals(Mode.Alert))
         {
-            agent.destination = player.transform.position;
+			if(agent.remainingDistance > 1.5f)
+            	agent.destination = player.transform.position;
             //agent.autoBraking = true;
             alertTime += Time.deltaTime;
             if (alertTime >= 10.0f)
