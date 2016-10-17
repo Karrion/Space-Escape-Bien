@@ -45,22 +45,20 @@ public class script : MonoBehaviour
             {
                 if (Physics.Raycast(transform.position, rayDirection, out hit, visibilityDistance))
                 {
-                    if (hit.transform.CompareTag("Player"))
-                    {
-                        mode = Mode.Alert;
-                        Debug.Log("Te veo");
-                        currentPatrol = agent.destination;
-                        line.SetPosition(0, transform.position);
-                        line.SetPosition(1, hit.transform.position);
-                        return mode;
-                    }else{
-                        Debug.Log("Veo pared");
-                        mode = Mode.Patrol;
-                        agent.destination = currentPatrol;
-                        return mode;
+                if (hit.transform.CompareTag("Player"))
+                {
+                    mode = Mode.Alert;
+                    Debug.Log("Te veo");
+                    currentPatrol = agent.destination;
+                    line.SetPosition(0, transform.position);
+                    line.SetPosition(1, hit.transform.position);
+                    return mode;
                     }
                 }
-            }
+            Debug.Log("No veo");
+            mode = Mode.Patrol;
+            return mode;
+        }
         return Mode.Patrol;
     }
 
@@ -72,18 +70,22 @@ public class script : MonoBehaviour
             GotoNextPoint();
         }
 
-        CanSeePlayer();
-        
-        if (mode.Equals(Mode.Alert))
+        if (CanSeePlayer().Equals(Mode.Alert))
         {
             agent.destination = player.transform.position;
+            //agent.autoBraking = true;
             alertTime += Time.deltaTime;
             if (alertTime >= 10.0f)
             {
                 mode = Mode.Patrol;
-            } else if(CanSeePlayer() == Mode.Alert)
+                agent.autoBraking = false;
+            }
+            else if(CanSeePlayer() == Mode.Alert)
             {
                 alertTime = 0.0f;
+            }else
+            {
+                agent.destination = currentPatrol;
             }
                 
         }
