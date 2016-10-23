@@ -69,10 +69,15 @@
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <Compile Include="Assets\IA.cs" />
     <Compile Include="Assets\IAVista.cs" />
 >>>>>>> 96eca3889f385501ffa8d3705fcab730359cbe22
+=======
+    <Compile Include="Assets\IA.cs" />
+    <Compile Include="Assets\IAVista.cs" />
+>>>>>>> origin/master
     <Compile Include="Assets\Mirilla.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
@@ -85,10 +90,13 @@
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\ToMove.cs" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="Assets\ia.cs" />
     <Compile Include="Assets\script.cs" />
 =======
 >>>>>>> 96eca3889f385501ffa8d3705fcab730359cbe22
+=======
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
