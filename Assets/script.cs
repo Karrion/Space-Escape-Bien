@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class script : MonoBehaviour
+public class IA : MonoBehaviour
 {
 
     public Transform[] points;
