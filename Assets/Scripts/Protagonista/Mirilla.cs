@@ -2,17 +2,18 @@
 using System.Collections;
 
 public class Mirilla : MonoBehaviour {
-    private SpriteRenderer mirillaRenderer;
-    public SpriteRenderer mirillaPequeñaRenderer;
+    public static bool estaApuntando = false;//Para decirle al script del jugador si esta apuntando o no.
+
+    private SpriteRenderer mirillaRenderer;//Imagen de la mirilla
+    public SpriteRenderer mirillaPequeñaRenderer;//Imagen de la mirilla cuando apunta a un enemigo
     public GameObject camara;
-    public GameObject camaraCerca;
-    public GameObject camaraLejos;
-    public bool enemigoApuntado = false;
+    public GameObject camaraCerca;//Gameobject que indica la posición de la camara cuando esta alejada
+    public GameObject camaraLejos;//Gameobject que indica la posición de la camara cuando esta apuntando(más cerca)
+    public bool enemigoApuntado = false;//Si esta apuntando a un enemigo.
     // Use this for initialization
     void Start()
     {
         mirillaRenderer = GetComponent<SpriteRenderer>();
-        
     }
 
     void FixedUpdate()
@@ -47,12 +48,14 @@ public class Mirilla : MonoBehaviour {
             if (!enemigoApuntado)
             {
                 mirillaRenderer.enabled = true;
+                estaApuntando = true;//Para decirle al script del jugador que esta apuntando
             }
         }
         else {
             camara.transform.position = new Vector3(camara.transform.position.x, camara.transform.position.y, camaraLejos.transform.position.z);
             mirillaRenderer.enabled = false;
-			mirillaPequeñaRenderer.enabled = false;
+            estaApuntando = false;//Para decirle al script del jugador que no esta apuntando
+            mirillaPequeñaRenderer.enabled = false;
         }
         Vector3 pos = Input.mousePosition;
         // pos.z = transform.position.z - Camera.main.transform.position.z;

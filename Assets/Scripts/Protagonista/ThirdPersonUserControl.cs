@@ -51,16 +51,28 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             bool crouch = Input.GetKey(KeyCode.C);
 
             // calculate move direction to pass to character
-            if (m_Cam != null)
+            if (m_Cam != null && Mirilla.estaApuntando)//Si apunta y se mueve tiene menos velocidad
+            {
+                // calculate camera relative direction to move:
+                m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(0.1f, 0, 0.1f)).normalized;
+                m_Move = v * 0.6f * m_CamForward + h * m_Cam.right;// v * 0.6f, es donde se le baja la velocidad
+            }
+            else if (Mirilla.estaApuntando)
+            {
+                // we use world-relative directions in the case of no main camera
+                m_Move = v * 0.6f * Vector3.forward + h * Vector3.right *0.1f;// v * 0.6f, es donde se le baja la velocidad
+            }
+            else if (m_Cam != null && !Mirilla.estaApuntando)
             {
                 // calculate camera relative direction to move:
                 m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-                m_Move = v*m_CamForward + h*m_Cam.right;
+                m_Move = v * m_CamForward + h * m_Cam.right;
+                
             }
-            else
+            else if (!Mirilla.estaApuntando)
             {
                 // we use world-relative directions in the case of no main camera
-                m_Move = v*Vector3.forward + h*Vector3.right;
+                m_Move = v * Vector3.forward + h * Vector3.right;
             }
 #if !MOBILE_INPUT
 			// walk speed multiplier

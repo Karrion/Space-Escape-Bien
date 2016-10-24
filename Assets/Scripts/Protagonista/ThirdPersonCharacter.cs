@@ -141,7 +141,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			// the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
 			// which affects the movement speed because of the root motion.
-			if (m_IsGrounded && move.magnitude > 0)
+			if (m_IsGrounded && move.magnitude > 0 )
 			{
 				m_Animator.speed = m_AnimSpeedMultiplier;
 			}
