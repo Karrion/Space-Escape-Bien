@@ -30,6 +30,7 @@ public class Mirilla : MonoBehaviour {
               
                 Debug.DrawLine(ray.origin, hit.point);
                 enemigoApuntado = true;
+                shoting();//Aprobecho el script y disparo xD
             }
             else {
                 
@@ -38,6 +39,13 @@ public class Mirilla : MonoBehaviour {
                 enemigoApuntado = false;
             }
             
+    }
+
+    void shoting() {
+        if (Input.GetMouseButtonDown(0)) {
+            Debug.Log("Acuestate y suda (Dormir)");
+            //TODO:Completar tirando un gameobject si vemos que queda mejor.
+        }
     }
 
     // Update is called once per frame
