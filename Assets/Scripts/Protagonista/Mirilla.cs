@@ -14,6 +14,7 @@ public class Mirilla : MonoBehaviour {
     void Start()
     {
         mirillaRenderer = GetComponent<SpriteRenderer>();
+        Cursor.visible = false;
     }
 
     void FixedUpdate()
