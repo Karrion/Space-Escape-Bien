@@ -8,22 +8,22 @@ public class IA : MonoBehaviour
     public Transform[] points;
     private int destPoint = 0;
     private NavMeshAgent agent;
-    private float visibilityDistance = 10f;
     public GameObject player;
-    private int fieldOfViewDegrees = 90;
-    private LineRenderer line;
-    enum Mode { Alert, Patrol };
+    private int fieldOfViewDegrees = 110;
+    enum Mode { Alert, Patrol, Shooting };
     Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
     private Vector3 currentPatrol;
+    private bool inSight;
+    private SphereCollider sphere;
 
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        line = GetComponent<LineRenderer>();
+        player = GameObject.FindGameObjectWithTag("Player");
         agent.autoBraking = false;
-        GotoNextPoint();
+        sphere = GetComponent<SphereCollider>();
     }
 
 
@@ -41,26 +41,27 @@ public class IA : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            inSight = false;
             RaycastHit hit;
             Vector3 rayDirection = player.transform.position - transform.position;
             if ((Vector3.Angle(rayDirection, transform.forward)) <= fieldOfViewDegrees * 0.5f)
             {
-                if (Physics.Raycast(transform.position, rayDirection, out hit, visibilityDistance))
+                if (Physics.Raycast(transform.position + transform.up, rayDirection.normalized, out hit, sphere.radius))
                 {
                     if (hit.transform.CompareTag("Player"))
                     {
-                        mode = Mode.Alert;
-                        Debug.Log("Te veo");
-                        currentPatrol = agent.destination;
-                        line.SetPosition(0, transform.position);
-                        line.SetPosition(1, hit.transform.position);
-                        agent.destination = player.transform.position;
+                        if (mode != Mode.Shooting)
+                        {
+                            mode = Mode.Alert;
+                            inSight = true;
+                            currentPatrol = agent.destination;
+                            agent.autoBraking = true;
+                        }
                     }
                 }
                 else
                 {
-                    Debug.Log("No veo");
-                    mode = Mode.Patrol;
+                    inSight = false;
                 }          
             }
         }
@@ -75,20 +76,57 @@ public class IA : MonoBehaviour
             case Mode.Alert:
                 Alert();
                 break;
+            case Mode.Shooting:
+                Shooting();
+                break;
             default:
                 break;
         }
 
     }
 
+    private void Shooting()
+    {
+        if (agent.remainingDistance <= 10f)
+        {
+            agent.Stop();
+            agent.destination = player.transform.position;
+        }
+        else
+        {
+            
+            Debug.Log("Marchamos en loca persecución");
+            agent.Resume();
+            mode = Mode.Alert;
+            
+        }
+    }
+
     private void Alert()
     {
-        throw new NotImplementedException();
+        if(inSight == true)
+        {
+            agent.destination = player.transform.position;
+        }
+        else
+        {
+            alertTime += Time.deltaTime;
+            if(alertTime >= 10.0f)
+            {
+                alertTime = 0;
+                mode = Mode.Patrol;
+                agent.destination = currentPatrol;
+            }
+        }
+        if(agent.remainingDistance <= 2.5f && inSight)
+        {
+            mode = Mode.Shooting;
+        }
     }
 
     private void Patrol()
     {
-
+       if (agent.autoBraking == true) agent.autoBraking = false;
        if (agent.remainingDistance < 1)
         {
             GotoNextPoint();
