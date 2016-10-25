@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: d01f798974337d0409336c5cfe92442b
+timeCreated: 1477405081
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: brazalete.002
+    100002: brazalete.003
+    100004: brazos.001
+    100006: Casco.001
+    100008: Cinturon.001
+    100010: cosacintura.001
+    100012: Cuerpo.001
+    100014: //RootNode
+    100016: hombreras.001
+    100018: manos.002
+    100020: manos.003
+    100022: Pie.002
+    100024: Pie.003
+    100026: Piernas.001
+    400000: brazalete.002
+    400002: brazalete.003
+    400004: brazos.001
+    400006: Casco.001
+    400008: Cinturon.001
+    400010: cosacintura.001
+    400012: Cuerpo.001
+    400014: //RootNode
+    400016: hombreras.001
+    400018: manos.002
+    400020: manos.003
+    400022: Pie.002
+    400024: Pie.003
+    400026: Piernas.001
+    2300000: brazalete.002
+    2300002: brazalete.003
+    2300004: brazos.001
+    2300006: Casco.001
+    2300008: Cinturon.001
+    2300010: cosacintura.001
+    2300012: Cuerpo.001
+    2300014: hombreras.001
+    2300016: manos.002
+    2300018: manos.003
+    2300020: Pie.002
+    2300022: Pie.003
+    2300024: Piernas.001
+    3300000: brazalete.002
+    3300002: brazalete.003
+    3300004: brazos.001
+    3300006: Casco.001
+    3300008: Cinturon.001
+    3300010: cosacintura.001
+    3300012: Cuerpo.001
+    3300014: hombreras.001
+    3300016: manos.002
+    3300018: manos.003
+    3300020: Pie.002
+    3300022: Pie.003
+    3300024: Piernas.001
+    4300000: brazalete.002
+    4300002: brazalete.003
+    4300004: brazos.001
+    4300006: Casco.001
+    4300008: Cinturon.001
+    4300010: cosacintura.001
+    4300012: Cuerpo.001
+    4300014: hombreras.001
+    4300016: manos.002
+    4300018: manos.003
+    4300020: Pie.002
+    4300022: Pie.003
+    4300024: Piernas.001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 1
+    motionNodeName: 
+    animationImportErrors: '
+
+      Imported file ''EnemigoMixamoGrande'' conversion failed: Required human bone
+      ''Hips'' not found
+
+
+'
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton:
+    - name: EnemigoMixamoGrande(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: brazalete.002
+      position: {x: 0.33989304, y: 0.8612496, z: -1.9932196}
+      rotation: {x: -0.19995305, y: 0.65554607, z: 0.7047616, w: -0.18327364}
+      scale: {x: 13.923262, y: 14.300049, z: 12.934347}
+      transformModified: 1
+    - name: brazalete.003
+      position: {x: -0.70278287, y: 0.8345384, z: -2.0133936}
+      rotation: {x: -0.71418333, y: 0.08521561, z: -0.25002474, w: 0.6482038}
+      scale: {x: 13.923264, y: 14.300049, z: 12.934346}
+      transformModified: 1
+    - name: brazos.001
+      position: {x: -0.18514514, y: 0.9352966, z: -2.0105708}
+      rotation: {x: -0.013206504, y: 0.7103872, z: 0.7036531, w: 0.0069261333}
+      scale: {x: 3.9011736, y: 6.6359057, z: 3.901175}
+      transformModified: 1
+    - name: Casco.001
+      position: {x: -0.16429535, y: 1.6971735, z: -1.9356604}
+      rotation: {x: 0.0065256697, y: 0.68097377, z: 0.7322537, w: -0.0060687354}
+      scale: {x: 13.251581, y: 13.251578, z: 13.251578}
+      transformModified: 1
+    - name: Cinturon.001
+      position: {x: -0.16170041, y: 0.9266337, z: -1.8951702}
+      rotation: {x: -0.7070788, y: 0.006301347, z: 0.006301348, w: 0.7070787}
+      scale: {x: -22.524878, y: -17.999987, z: -1.9871576}
+      transformModified: 1
+    - name: cosacintura.001
+      position: {x: -0.17137428, y: 0.3430462, z: -2.0750947}
+      rotation: {x: 0.0063013453, y: 0.7070788, z: 0.7070787, w: -0.0063013462}
+      scale: {x: 16.592764, y: 16.592764, z: 16.592766}
+      transformModified: 1
+    - name: Cuerpo.001
+      position: {x: -0.16569158, y: 1.0425763, z: -2.0490878}
+      rotation: {x: 0.0063013453, y: 0.7070788, z: 0.7070787, w: -0.0063013462}
+      scale: {x: 93.42055, y: 93.42055, z: 93.42057}
+      transformModified: 1
+    - name: hombreras.001
+      position: {x: -0.17252013, y: 0.9575506, z: -2.139354}
+      rotation: {x: 0.0063013453, y: 0.7070788, z: 0.7070787, w: -0.0063013462}
+      scale: {x: 16.592764, y: 16.592764, z: 16.592766}
+      transformModified: 1
+    - name: manos.002
+      position: {x: 0.39998108, y: 0.768597, z: -1.9987011}
+      rotation: {x: -0.72190815, y: -0.17488484, z: 0.21314137, w: 0.6346926}
+      scale: {x: 4.0820675, y: 1.5079894, z: 4.082068}
+      transformModified: 1
+    - name: manos.003
+      position: {x: -0.7541345, y: 0.7390995, z: -2.021528}
+      rotation: {x: 0.028678458, y: 0.73428464, z: 0.626719, w: 0.2592815}
+      scale: {x: 4.082068, y: 1.5079894, z: 4.0820675}
+      transformModified: 1
+    - name: Pie.002
+      position: {x: -0.0011594146, y: -0.5878658, z: -2.0558016}
+      rotation: {x: 0.006314971, y: 0.7055464, z: 0.70860773, w: -0.00628769}
+      scale: {x: -6.8757496, y: -6.8757524, z: -6.8757505}
+      transformModified: 1
+    - name: Pie.003
+      position: {x: -0.33089226, y: -0.5878658, z: -2.039877}
+      rotation: {x: 0.006314971, y: 0.7055464, z: 0.70860773, w: -0.00628769}
+      scale: {x: -6.8757496, y: -6.8757524, z: -6.8757505}
+      transformModified: 1
+    - name: Piernas.001
+      position: {x: -0.16569158, y: 1.0425763, z: -2.0490878}
+      rotation: {x: 0.0063013453, y: 0.7070788, z: 0.7070787, w: -0.0063013462}
+      scale: {x: 93.42055, y: 93.42055, z: 93.42057}
+      transformModified: 1
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

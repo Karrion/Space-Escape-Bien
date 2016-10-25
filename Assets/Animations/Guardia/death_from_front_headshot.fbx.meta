@@ -425,75 +425,75 @@ ModelImporter:
   humanDescription:
     human: []
     skeleton:
-    - name: EnemigoMixamo (Clone)
+    - name: EnemigoMixamoGrande(Clone)
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
-    - name: brazalete.000
-      position: {x: 0.07433749, y: 0.18419711, z: 0.0011597164}
-      rotation: {x: -0.19995296, y: 0.655546, z: 0.7047617, w: -0.18327372}
-      scale: {x: 2.085581, y: 2.1420207, z: 1.9374502}
+    - name: brazalete.002
+      position: {x: 0.33989304, y: 0.8612496, z: -1.9932196}
+      rotation: {x: -0.19995305, y: 0.65554607, z: 0.7047616, w: -0.18327364}
+      scale: {x: 13.923262, y: 14.300049, z: 12.934347}
       transformModified: 1
-    - name: brazalete.001
-      position: {x: -0.0818461, y: 0.18019597, z: -0.0018621441}
-      rotation: {x: -0.71418333, y: 0.08521559, z: -0.25002474, w: 0.6482038}
-      scale: {x: 2.085581, y: 2.1420207, z: 1.9374503}
+    - name: brazalete.003
+      position: {x: -0.70278287, y: 0.8345384, z: -2.0133936}
+      rotation: {x: -0.71418333, y: 0.08521561, z: -0.25002474, w: 0.6482038}
+      scale: {x: 13.923264, y: 14.300049, z: 12.934346}
       transformModified: 1
-    - name: brazos
-      position: {x: -0.004308561, y: 0.1952888, z: -0.0014392952}
-      rotation: {x: -0.013206505, y: 0.7103872, z: 0.7036531, w: 0.0069261324}
-      scale: {x: 0.58436126, y: 0.99399984, z: 0.58436126}
+    - name: brazos.001
+      position: {x: -0.18514514, y: 0.9352966, z: -2.0105708}
+      rotation: {x: -0.013206504, y: 0.7103872, z: 0.7036531, w: 0.0069261333}
+      scale: {x: 3.9011736, y: 6.6359057, z: 3.901175}
       transformModified: 1
-    - name: Casco
-      position: {x: -0.0011854428, y: 0.30941126, z: 0.009781602}
-      rotation: {x: 0.0065257293, y: 0.68097377, z: 0.7322537, w: -0.006068671}
-      scale: {x: 1.9849693, y: 1.9849691, z: 1.9849693}
+    - name: Casco.001
+      position: {x: -0.16429535, y: 1.6971735, z: -1.9356604}
+      rotation: {x: 0.0065256697, y: 0.68097377, z: 0.7322537, w: -0.0060687354}
+      scale: {x: 13.251581, y: 13.251578, z: 13.251578}
       transformModified: 1
-    - name: Cinturon
-      position: {x: -0.0007967436, y: 0.19399124, z: 0.015846707}
+    - name: Cinturon.001
+      position: {x: -0.16170041, y: 0.9266337, z: -1.8951702}
       rotation: {x: -0.7070788, y: 0.006301347, z: 0.006301348, w: 0.7070787}
-      scale: {x: -3.3740256, y: -2.696238, z: -0.2976586}
+      scale: {x: -22.524878, y: -17.999987, z: -1.9871576}
       transformModified: 1
-    - name: cosacintura
-      position: {x: -0.0022458152, y: 0.10657489, z: -0.011104444}
+    - name: cosacintura.001
+      position: {x: -0.17137428, y: 0.3430462, z: -2.0750947}
       rotation: {x: 0.0063013453, y: 0.7070788, z: 0.7070787, w: -0.0063013462}
-      scale: {x: 2.4854488, y: 2.4854488, z: 2.4854488}
+      scale: {x: 16.592764, y: 16.592764, z: 16.592766}
       transformModified: 1
-    - name: Cuerpo
-      position: {x: -0.0013945927, y: 0.21135837, z: -0.0072088293}
+    - name: Cuerpo.001
+      position: {x: -0.16569158, y: 1.0425763, z: -2.0490878}
       rotation: {x: 0.0063013453, y: 0.7070788, z: 0.7070787, w: -0.0063013462}
-      scale: {x: 13.99357, y: 13.99357, z: 13.993571}
+      scale: {x: 93.42055, y: 93.42055, z: 93.42057}
       transformModified: 1
-    - name: hombreras
-      position: {x: -0.0024174543, y: 0.19862229, z: -0.020729942}
+    - name: hombreras.001
+      position: {x: -0.17252013, y: 0.9575506, z: -2.139354}
       rotation: {x: 0.0063013453, y: 0.7070788, z: 0.7070787, w: -0.0063013462}
-      scale: {x: 2.4854488, y: 2.4854488, z: 2.4854488}
+      scale: {x: 16.592764, y: 16.592764, z: 16.592766}
       transformModified: 1
-    - name: manos
-      position: {x: 0.08333816, y: 0.17031857, z: 0.00033865962}
+    - name: manos.002
+      position: {x: 0.39998108, y: 0.768597, z: -1.9987011}
       rotation: {x: -0.72190815, y: -0.17488484, z: 0.21314137, w: 0.6346926}
-      scale: {x: 0.61145735, y: 0.22588342, z: 0.61145735}
+      scale: {x: 4.0820675, y: 1.5079894, z: 4.082068}
       transformModified: 1
-    - name: manos.001
-      position: {x: -0.08953811, y: 0.16590023, z: -0.0030805897}
-      rotation: {x: 0.028678406, y: 0.7342846, z: 0.6267191, w: 0.25928146}
-      scale: {x: 0.6114574, y: 0.22588342, z: 0.6114574}
+    - name: manos.003
+      position: {x: -0.7541345, y: 0.7390995, z: -2.021528}
+      rotation: {x: 0.028678458, y: 0.73428464, z: 0.626719, w: 0.2592815}
+      scale: {x: 4.082068, y: 1.5079894, z: 4.0820675}
       transformModified: 1
-    - name: Pie
-      position: {x: 0.023250865, y: -0.03286743, z: -0.008214546}
-      rotation: {x: 0.0063149715, y: 0.7055463, z: 0.7086078, w: -0.0062876893}
-      scale: {x: -1.0299264, y: -1.0299264, z: -1.0299265}
+    - name: Pie.002
+      position: {x: -0.0011594146, y: -0.5878658, z: -2.0558016}
+      rotation: {x: 0.006314971, y: 0.7055464, z: 0.70860773, w: -0.00628769}
+      scale: {x: -6.8757496, y: -6.8757524, z: -6.8757505}
       transformModified: 1
-    - name: Pie.001
-      position: {x: -0.02614018, y: -0.03286743, z: -0.0058291564}
-      rotation: {x: 0.0063149715, y: 0.7055463, z: 0.7086078, w: -0.0062876893}
-      scale: {x: -1.0299264, y: -1.0299264, z: -1.0299265}
+    - name: Pie.003
+      position: {x: -0.33089226, y: -0.5878658, z: -2.039877}
+      rotation: {x: 0.006314971, y: 0.7055464, z: 0.70860773, w: -0.00628769}
+      scale: {x: -6.8757496, y: -6.8757524, z: -6.8757505}
       transformModified: 1
-    - name: Piernas
-      position: {x: -0.0013945927, y: 0.21135837, z: -0.0072088293}
+    - name: Piernas.001
+      position: {x: -0.16569158, y: 1.0425763, z: -2.0490878}
       rotation: {x: 0.0063013453, y: 0.7070788, z: 0.7070787, w: -0.0063013462}
-      scale: {x: 13.99357, y: 13.99357, z: 13.993571}
+      scale: {x: 93.42055, y: 93.42055, z: 93.42057}
       transformModified: 1
     armTwist: 0.5
     foreArmTwist: 0.5
@@ -504,7 +504,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: edb2eac97b4328a4fbb126382df642ad,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: d01f798974337d0409336c5cfe92442b,
     type: 3}
   animationType: 2
   humanoidOversampling: 1
