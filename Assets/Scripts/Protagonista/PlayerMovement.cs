@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     public float Speed = 10f;            
     public float TurnSpeed = 180f;
     public float SpeedLimit = 10f;
-    public float WalkLimit = 5f;
     public float CrouchLimit = 3f;
     private float initialSpeedLimit;
 
@@ -17,21 +16,13 @@ public class PlayerMovement : MonoBehaviour
     private float TurnInputValue;        
     private float Acceleration = 40f;
     private Animator anim;
-	//public GameObject particle;
-	//public GameObject particleVelocidad;
-	public static AudioSource runningAudio;
-
-    //public Rigidbody Shell;
-    //public Transform FireTransform;
-    private string FireButton;
-    private bool Fired;
-    private bool Sprint = false;
-    private float SprintTimer;
-    private float SprintCooldown;
 
     private Transform m_Cam;                  // A reference to the main camera in the scenes transform
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
+
+    enum Mode { Standing, Crouching, Aiming };
+    Mode mode = Mode.Standing;
 
     private void Awake()
     {
@@ -51,98 +42,103 @@ public class PlayerMovement : MonoBehaviour
     {
         MovementAxisName = "Vertical";
         TurnAxisName = "Horizontal";
-        FireButton = "Fire1";
         Speed = 0;
-		runningAudio = GetComponent<AudioSource> ();
-		//particle.SetActive (false);
-		//particleVelocidad.SetActive (false);
         initialSpeedLimit = SpeedLimit;
     }
     
     private void Update()
     {
-
         MovementInputValue = Input.GetAxis(MovementAxisName);
         TurnInputValue = Input.GetAxis(TurnAxisName);
 
-        
-        
+        if (Input.GetKeyDown(KeyCode.C) || (Input.GetKeyDown(KeyCode.LeftControl)))
+        {
+            if (mode == Mode.Standing)
+            {
+                anim.SetBool("Levantarse", false);
+                anim.SetBool("Run", false);
+                anim.SetBool("Aim", false);
+                anim.SetBool("Agachado", true);
+                mode = Mode.Crouching;
+            }
+            else if (mode == Mode.Crouching)
+            {
+                anim.SetBool("Run", false);
+                anim.SetBool("Agachado", false);
+                anim.SetBool("CaminarAgachado", false);
+                anim.SetBool("Aim", false);
+                anim.SetBool("Levantarse", true);
+                mode = Mode.Standing;
+            }
+        }
 
+        Debug.Log(anim.GetBool("Levantarse"));
+        /*
+        switch (mode)
+        {
+            case Mode.Standing:
+                anim.SetBool("Run", false);
+                anim.SetBool("Agachado", false);
+                anim.SetBool("CaminarAgachado", false);
+                anim.SetBool("Aim", false);
+                anim.SetBool("Levantarse", true);
+                break;
+
+            case Mode.Crouching:
+                anim.SetBool("Run", false);
+                anim.SetBool("Aim", false);
+                anim.SetBool("Agachado", true);
+                break;
+
+            default:
+                break;
+        }*/
     }
 
-    //private void Fire()
-    //{
-    //    Fired = true;
-    //    Vector3 adjust = new Vector3(0, 0, 0);
-    //    Rigidbody shellInstance = Instantiate(Shell, FireTransform.position, FireTransform.rotation) as Rigidbody;
-    //    shellInstance.velocity = 40f * FireTransform.forward;
-    //}
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
-            Agacharse();
-        else
-        {
-            Move();
-            Turn();
-        }
+        Move();
+        Turn();
     }
 
 
     private void Move()
     {   
-        if (!Input.GetKey(KeyCode.LeftShift))
+        if (mode == Mode.Standing)
         {
             if (MovementInputValue > 0.1f)
             {
-                if (anim.GetBool("Walk") == true)
-                    anim.SetBool("Walk", false);
                 anim.SetBool("Run", true);
-                //particle.SetActive (true);
                 Speed = Speed + Acceleration * Time.deltaTime;
                 if (Speed > SpeedLimit) Speed = SpeedLimit;
-                //runningAudio.Play ();
             }
             else if (MovementInputValue == 0)
             {
                 anim.SetBool("Run", false);
-                //particle.SetActive (false);
                 Speed = Speed - Acceleration * 10 * Time.deltaTime;
                 if (Speed < 0) Speed = 0;
-                //runningAudio.Stop ();
             }
             else
             {
                 anim.SetBool("Run", true);
-                //particle.SetActive (true);
                 Speed = Speed - Acceleration * Time.deltaTime;
                 if (Speed < -SpeedLimit) Speed = -SpeedLimit;
-
             }
         }
-
-        else
+        else if (mode == Mode.Crouching)
         {
             if (MovementInputValue > 0.1f)
             {
-                if(anim.GetBool("Run") == true)
-                    anim.SetBool("Run", false);
-                anim.SetBool("Walk", true);
-                Speed = WalkLimit;
-                //particle.SetActive (true);
-                /*Speed = Speed + Acceleration * Time.deltaTime;
-                if (Speed > WalkLimit) Speed = SpeedLimit;
-                //runningAudio.Play ();*/
+                anim.SetBool("CaminarAgachado", true);
+                Speed = CrouchLimit;
+                Speed = Speed + Acceleration * Time.deltaTime;
+                if (Speed > CrouchLimit) Speed = CrouchLimit;
             }
             else if (MovementInputValue == 0)
             {
-                anim.SetBool("Walk", false);
+                anim.SetBool("CaminarAgachado", false);
                 Speed = 0;
-                //particle.SetActive (false);
-                /*Speed = Speed - Acceleration * 10 * Time.deltaTime;
-                if (Speed < 0) Speed = 0;
-                //runningAudio.Stop ();*/
             }
            /* else
             {
