@@ -72,7 +72,30 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        Debug.Log(anim.GetBool("Levantarse"));
+        if (Input.GetMouseButton(1))
+        {
+            if (mode == Mode.Standing)
+            {
+                anim.SetBool("Run", false);
+                anim.SetBool("Aim", true);
+                mode = Mode.Aiming;
+            }
+            else if (mode == Mode.Crouching)
+            {
+                anim.SetBool("Agachado", false);
+                anim.SetBool("CaminarAgachado", false);
+                anim.SetBool("Aim", true);
+                anim.SetBool("Levantarse", true);
+                mode = Mode.Aiming;
+            }
+        }
+        else
+        {
+            anim.SetBool("Aim", false);
+            anim.SetBool("Disparar", false);
+            mode = Mode.Standing;
+        }
+
         /*
         switch (mode)
         {
@@ -140,14 +163,19 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("CaminarAgachado", false);
                 Speed = 0;
             }
-           /* else
+        }
+        else
+        {
+            Speed = 0;
+
+            if (Input.GetKey(KeyCode.R))
             {
-                anim.SetBool("Walk", true);
-                //particle.SetActive (true);
-                Speed = Speed - Acceleration * Time.deltaTime;
-                if (Speed < -WalkLimit) Speed = -SpeedLimit;
-                //runningAudio.Play();
-            }*/
+                anim.SetTrigger("Recargar");
+            }else if (Input.GetMouseButtonDown(0))
+            {
+                anim.SetTrigger("Disparar");
+            }
+            Apuntar();
         }
 
         Vector3 movement = transform.forward * Speed * Time.deltaTime;
