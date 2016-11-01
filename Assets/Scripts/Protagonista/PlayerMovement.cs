@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {       
-    public float Speed = 20f;            
+    public float Speed = 10f;            
     public float TurnSpeed = 180f;
-    public float SpeedLimit = 20f;
-    public float WalkLimit = 10f;
-    public float CrouchLimit = 8f;
+    public float SpeedLimit = 10f;
+    public float WalkLimit = 5f;
+    public float CrouchLimit = 3f;
     private float initialSpeedLimit;
 
     private string MovementAxisName;     
@@ -65,10 +65,8 @@ public class PlayerMovement : MonoBehaviour
         MovementInputValue = Input.GetAxis(MovementAxisName);
         TurnInputValue = Input.GetAxis(TurnAxisName);
 
-        if (Input.GetButtonUp(FireButton))
-        {
-            
-        }
+        
+        
 
     }
 
@@ -82,17 +80,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
-        Turn();
+        if (Input.GetKey(KeyCode.LeftControl))
+            Agacharse();
+        else
+        {
+            Move();
+            Turn();
+        }
     }
 
 
     private void Move()
-    {
-        if (!Input.GetKeyDown(KeyCode.LeftShift))
+    {   
+        if (!Input.GetKey(KeyCode.LeftShift))
         {
             if (MovementInputValue > 0.1f)
             {
+                if (anim.GetBool("Walk") == true)
+                    anim.SetBool("Walk", false);
                 anim.SetBool("Run", true);
                 //particle.SetActive (true);
                 Speed = Speed + Acceleration * Time.deltaTime;
@@ -113,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
                 //particle.SetActive (true);
                 Speed = Speed - Acceleration * Time.deltaTime;
                 if (Speed < -SpeedLimit) Speed = -SpeedLimit;
-                runningAudio.Play();
+
             }
         }
 
@@ -121,28 +126,32 @@ public class PlayerMovement : MonoBehaviour
         {
             if (MovementInputValue > 0.1f)
             {
+                if(anim.GetBool("Run") == true)
+                    anim.SetBool("Run", false);
                 anim.SetBool("Walk", true);
+                Speed = WalkLimit;
                 //particle.SetActive (true);
-                Speed = Speed + Acceleration * Time.deltaTime;
+                /*Speed = Speed + Acceleration * Time.deltaTime;
                 if (Speed > WalkLimit) Speed = SpeedLimit;
-                //runningAudio.Play ();
+                //runningAudio.Play ();*/
             }
             else if (MovementInputValue == 0)
             {
                 anim.SetBool("Walk", false);
+                Speed = 0;
                 //particle.SetActive (false);
-                Speed = Speed - Acceleration * 10 * Time.deltaTime;
+                /*Speed = Speed - Acceleration * 10 * Time.deltaTime;
                 if (Speed < 0) Speed = 0;
-                //runningAudio.Stop ();
+                //runningAudio.Stop ();*/
             }
-            else
+           /* else
             {
                 anim.SetBool("Walk", true);
                 //particle.SetActive (true);
                 Speed = Speed - Acceleration * Time.deltaTime;
                 if (Speed < -WalkLimit) Speed = -SpeedLimit;
-                runningAudio.Play();
-            }
+                //runningAudio.Play();
+            }*/
         }
 
         Vector3 movement = transform.forward * Speed * Time.deltaTime;
@@ -151,30 +160,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void Agacharse()
     {
-        if (MovementInputValue > 0.1f)
+        if (Input.GetKey(KeyCode.LeftControl))
         {
-            anim.SetBool("agachado", true);
-            //particle.SetActive (true);
-            Speed = Speed + Acceleration * Time.deltaTime;
-            if (Speed > CrouchLimit) Speed = SpeedLimit;
-            //runningAudio.Play ();
+            if (MovementInputValue > 0.1f)
+            {
+                anim.SetBool("agachado", true);
+                //particle.SetActive (true);
+                Speed = CrouchLimit;
+                //runningAudio.Play ();
+            }
+            else if (MovementInputValue == 0)
+            {
+                //anim.SetBool("agachado", false);
+                //particle.SetActive (false);
+                Speed = 0;
+                //runningAudio.Stop ();
+            }
         }
-        else if (MovementInputValue == 0)
+        if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             anim.SetBool("agachado", false);
-            //particle.SetActive (false);
-            Speed = Speed - Acceleration * 10 * Time.deltaTime;
-            if (Speed < 0) Speed = 0;
-            //runningAudio.Stop ();
         }
-        else
+       /* else
         {
             anim.SetBool("agachado", true);
             //particle.SetActive (true);
             Speed = Speed - Acceleration * Time.deltaTime;
             if (Speed < -CrouchLimit) Speed = -SpeedLimit;
-            runningAudio.Play();
-        }
+            //runningAudio.Play();
+        }*/
         Vector3 movement = transform.forward * Speed * Time.deltaTime;
         Rigidbody.MovePosition(Rigidbody.position + movement);
     }
