@@ -79,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-
         if (Input.GetMouseButton(1))
         {
             if (mode == Mode.Standing)
@@ -110,7 +109,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if(!isReloading)
+            Move();
         Turn();
     }
 
@@ -161,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 anim.SetTrigger("Recargar");
                 StartCoroutine("finalizarCarga");
+
                 
             }
             else if (Input.GetMouseButtonDown(0))
@@ -172,11 +173,13 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = transform.forward * Speed * Time.deltaTime;
         Rigidbody.MovePosition(Rigidbody.position + movement);
+
     }
 
     private IEnumerator finalizarCarga() {
         isReloading = true;
         yield return new WaitForSeconds(5.3f);
+        Debug.Log("animacin acabada");
         isReloading = false;
         
     }
