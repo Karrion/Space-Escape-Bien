@@ -16,7 +16,7 @@ public class IA : MonoBehaviour
     private Vector3 currentPatrol;
     private bool inSight;
     private SphereCollider sphere;
-
+    private Animator anim;
 
     void Start()
     {
@@ -24,6 +24,7 @@ public class IA : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         agent.autoBraking = false;
         sphere = GetComponent<SphereCollider>();
+        anim = GetComponent<Animator>();
     }
 
 
@@ -71,12 +72,21 @@ public class IA : MonoBehaviour
     {
         switch (mode){
             case Mode.Patrol:
+                anim.SetBool("Caminar", true);
+                anim.SetBool("Correr", false);
+                anim.SetBool("Disparar", false);
                 Patrol();
                 break;
             case Mode.Alert:
+                anim.SetBool("Correr", true);
+                anim.SetBool("Caminar", false);
+                anim.SetBool("Disparar", false);
                 Alert();
                 break;
             case Mode.Shooting:
+                anim.SetBool("Disparar", true);
+                anim.SetBool("Correr", false);
+                anim.SetBool("Caminar", false);
                 Shooting();
                 break;
             default:
