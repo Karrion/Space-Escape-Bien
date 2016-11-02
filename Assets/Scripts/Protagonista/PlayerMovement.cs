@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float CrouchLimit = 3f;
     private float initialSpeedLimit;
 
+    [HideInInspector] public static bool enConducto = false;
+
     private string MovementAxisName;     
     private string TurnAxisName;         
     private Rigidbody Rigidbody;         
@@ -17,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float TurnInputValue;        
     private float Acceleration = 40f;
     private Animator anim;
+    private MeshRenderer meshRenderer;
 
     private bool isReloading = false;
 
@@ -32,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
 
@@ -55,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
         MovementInputValue = Input.GetAxis(MovementAxisName);
         TurnInputValue = Input.GetAxis(TurnAxisName);
 
-        Debug.Log(mode);
         if (!isReloading)
         {
             if (Input.GetKeyDown(KeyCode.C) || (Input.GetKeyDown(KeyCode.LeftControl)))
@@ -179,7 +182,6 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator finalizarCarga() {
         isReloading = true;
         yield return new WaitForSeconds(5.3f);
-        Debug.Log("animacin acabada");
         isReloading = false;
         
     }
@@ -261,11 +263,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void Tumbarse()
-    {
-
-    }
-
     private void Turn()
     {
         // Adjust the rotation of the tank based on the player's input.
@@ -274,6 +271,21 @@ public class PlayerMovement : MonoBehaviour
         float turn = TurnInputValue * TurnSpeed * Time.deltaTime;
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
         Rigidbody.MoveRotation(Rigidbody.rotation * turnRotation);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.collider.tag == "conducto")
+        {
+            if (mode == Mode.Crouching)
+            {
+                meshRenderer.enabled = false;
+
+            }else if (mode == Mode.Crawling)
+            {
+                meshRenderer.enabled = true;
+            }
+        }
     }
 
 }
