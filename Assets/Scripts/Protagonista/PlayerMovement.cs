@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
                 mode = Mode.Aiming;
             }
         }
-        else
+        else if(Input.GetMouseButtonUp(1))
         {
             anim.SetBool("Aim", false);
             anim.SetBool("Disparar", false);
