@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -17,12 +18,15 @@ public class PlayerMovement : MonoBehaviour
     private float Acceleration = 40f;
     private Animator anim;
 
+    private bool isReloading = false;
+
     private Transform m_Cam;                  // A reference to the main camera in the scenes transform
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
 
-    enum Mode { Standing, Crouching, Aiming };
+    enum Mode { Standing, Crouching, Aiming, Crawling };
     Mode mode = Mode.Standing;
+
 
     private void Awake()
     {
@@ -45,30 +49,34 @@ public class PlayerMovement : MonoBehaviour
         Speed = 0;
         initialSpeedLimit = SpeedLimit;
     }
-    
+
     private void Update()
     {
         MovementInputValue = Input.GetAxis(MovementAxisName);
         TurnInputValue = Input.GetAxis(TurnAxisName);
 
-        if (Input.GetKeyDown(KeyCode.C) || (Input.GetKeyDown(KeyCode.LeftControl)))
+        Debug.Log(mode);
+        if (!isReloading)
         {
-            if (mode == Mode.Standing)
+            if (Input.GetKeyDown(KeyCode.C) || (Input.GetKeyDown(KeyCode.LeftControl)))
             {
-                anim.SetBool("Levantarse", false);
-                anim.SetBool("Run", false);
-                anim.SetBool("Aim", false);
-                anim.SetBool("Agachado", true);
-                mode = Mode.Crouching;
-            }
-            else if (mode == Mode.Crouching)
-            {
-                anim.SetBool("Run", false);
-                anim.SetBool("Agachado", false);
-                anim.SetBool("CaminarAgachado", false);
-                anim.SetBool("Aim", false);
-                anim.SetBool("Levantarse", true);
-                mode = Mode.Standing;
+                if (mode == Mode.Standing)
+                {
+                    anim.SetBool("Levantarse", false);
+                    anim.SetBool("Run", false);
+                    anim.SetBool("Aim", false);
+                    anim.SetBool("Agachado", true);
+                    mode = Mode.Crouching;
+                }
+                else if (mode == Mode.Crouching)
+                {
+                    anim.SetBool("Run", false);
+                    anim.SetBool("Agachado", false);
+                    anim.SetBool("CaminarAgachado", false);
+                    anim.SetBool("Aim", false);
+                    anim.SetBool("Levantarse", true);
+                    mode = Mode.Standing;
+                }
             }
         }
 
@@ -89,33 +97,14 @@ public class PlayerMovement : MonoBehaviour
                 mode = Mode.Aiming;
             }
         }
-        else if(Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButtonUp(1))
         {
             anim.SetBool("Aim", false);
             anim.SetBool("Disparar", false);
             mode = Mode.Standing;
         }
-
-        /*
-        switch (mode)
-        {
-            case Mode.Standing:
-                anim.SetBool("Run", false);
-                anim.SetBool("Agachado", false);
-                anim.SetBool("CaminarAgachado", false);
-                anim.SetBool("Aim", false);
-                anim.SetBool("Levantarse", true);
-                break;
-
-            case Mode.Crouching:
-                anim.SetBool("Run", false);
-                anim.SetBool("Aim", false);
-                anim.SetBool("Agachado", true);
-                break;
-
-            default:
-                break;
-        }*/
+        
+        
     }
 
 
@@ -171,7 +160,10 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.R))
             {
                 anim.SetTrigger("Recargar");
-            }else if (Input.GetMouseButtonDown(0))
+                StartCoroutine("finalizarCarga");
+                
+            }
+            else if (Input.GetMouseButtonDown(0))
             {
                 anim.SetTrigger("Disparar");
             }
@@ -180,6 +172,13 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = transform.forward * Speed * Time.deltaTime;
         Rigidbody.MovePosition(Rigidbody.position + movement);
+    }
+
+    private IEnumerator finalizarCarga() {
+        isReloading = true;
+        yield return new WaitForSeconds(5.3f);
+        isReloading = false;
+        
     }
 
     private void Agacharse()
