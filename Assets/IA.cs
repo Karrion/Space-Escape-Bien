@@ -8,7 +8,7 @@ public class IA : MonoBehaviour
     public Transform[] points;
     private int destPoint = 0;
     private NavMeshAgent agent;
-    public GameObject player;
+    private GameObject player;
     private int fieldOfViewDegrees = 110;
     enum Mode { Alert, Patrol, Shooting };
     Mode mode = Mode.Patrol;
@@ -18,7 +18,7 @@ public class IA : MonoBehaviour
     private SphereCollider sphere;
     private Animator anim;
 
-    void Start()
+    void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -70,11 +70,9 @@ public class IA : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Correr = " + anim.GetBool("Correr") + " Caminar = " + anim.GetBool("Caminar") + " Disparar = " + anim.GetBool("Disparar"));
         switch (mode){
             case Mode.Patrol:
-                anim.SetBool("Caminar", true);
-                anim.SetBool("Correr", false);
-                anim.SetBool("Disparar", false);
                 Patrol();
                 break;
             case Mode.Alert:
@@ -136,7 +134,10 @@ public class IA : MonoBehaviour
 
     private void Patrol()
     {
-       if (agent.autoBraking == true) agent.autoBraking = false;
+        anim.SetBool("Caminar", true);
+        anim.SetBool("Correr", false);
+        anim.SetBool("Disparar", false);
+        if (agent.autoBraking == true) agent.autoBraking = false;
        if (agent.remainingDistance < 1)
         {
             GotoNextPoint();

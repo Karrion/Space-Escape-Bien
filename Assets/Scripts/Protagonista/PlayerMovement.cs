@@ -59,6 +59,10 @@ public class PlayerMovement : MonoBehaviour
         MovementInputValue = Input.GetAxis(MovementAxisName);
         TurnInputValue = Input.GetAxis(TurnAxisName);
 
+<<<<<<< HEAD
+=======
+        //Debug.Log(mode);
+>>>>>>> origin/master
         if (!isReloading)
         {
             if (Input.GetKeyDown(KeyCode.C) || (Input.GetKeyDown(KeyCode.LeftControl)))
