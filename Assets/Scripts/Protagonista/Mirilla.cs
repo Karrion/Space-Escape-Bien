@@ -43,7 +43,7 @@ public class Mirilla : MonoBehaviour {
 
     void shoting() {
         if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("Acuestate y suda (Dormir)");
+            Debug.Log("A dormir");
             //TODO:Completar tirando un gameobject si vemos que queda mejor.
         }
     }
@@ -71,5 +71,7 @@ public class Mirilla : MonoBehaviour {
         pos.z = 2.0f;
         transform.position = Camera.main.ScreenToWorldPoint(pos);
     }
+
+   
 }
 

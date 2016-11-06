@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{       
+{
+
     public float Speed = 10f;            
     public float TurnSpeed = 180f;
     public float SpeedLimit = 10f;
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform m_Cam;                  // A reference to the main camera in the scenes transform
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
+
 
     enum Mode { Standing, Crouching, Aiming, Crawling };
     Mode mode = Mode.Standing;
@@ -54,9 +56,12 @@ public class PlayerMovement : MonoBehaviour
         initialSpeedLimit = SpeedLimit;
     }
 
-    private void Update()
+ 
+    
+    void Update()
     {
-        MovementInputValue = Input.GetAxis(MovementAxisName);
+    
+         MovementInputValue = Input.GetAxis(MovementAxisName);
         TurnInputValue = Input.GetAxis(TurnAxisName);
 
         //Debug.Log(mode);
@@ -116,6 +121,8 @@ public class PlayerMovement : MonoBehaviour
         if(!isReloading)
             Move();
         Turn();
+        turnWhileAim();
+        
     }
 
 
@@ -182,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator finalizarCarga() {
         isReloading = true;
-        yield return new WaitForSeconds(5.3f);
+        yield return new WaitForSeconds(5.4f);
         isReloading = false;
         
     }
@@ -269,9 +276,18 @@ public class PlayerMovement : MonoBehaviour
         // Adjust the rotation of the tank based on the player's input.
 
 
-        float turn = TurnInputValue * TurnSpeed * Time.deltaTime;
+        float turn =TurnInputValue * TurnSpeed * Time.deltaTime;
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
         Rigidbody.MoveRotation(Rigidbody.rotation * turnRotation);
+    }
+
+
+    private void turnWhileAim()
+    {
+        if (Input.GetMouseButton(1)) { 
+            float h = 7 * Input.GetAxis("Mouse X");
+            transform.Rotate(0, h, 0);
+        }
     }
 
     private void OnCollisionEnter(Collision other)
