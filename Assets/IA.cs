@@ -18,6 +18,7 @@ public class IA : MonoBehaviour
     private SphereCollider sphere;
     private Animator anim;
     private Rigidbody rigidbody;
+    public float rotationSpeed = 10f;
 
     void Awake()
     {
@@ -98,10 +99,13 @@ public class IA : MonoBehaviour
     private void Shooting()
     {
         
-        if (agent.remainingDistance <= 10f)
+        if (agent.remainingDistance <= 20f)
         {
             agent.Stop();
             agent.destination = player.transform.position;
+            RotateTowards(player.transform);
+            
+            
         }
         else
         {
@@ -146,5 +150,13 @@ public class IA : MonoBehaviour
         {
             GotoNextPoint();
         }
+    }
+
+
+    private void RotateTowards(Transform target)
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
 }
