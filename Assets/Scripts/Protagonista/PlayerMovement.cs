@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float SpeedLimit = 10f;
     public float CrouchLimit = 3f;
     private float initialSpeedLimit;
+    private float camRayLength = 100f;
 
     [HideInInspector] public static bool enConducto = false;
 
@@ -121,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         if(!isReloading)
             Move();
         Turn();
-        turnWhileAim();
+        //turnWhileAim();
         
     }
 
@@ -256,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
             // we use world-relative directions in the case of no main camera
             m_Move = v * 0.6f * Vector3.forward + h * Vector3.right * 0.1f;// v * 0.6f, es donde se le baja la velocidad
         }
-        else if (m_Cam != null && !Mirilla.estaApuntando)
+        if (m_Cam != null && !Mirilla.estaApuntando)
         {
             // calculate camera relative direction to move:
             m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
@@ -268,6 +269,25 @@ public class PlayerMovement : MonoBehaviour
             // we use world-relative directions in the case of no main camera
             m_Move = v * Vector3.forward + h * Vector3.right;
         }
+
+        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit apuntinho;
+
+        if(Physics.Raycast(camRay, out apuntinho, camRayLength))
+        {
+            Vector3 playerToMouse = apuntinho.point - transform.position;
+            playerToMouse.y = 0f;
+
+            Quaternion RotaciónBrazos = Quaternion.LookRotation(playerToMouse);
+            Transform Arms = transform.GetChild(4).GetChild(2);
+
+            Debug.Log(Arms.name);
+
+            Arms.rotation = RotaciónBrazos;
+            //Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+            //Rigidbody.MoveRotation(newRotation);
+        }
+
     }
 
 

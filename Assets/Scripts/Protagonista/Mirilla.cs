@@ -30,7 +30,7 @@ public class Mirilla : MonoBehaviour {
               
                 Debug.DrawLine(ray.origin, hit.point);
                 enemigoApuntado = true;
-                shoting();//Aprobecho el script y disparo xD
+                shooting();//Aprobecho el script y disparo xD
             }
             else {
                 
@@ -41,7 +41,7 @@ public class Mirilla : MonoBehaviour {
             
     }
 
-    void shoting() {
+    void shooting() {
         if (Input.GetMouseButtonDown(0)) {
             Debug.Log("A dormir");
             //TODO:Completar tirando un gameobject si vemos que queda mejor.

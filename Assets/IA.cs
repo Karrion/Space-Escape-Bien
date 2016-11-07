@@ -17,6 +17,7 @@ public class IA : MonoBehaviour
     private bool inSight;
     private SphereCollider sphere;
     private Animator anim;
+    private Rigidbody rigidbody;
 
     void Awake()
     {
@@ -25,6 +26,7 @@ public class IA : MonoBehaviour
         agent.autoBraking = false;
         sphere = GetComponent<SphereCollider>();
         anim = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
 
@@ -70,7 +72,7 @@ public class IA : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Correr = " + anim.GetBool("Correr") + " Caminar = " + anim.GetBool("Caminar") + " Disparar = " + anim.GetBool("Disparar"));
+        //Debug.Log("Correr = " + anim.GetBool("Correr") + " Caminar = " + anim.GetBool("Caminar") + " Disparar = " + anim.GetBool("Disparar"));
         switch (mode){
             case Mode.Patrol:
                 Patrol();
@@ -95,6 +97,7 @@ public class IA : MonoBehaviour
 
     private void Shooting()
     {
+        
         if (agent.remainingDistance <= 10f)
         {
             agent.Stop();
@@ -108,6 +111,7 @@ public class IA : MonoBehaviour
             mode = Mode.Alert;
             
         }
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotationY;
     }
 
     private void Alert()
