@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private MeshRenderer meshRenderer;
 
     private bool isReloading = false;
+    [HideInInspector]public static bool Running = false;
 
     private Transform m_Cam;                  // A reference to the main camera in the scenes transform
     private Vector3 m_CamForward;             // The current forward direction of the camera
@@ -133,18 +134,21 @@ public class PlayerMovement : MonoBehaviour
         {
             if (MovementInputValue > 0.1f)
             {
+                Running = true;
                 anim.SetBool("Run", true);
                 Speed = Speed + Acceleration * Time.deltaTime;
                 if (Speed > SpeedLimit) Speed = SpeedLimit;
             }
             else if (MovementInputValue == 0)
             {
+                Running = false;
                 anim.SetBool("Run", false);
                 Speed = Speed - Acceleration * 10 * Time.deltaTime;
                 if (Speed < 0) Speed = 0;
             }
             else
             {
+                Running = true;
                 anim.SetBool("Run", true);
                 Speed = Speed - Acceleration * Time.deltaTime;
                 if (Speed < -SpeedLimit) Speed = -SpeedLimit;

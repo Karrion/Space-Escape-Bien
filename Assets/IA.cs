@@ -76,6 +76,30 @@ public class IA : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.tag == "Player")
+            if (PlayerMovement.Running)
+            {
+                currentPatrol = agent.destination;
+                agent.destination = player.transform.position;
+                if(agent.remainingDistance >= 0)
+                {
+                    StartCoroutine("tiempoEspera");
+                    
+                }
+            }
+            
+
+    }
+    IEnumerator tiempoEspera()
+    {
+        agent.Stop();
+        yield return new WaitForSeconds(2);
+        agent.destination = currentPatrol;
+        agent.Resume();
+    }
+
     void Update()
     {
         //Debug.Log("Correr = " + anim.GetBool("Correr") + " Caminar = " + anim.GetBool("Caminar") + " Disparar = " + anim.GetBool("Disparar"));
