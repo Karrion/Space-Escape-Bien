@@ -56,11 +56,16 @@ public class IA : MonoBehaviour
                     {
                         if (mode != Mode.Shooting)
                         {
+                            currentPatrol = agent.destination;
                             mode = Mode.Alert;
                             inSight = true;
-                            currentPatrol = agent.destination;
                             agent.autoBraking = true;
                         }
+                    }
+                    else {
+                        if (mode == Mode.Shooting)
+                          mode = Mode.Alert;
+                            
                     }
                 }
                 else
@@ -99,20 +104,21 @@ public class IA : MonoBehaviour
     private void Shooting()
     {
         
-        if (agent.remainingDistance <= 20f)
+        if (agent.remainingDistance <= 8f)
         {
-            agent.Stop();
-            agent.destination = player.transform.position;
-            RotateTowards(player.transform);
-            
-            
+           
+        agent.Stop();
+        agent.destination = player.transform.position;
+        RotateTowards(player.transform);
+
+
         }
         else
         {
-            
-            Debug.Log("Marchamos en loca persecución");
+        
             agent.Resume();
             mode = Mode.Alert;
+        
             
         }
         rigidbody.constraints = RigidbodyConstraints.FreezeRotationY;
@@ -126,6 +132,7 @@ public class IA : MonoBehaviour
         }
         else
         {
+            agent.destination = player.transform.position;
             alertTime += Time.deltaTime;
             if(alertTime >= 10.0f)
             {
@@ -134,10 +141,10 @@ public class IA : MonoBehaviour
                 agent.destination = currentPatrol;
             }
         }
-        if(agent.remainingDistance <= 2.5f && inSight)
+        if (agent.remainingDistance <= 8f && inSight)
         {
             mode = Mode.Shooting;
-        }
+        }    
     }
 
     private void Patrol()
@@ -146,7 +153,7 @@ public class IA : MonoBehaviour
         anim.SetBool("Correr", false);
         anim.SetBool("Disparar", false);
         if (agent.autoBraking == true) agent.autoBraking = false;
-       if (agent.remainingDistance < 1)
+        if (agent.remainingDistance < 1)
         {
             GotoNextPoint();
         }
