@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_Move;
 
 
-    enum Mode { Standing, Crouching, Aiming, Crawling };
+    [HideInInspector] public enum Mode { Standing, Crouching, Aiming, Crawling };
     Mode mode = Mode.Standing;
 
 

@@ -73,6 +73,13 @@ public class IA : MonoBehaviour
                     inSight = false;
                 }          
             }
+            else if (PlayerMovement.Running && mode != Mode.Shooting)
+            {
+                currentPatrol = agent.destination;
+                mode = Mode.Alert;
+                inSight = true;
+                agent.autoBraking = true;
+            }
         }
     }
 
