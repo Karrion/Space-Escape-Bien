@@ -129,12 +129,16 @@ public class PlayerMovement : MonoBehaviour
 
 
     private void Move()
-    {   
+    {
         if (mode == Mode.Standing)
         {
+            
+            Debug.Log(Running);
             if (MovementInputValue > 0.1f)
             {
+                Quaternion currentRotation = GetComponent<Transform>().rotation;
                 Running = true;
+                anim.SetBool("GirarCorriendo", false);
                 anim.SetBool("Run", true);
                 Speed = Speed + Acceleration * Time.deltaTime;
                 if (Speed > SpeedLimit) Speed = SpeedLimit;
@@ -143,15 +147,21 @@ public class PlayerMovement : MonoBehaviour
             {
                 Running = false;
                 anim.SetBool("Run", false);
+                anim.SetBool("GirarCorriendo", false);
                 Speed = Speed - Acceleration * 10 * Time.deltaTime;
                 if (Speed < 0) Speed = 0;
             }
-            else
+            else if (MovementInputValue < 0.1f /*&& Running*/)
             {
-                Running = true;
+                /*Running = true;
                 anim.SetBool("Run", true);
                 Speed = Speed - Acceleration * Time.deltaTime;
-                if (Speed < -SpeedLimit) Speed = -SpeedLimit;
+                if (Speed < -SpeedLimit) Speed = -SpeedLimit;*/
+                Running = true;
+                anim.SetBool("Run", true);
+                anim.SetBool("GirarCorriendo", true);
+                //if(transform.rotation >= )
+                transform.Rotate(0, 10, 0);
             }
         }
         else if (mode == Mode.Crouching)
@@ -178,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetTrigger("Recargar");
                 StartCoroutine("finalizarCarga");
 
-                
+
             }
             else if (Input.GetMouseButtonDown(0))
             {
