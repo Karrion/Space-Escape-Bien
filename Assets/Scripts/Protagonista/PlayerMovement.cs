@@ -5,34 +5,42 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float Speed = 10f;            
+    public float Speed = 10f;
     public float TurnSpeed = 180f;
     public float SpeedLimit = 10f;
     public float CrouchLimit = 3f;
     private float initialSpeedLimit;
     private float camRayLength = 100f;
 
-    [HideInInspector] public static bool enConducto = false;
+    [HideInInspector]
+    public static bool enConducto = false;
 
-    private string MovementAxisName;     
-    private string TurnAxisName;         
-    private Rigidbody Rigidbody;         
-    private float MovementInputValue;    
-    private float TurnInputValue;        
+    private string MovementAxisName;
+    private string TurnAxisName;
+    private Rigidbody Rigidbody;
+    private float MovementInputValue;
+    private float TurnInputValue;
     private float Acceleration = 40f;
     private Animator anim;
     private MeshRenderer meshRenderer;
 
     private bool isReloading = false;
-    [HideInInspector]public static bool Running = false;
+    [HideInInspector]
+    public static bool Running = false;
 
     private Transform m_Cam;                  // A reference to the main camera in the scenes transform
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
 
 
-    [HideInInspector] public enum Mode { Standing, Crouching, Aiming, Crawling };
-    Mode mode = Mode.Standing;
+    [HideInInspector]
+    public enum Mode { Standing, Crouching, Aiming, Crawling };
+    public static Mode mode = Mode.Standing;
+
+    public static Mode getMode()
+    {
+        return mode;
+    }
 
 
     private void Awake()
@@ -43,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void OnEnable ()
+    private void OnEnable()
     {
         MovementInputValue = 0f;
         TurnInputValue = 0f;
@@ -58,12 +66,12 @@ public class PlayerMovement : MonoBehaviour
         initialSpeedLimit = SpeedLimit;
     }
 
- 
-    
+
+
     void Update()
     {
-    
-         MovementInputValue = Input.GetAxis(MovementAxisName);
+
+        MovementInputValue = Input.GetAxis(MovementAxisName);
         TurnInputValue = Input.GetAxis(TurnAxisName);
 
         //Debug.Log(mode);
@@ -113,18 +121,18 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Disparar", false);
             mode = Mode.Standing;
         }
-        
-        
+
+
     }
 
 
     private void FixedUpdate()
     {
-        if(!isReloading)
+        if (!isReloading)
             Move();
         Turn();
         //turnWhileAim();
-        
+
     }
 
 
@@ -132,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (mode == Mode.Standing)
         {
-            
+
             Debug.Log(Running);
             if (MovementInputValue > 0.1f)
             {
@@ -202,11 +210,12 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private IEnumerator finalizarCarga() {
+    private IEnumerator finalizarCarga()
+    {
         isReloading = true;
         yield return new WaitForSeconds(5.4f);
         isReloading = false;
-        
+
     }
 
     private void Agacharse()
@@ -232,14 +241,14 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("agachado", false);
         }
-       /* else
-        {
-            anim.SetBool("agachado", true);
-            //particle.SetActive (true);
-            Speed = Speed - Acceleration * Time.deltaTime;
-            if (Speed < -CrouchLimit) Speed = -SpeedLimit;
-            //runningAudio.Play();
-        }*/
+        /* else
+         {
+             anim.SetBool("agachado", true);
+             //particle.SetActive (true);
+             Speed = Speed - Acceleration * Time.deltaTime;
+             if (Speed < -CrouchLimit) Speed = -SpeedLimit;
+             //runningAudio.Play();
+         }*/
         Vector3 movement = transform.forward * Speed * Time.deltaTime;
         Rigidbody.MovePosition(Rigidbody.position + movement);
     }
@@ -287,7 +296,7 @@ public class PlayerMovement : MonoBehaviour
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit apuntinho;
 
-        if(Physics.Raycast(camRay, out apuntinho, camRayLength))
+        if (Physics.Raycast(camRay, out apuntinho, camRayLength))
         {
             Vector3 playerToMouse = apuntinho.point - transform.position;
             playerToMouse.y = 0f;
@@ -310,7 +319,7 @@ public class PlayerMovement : MonoBehaviour
         // Adjust the rotation of the tank based on the player's input.
 
 
-        float turn =TurnInputValue * TurnSpeed * Time.deltaTime;
+        float turn = TurnInputValue * TurnSpeed * Time.deltaTime;
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
         Rigidbody.MoveRotation(Rigidbody.rotation * turnRotation);
     }
@@ -318,7 +327,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void turnWhileAim()
     {
-        if (Input.GetMouseButton(1)) { 
+        if (Input.GetMouseButton(1))
+        {
             float h = 7 * Input.GetAxis("Mouse X");
             transform.Rotate(0, h, 0);
         }
@@ -326,13 +336,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.collider.tag == "conducto")
+        if (other.collider.tag == "conducto")
         {
             if (mode == Mode.Crouching)
             {
                 meshRenderer.enabled = false;
 
-            }else if (mode == Mode.Crawling)
+            }
+            else if (mode == Mode.Crawling)
             {
                 meshRenderer.enabled = true;
             }

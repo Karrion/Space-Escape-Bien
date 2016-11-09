@@ -47,11 +47,12 @@ public class IA : MonoBehaviour
         {
             inSight = false;
             RaycastHit hit;
-            Vector3 rayDirection = player.transform.position - transform.position;
+            Vector3 rayDirection = player.transform.position - transform.position + transform.up;
             if ((Vector3.Angle(rayDirection, transform.forward)) <= fieldOfViewDegrees * 0.5f)
             {
                 if (Physics.Raycast(transform.position + transform.up, rayDirection.normalized, out hit, sphere.radius))
                 {
+                    Debug.DrawLine(transform.position + transform.up, hit.point);
                     if (hit.transform.CompareTag("Player"))
                     {
                         if (mode != Mode.Shooting)
@@ -73,12 +74,13 @@ public class IA : MonoBehaviour
                     inSight = false;
                 }          
             }
-            else if (PlayerMovement.Running && mode != Mode.Shooting)
+            else if (PlayerMovement.Running && mode == Mode.Patrol)
             {
-                currentPatrol = agent.destination;
+                /*currentPatrol = agent.destination;
                 mode = Mode.Alert;
                 inSight = true;
-                agent.autoBraking = true;
+                agent.autoBraking = true;*/
+                escuchado();
             }
         }
     }
@@ -86,15 +88,16 @@ public class IA : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
-            if (PlayerMovement.Running)
+            if (PlayerMovement.Running && mode == Mode.Patrol)
             {
-                currentPatrol = agent.destination;
-                agent.destination = player.transform.position;
-                if(agent.remainingDistance >= 0)
-                {
-                    StartCoroutine("tiempoEspera");
-                    
-                }
+                /* currentPatrol = agent.destination;
+                 agent.destination = player.transform.position;
+                 if(agent.remainingDistance >= 0)
+                 {
+                     StartCoroutine("tiempoEspera");
+
+                 }*/
+                escuchado();
             }
             
 
@@ -102,7 +105,7 @@ public class IA : MonoBehaviour
     IEnumerator tiempoEspera()
     {
         agent.Stop();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         agent.destination = currentPatrol;
         agent.Resume();
     }
@@ -110,6 +113,7 @@ public class IA : MonoBehaviour
     void Update()
     {
         //Debug.Log("Correr = " + anim.GetBool("Correr") + " Caminar = " + anim.GetBool("Caminar") + " Disparar = " + anim.GetBool("Disparar"));
+        Debug.Log(mode);
         switch (mode){
             case Mode.Patrol:
                 Patrol();
@@ -136,21 +140,27 @@ public class IA : MonoBehaviour
     {
         
         if (agent.remainingDistance <= 8f)
-        {
-           
-        agent.Stop();
-        agent.destination = player.transform.position;
-        RotateTowards(player.transform);
-
-
+        {         
+            agent.Stop();
+            if (PlayerMovement.getMode() != PlayerMovement.Mode.Aiming)
+                agent.destination = player.transform.position;
+            RotateTowards(player.transform);
+            if (PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
+            {
+                Transform Objetivo = CoverManager.BuscarMasCercana(transform);
+                agent.destination = Objetivo.position;
+                agent.Resume();
+                if(agent.remainingDistance <= 1f)
+                {
+                    agent.Stop();
+                }
+                //Debug.Log(agent.destination);
+            }
         }
         else
-        {
-        
+        {      
             agent.Resume();
-            mode = Mode.Alert;
-        
-            
+            mode = Mode.Alert;           
         }
         rigidbody.constraints = RigidbodyConstraints.FreezeRotationY;
     }
@@ -159,7 +169,14 @@ public class IA : MonoBehaviour
     {
         if(inSight == true)
         {
-            agent.destination = player.transform.position;
+            if (PlayerMovement.getMode() != PlayerMovement.Mode.Aiming)
+                agent.destination = player.transform.position;
+            if(PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
+            {
+                Transform Objetivo = CoverManager.BuscarMasCercana(transform);
+                agent.destination = Objetivo.position;
+                //Debug.Log(agent.destination);
+            }
         }
         else
         {
@@ -196,5 +213,18 @@ public class IA : MonoBehaviour
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+    }
+    private void escuchado()
+    {
+        if (PlayerMovement.Running && mode != Mode.Shooting)
+        {
+            currentPatrol = agent.destination;
+            agent.destination = player.transform.position;
+            if (agent.remainingDistance >= 0)
+            {
+                StartCoroutine("tiempoEspera");
+
+            }
+        }
     }
 }

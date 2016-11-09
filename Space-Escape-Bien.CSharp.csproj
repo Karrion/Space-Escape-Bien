@@ -82,6 +82,7 @@
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Scripts\AICharacterControl.cs" />
     <Compile Include="Assets\Scripts\Camara\Camara.cs" />
+    <Compile Include="Assets\Scripts\CoverManager.cs" />
     <Compile Include="Assets\Scripts\DoorController.cs" />
     <Compile Include="Assets\Scripts\Protagonista\Mirilla.cs" />
     <Compile Include="Assets\Scripts\Protagonista\PlayerMovement.cs" />
