@@ -19,6 +19,7 @@ public class IA : MonoBehaviour
     private Animator anim;
     private Rigidbody rigidbody;
     public float rotationSpeed = 10f;
+    bool delReves = false;
 
     void Awake()
     {
@@ -37,8 +38,18 @@ public class IA : MonoBehaviour
         if (points.Length == 0)
             return;
 
-        agent.destination = points[destPoint].position;
-        destPoint = (destPoint + 1) % points.Length;
+        if (!delReves)
+        {
+            agent.destination = points[destPoint].position;
+            destPoint++;
+            if (destPoint == points.Length - 1) delReves = true;
+        }
+        else
+        {
+            agent.destination = points[destPoint].position;
+            destPoint--;
+            if (destPoint == 0) delReves = false;
+        }
     }
 
     public void OnTriggerStay(Collider other)
@@ -112,7 +123,6 @@ public class IA : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log("Correr = " + anim.GetBool("Correr") + " Caminar = " + anim.GetBool("Caminar") + " Disparar = " + anim.GetBool("Disparar"));
         Debug.Log(mode);
         switch (mode){
             case Mode.Patrol:
@@ -147,14 +157,20 @@ public class IA : MonoBehaviour
             RotateTowards(player.transform);
             if (PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
             {
-                Transform Objetivo = CoverManager.BuscarMasCercana(transform);
-                agent.destination = Objetivo.position;
-                agent.Resume();
-                if(agent.remainingDistance <= 1f)
+                Transform Objetivo = CoverManager.BuscarMasCercana(transform, (int) sphere.radius);
+                if (Objetivo != null)
                 {
-                    agent.Stop();
+                    agent.destination = Objetivo.position;
+                    anim.SetBool("Disparar", false);
+                    anim.SetBool("Correr", true);
+                    agent.Resume();
+                    if (agent.remainingDistance <= 1f)
+                    {
+                        agent.Stop();
+                        anim.SetBool("Disparar", true);
+                        anim.SetBool("Correr", false);
+                    }
                 }
-                //Debug.Log(agent.destination);
             }
         }
         else
@@ -173,9 +189,8 @@ public class IA : MonoBehaviour
                 agent.destination = player.transform.position;
             if(PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
             {
-                Transform Objetivo = CoverManager.BuscarMasCercana(transform);
-                agent.destination = Objetivo.position;
-                //Debug.Log(agent.destination);
+                Transform Objetivo = CoverManager.BuscarMasCercana(transform, (int) sphere.radius);
+                if(Objetivo != null) agent.destination = Objetivo.position;
             }
         }
         else
@@ -197,7 +212,8 @@ public class IA : MonoBehaviour
 
     private void Patrol()
     {
-        anim.SetBool("Caminar", true);
+        if (points.Length != 0) anim.SetBool("Caminar", true);
+        else anim.SetBool("Caminar", false);
         anim.SetBool("Correr", false);
         anim.SetBool("Disparar", false);
         if (agent.autoBraking == true) agent.autoBraking = false;

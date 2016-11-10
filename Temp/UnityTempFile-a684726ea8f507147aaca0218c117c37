@@ -98,6 +98,7 @@ Assets/SampleScenes/Scripts/PlaceTargetWithMouse.cs
 Assets/SampleScenes/Scripts/SlowMoButton.cs
 Assets/Scripts/AICharacterControl.cs
 Assets/Scripts/Camara/Camara.cs
+Assets/Scripts/CoverManager.cs
 Assets/Scripts/DoorController.cs
 Assets/Scripts/Protagonista/Mirilla.cs
 Assets/Scripts/Protagonista/PlayerMovement.cs

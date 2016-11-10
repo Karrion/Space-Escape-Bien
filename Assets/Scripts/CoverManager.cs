@@ -15,7 +15,7 @@ public class CoverManager : MonoBehaviour {
 
     }
 
-    public static Transform BuscarMasCercana(Transform guardia)
+    public static Transform BuscarMasCercana(Transform guardia, int radio)
     {
         Transform coberturaMesPropeta = null;
         float minimo = float.MaxValue;
@@ -29,6 +29,9 @@ public class CoverManager : MonoBehaviour {
             }
 
         }
-        return coberturaMesPropeta;
+        if (Vector3.Distance(guardia.position, coberturaMesPropeta.position) < radio)
+            return coberturaMesPropeta;
+        else
+            return null;
     }
 }
