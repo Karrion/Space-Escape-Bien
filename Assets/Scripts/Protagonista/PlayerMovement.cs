@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector]
     public static bool enConducto = false;
+    bool agachando = false;
+    bool levantando = false;
+
 
     private string MovementAxisName;
     private string TurnAxisName;
@@ -85,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetBool("Run", false);
                     anim.SetBool("Aim", false);
                     anim.SetBool("Agachado", true);
+                    StartCoroutine("finalizarAgachando");
                     mode = Mode.Crouching;
                 }
                 else if (mode == Mode.Crouching)
@@ -94,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetBool("CaminarAgachado", false);
                     anim.SetBool("Aim", false);
                     anim.SetBool("Levantarse", true);
+                    StartCoroutine("finalizarLevantando");
                     mode = Mode.Standing;
                 }
             }
@@ -128,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isReloading)
+        if (!isReloading && !agachando && !levantando)
             Move();
         Turn();
         //turnWhileAim();
@@ -140,8 +145,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (mode == Mode.Standing)
         {
-
-            Debug.Log(Running);
+           
             if (MovementInputValue > 0.1f)
             {
                 Quaternion currentRotation = GetComponent<Transform>().rotation;
@@ -161,15 +165,11 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (MovementInputValue < 0.1f /*&& Running*/)
             {
-                /*Running = true;
-                anim.SetBool("Run", true);
-                Speed = Speed - Acceleration * Time.deltaTime;
-                if (Speed < -SpeedLimit) Speed = -SpeedLimit;*/
                 Running = true;
                 anim.SetBool("Run", true);
-                anim.SetBool("GirarCorriendo", true);
-                //if(transform.rotation >= )
-                transform.Rotate(0, 10, 0);
+                Speed = Speed - Acceleration * Time.deltaTime;
+                if (Speed < -SpeedLimit) Speed = -SpeedLimit;
+               
             }
         }
         else if (mode == Mode.Crouching)
@@ -215,6 +215,22 @@ public class PlayerMovement : MonoBehaviour
         isReloading = true;
         yield return new WaitForSeconds(5.4f);
         isReloading = false;
+
+    }
+
+    private IEnumerator finalizarAgachando()
+    {
+        agachando = true;
+        yield return new WaitForSeconds(1.4f);
+        agachando = false;
+
+    }
+
+    private IEnumerator finalizarLevantando()
+    {
+        levantando = true;
+        yield return new WaitForSeconds(1.07f);
+        levantando = false;
 
     }
 
@@ -303,8 +319,6 @@ public class PlayerMovement : MonoBehaviour
 
             Quaternion RotaciónBrazos = Quaternion.LookRotation(playerToMouse);
             Transform Arms = transform.GetChild(4).GetChild(2);
-
-            Debug.Log(Arms.name);
 
             Arms.rotation = RotaciónBrazos;
             //Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
