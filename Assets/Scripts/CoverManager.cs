@@ -4,13 +4,13 @@ using System;
 
 public class CoverManager : MonoBehaviour {
     public static Transform[] coberturas;
+    public static GameObject[] objetos;
 
-    // Use this for initialization
     void Start() {
         coberturas = GetComponentsInChildren<Transform>();
     }
 
-    // Update is called once per frame
+
     void Update() {
 
     }
@@ -19,13 +19,16 @@ public class CoverManager : MonoBehaviour {
     {
         Transform coberturaMesPropeta = null;
         float minimo = float.MaxValue;
-        foreach(Transform cobertura in coberturas)
+        for(int i = 0; i < coberturas.Length;i++)
         {
-            float distancia = Vector3.Distance(guardia.position, cobertura.position);
-            if (distancia < minimo)
+            if (coberturas[i].gameObject.GetComponent<Cover>().occupied)
             {
-                minimo = distancia;
-                coberturaMesPropeta = cobertura;
+                float distancia = Vector3.Distance(guardia.position, coberturas[i].position);
+                if (distancia < minimo)
+                {
+                    minimo = distancia;
+                    coberturaMesPropeta = coberturas[i];
+                }
             }
 
         }

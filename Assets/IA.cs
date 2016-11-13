@@ -20,6 +20,7 @@ public class IA : MonoBehaviour
     private Rigidbody rigidbody;
     public float rotationSpeed = 10f;
     bool delReves = false;
+    public static bool runToCover = false;
 
     void Awake()
     {
@@ -31,6 +32,10 @@ public class IA : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
 
+    public bool getRunToCover()
+    {
+        return runToCover;
+    }
 
     void GotoNextPoint()
     {
@@ -123,7 +128,7 @@ public class IA : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(mode);
+        //Debug.Log(mode);
         switch (mode){
             case Mode.Patrol:
                 Patrol();
@@ -160,6 +165,8 @@ public class IA : MonoBehaviour
                 Transform Objetivo = CoverManager.BuscarMasCercana(transform, (int) sphere.radius);
                 if (Objetivo != null)
                 {
+                    Debug.Log("Corro p'allá");
+                    runToCover = true;
                     agent.destination = Objetivo.position;
                     anim.SetBool("Disparar", false);
                     anim.SetBool("Correr", true);
@@ -190,7 +197,11 @@ public class IA : MonoBehaviour
             if(PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
             {
                 Transform Objetivo = CoverManager.BuscarMasCercana(transform, (int) sphere.radius);
-                if(Objetivo != null) agent.destination = Objetivo.position;
+                if (Objetivo != null)
+                {
+                    runToCover = true;
+                    agent.destination = Objetivo.position;
+                }
             }
         }
         else
