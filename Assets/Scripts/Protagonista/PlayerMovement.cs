@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public static bool enConducto = false;
     bool agachando = false;
     bool levantando = false;
+    bool apuntando = false;
 
 
     private string MovementAxisName;
@@ -34,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     private Transform m_Cam;                  // A reference to the main camera in the scenes transform
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
+    public Camera camera;
+
 
 
     [HideInInspector]
@@ -105,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetMouseButton(1))
         {
+            apuntando = true;
             if (mode == Mode.Standing)
             {
                 anim.SetBool("Run", false);
@@ -122,6 +126,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1))
         {
+            apuntando = false;
+            if (apuntando == false && camera.fieldOfView < 60)
+            {
+                camera.fieldOfView = camera.fieldOfView + 65.0f * Time.deltaTime;
+            }
             anim.SetBool("Aim", false);
             anim.SetBool("Disparar", false);
             mode = Mode.Standing;
@@ -283,6 +292,12 @@ public class PlayerMovement : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
+
+        if (apuntando == true && camera.fieldOfView > 37)
+        {
+            camera.fieldOfView = camera.fieldOfView - 65.0f * Time.deltaTime;
+        }
+       
 
         // calculate move direction to pass to character
         if (m_Cam != null && Mirilla.estaApuntando)//Si apunta y se mueve tiene menos velocidad
