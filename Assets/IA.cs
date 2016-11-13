@@ -162,7 +162,7 @@ public class IA : MonoBehaviour
             RotateTowards(player.transform);
             if (PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
             {
-                Transform Objetivo = CoverManager.BuscarMasCercana(transform, (int) sphere.radius);
+                Transform Objetivo = CoverManagerMal.BuscarMasCercana(transform, (int) sphere.radius);
                 if (Objetivo != null)
                 {
                     Debug.Log("Corro p'allá");
@@ -196,7 +196,7 @@ public class IA : MonoBehaviour
                 agent.destination = player.transform.position;
             if(PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
             {
-                Transform Objetivo = CoverManager.BuscarMasCercana(transform, (int) sphere.radius);
+                Transform Objetivo = CoverManagerMal.BuscarMasCercana(transform, (int) sphere.radius);
                 if (Objetivo != null)
                 {
                     runToCover = true;

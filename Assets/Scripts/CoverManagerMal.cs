@@ -3,12 +3,14 @@ using System.Collections;
 
 public class CoverManagerMal : MonoBehaviour {
 
-	static GameObject[] m_GameObjects;
+	static GameObject[] coberturas;
+
 	void Start () {
-        m_GameObjects = new GameObject[transform.childCount];
-        for(int i = 0;i < m_GameObjects.Length; i++)
+
+        coberturas = new GameObject[transform.childCount];
+        for(int i = 0;i < coberturas.Length; i++)
         {
-            m_GameObjects[i] = transform.GetChild(i).gameObject;
+            coberturas[i] = transform.GetChild(i).gameObject;
         }
 	}
 
@@ -16,23 +18,25 @@ public class CoverManagerMal : MonoBehaviour {
     {
         Transform resultado = null;
         float minimo = float.MaxValue;
-        foreach(GameObject objeto in m_GameObjects)
+        foreach(GameObject cobertura in coberturas)
         {
-            if (!objeto.GetComponent<Cover>().occupied)
+            if (!cobertura.GetComponent<Cover>().occupied)
             {
-                float distancia = Vector3.Distance(guardia.position, objeto.transform.position);
+                float distancia = Vector3.Distance(guardia.position, cobertura.transform.position);
                 if (distancia < minimo)
                 {
                     minimo = distancia;
-                    resultado = objeto.transform;
+                    resultado = cobertura.transform;
                 }
             }
         }
+
         if (Vector3.Distance(guardia.position, resultado.position) < radio)
+        {
+            resultado.gameObject.GetComponent<Cover>().occupied = true;
             return resultado;
+        }
         else
             return null;
     }
-        
-       
 }

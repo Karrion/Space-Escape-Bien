@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraZoom : MonoBehaviour {
+public class CameraZoom : MonoBehaviour
+{
 
 
     float distanciaOriginal;
@@ -10,39 +11,37 @@ public class CameraZoom : MonoBehaviour {
     float distancia;
 
 
-	// Use this for initialization
-	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
-        distanciaOriginal = Vector3.Distance(player.transform.position, transform.position);
-    }
-	
-	// Update is called once per frame
-	void OnTriggerEnter(Collider other)
+    // Use this for initialization
+    void Start()
     {
-        Debug.Log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeh");
+        player = GameObject.FindGameObjectWithTag("Player");
+        distanciaOriginal = Vector3.Distance(transform.parent.position, transform.position);
+    }
+
+    public void OnCollisionStay(Collision collision)
+    {
         colisiona = true;
     }
-    void OnTriggerExit(Collider other)
+
+    public void OnCollisionExit(Collision collision)
     {
-        Debug.Log("eeeeeeeeeeeedsfsadfasfsdfaeeeeeeefadsfeeeeeeeeeeeeeeeeeeeeeh");
         colisiona = false;
     }
 
-   void Update()
-   {
-        Debug.Log(colisiona);
+    void LateUpdate()
+    {
         if (colisiona)
         {
-            Debug.Log("hola");
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 10f * Time.deltaTime);
+            Debug.Log("choco");
+            //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 10f * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, transform.parent.position, 0.5f * Time.deltaTime);
         }
         else
         {
-            distancia = Vector3.Distance(player.transform.position, transform.position);
-            if (distancia > distanciaOriginal)
+            distancia = Vector3.Distance(transform.parent.position, transform.position);
+            if (distancia < distanciaOriginal)
             {
-                Debug.Log("adios");
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z -10f * Time.deltaTime);
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 10f * Time.deltaTime);
             }
         }
     }

@@ -321,6 +321,7 @@ public class PlayerMovement : MonoBehaviour
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit apuntinho;
 
+        /*
         if (Physics.Raycast(camRay, out apuntinho, camRayLength))
         {
             Vector3 playerToMouse = apuntinho.point - transform.position;
@@ -333,6 +334,7 @@ public class PlayerMovement : MonoBehaviour
             //Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
             //Rigidbody.MoveRotation(newRotation);
         }
+        */
 
     }
 
