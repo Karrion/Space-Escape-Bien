@@ -6,10 +6,11 @@ public class Mirilla : MonoBehaviour {
 
     private SpriteRenderer mirillaRenderer;//Imagen de la mirilla
     public SpriteRenderer mirillaPequeñaRenderer;//Imagen de la mirilla cuando apunta a un enemigo
-   /* public GameObject camara;
+    public GameObject camara;
     public GameObject camaraCerca;//Gameobject que indica la posición de la camara cuando esta alejada
-    public GameObject camaraLejos;//Gameobject que indica la posición de la camara cuando esta apuntando(más cerca)*/
+    public GameObject camaraLejos;//Gameobject que indica la posición de la camara cuando esta apuntando(más cerca)
     public bool enemigoApuntado = false;//Si esta apuntando a un enemigo.
+
     // Use this for initialization
     void Start()
     {
@@ -69,9 +70,9 @@ public class Mirilla : MonoBehaviour {
         Vector3 pos = Input.mousePosition;
         // pos.z = transform.position.z - Camera.main.transform.position.z;
         pos.z = 2.0f;
-        transform.position = Camera.main.ScreenToWorldPoint(pos);
+      //  transform.position = Camera.main.ScreenToWorldPoint(pos);
     }
-
+    
    
 }
 

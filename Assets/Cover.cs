@@ -27,7 +27,7 @@ public class Cover : MonoBehaviour {
 	
     void Update()
     {
-        Debug.Log(occupied);
+
     }
 
 }

@@ -68,6 +68,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Cover.cs" />
     <Compile Include="Assets\IA.cs" />
     <Compile Include="Assets\IAVista.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
@@ -81,8 +82,10 @@
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Scripts\AICharacterControl.cs" />
     <Compile Include="Assets\Scripts\Camara\Camara.cs" />
+    <Compile Include="Assets\Scripts\Camara\CameraZoom.cs" />
     <Compile Include="Assets\Scripts\CoverManager.cs" />
     <Compile Include="Assets\Scripts\DoorController.cs" />
+    <Compile Include="Assets\Scripts\Protagonista\CoverManagerMal.cs" />
     <Compile Include="Assets\Scripts\Protagonista\Mirilla.cs" />
     <Compile Include="Assets\Scripts\Protagonista\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Protagonista\ThirdPersonCharacter.cs" />

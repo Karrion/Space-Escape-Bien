@@ -127,14 +127,13 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetMouseButtonUp(1))
         {
             apuntando = false;
-            if (apuntando == false && camera.fieldOfView < 60)
-            {
-                camera.fieldOfView = camera.fieldOfView + 65.0f * Time.deltaTime;
-            }
+           
             anim.SetBool("Aim", false);
             anim.SetBool("Disparar", false);
             mode = Mode.Standing;
         }
+
+        camaraFocus();
 
 
     }
@@ -159,7 +158,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 Quaternion currentRotation = GetComponent<Transform>().rotation;
                 Running = true;
-                anim.SetBool("GirarCorriendo", false);
                 anim.SetBool("Run", true);
                 Speed = Speed + Acceleration * Time.deltaTime;
                 if (Speed > SpeedLimit) Speed = SpeedLimit;
@@ -168,7 +166,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 Running = false;
                 anim.SetBool("Run", false);
-                anim.SetBool("GirarCorriendo", false);
                 Speed = Speed - Acceleration * 10 * Time.deltaTime;
                 if (Speed < 0) Speed = 0;
             }
@@ -293,10 +290,7 @@ public class PlayerMovement : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        if (apuntando == true && camera.fieldOfView > 37)
-        {
-            camera.fieldOfView = camera.fieldOfView - 65.0f * Time.deltaTime;
-        }
+       
        
 
         // calculate move direction to pass to character
@@ -340,6 +334,19 @@ public class PlayerMovement : MonoBehaviour
             //Rigidbody.MoveRotation(newRotation);
         }
 
+    }
+
+    void camaraFocus()
+    {
+        if (apuntando == true && camera.fieldOfView > 37)
+        {
+            camera.fieldOfView = camera.fieldOfView - 65.0f * Time.deltaTime;
+        }
+
+        else if (apuntando == false && camera.fieldOfView < 60)
+             {
+                camera.fieldOfView = camera.fieldOfView + 65.0f * Time.deltaTime;
+             }
     }
 
 
