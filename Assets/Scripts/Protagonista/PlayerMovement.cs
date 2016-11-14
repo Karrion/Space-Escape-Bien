@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         meshRenderer = GetComponent<MeshRenderer>();
-        scriptMirilla = GetComponent<Mirilla>();
+        scriptMirilla = transform.GetChild(0).GetComponent<Mirilla>();
     }
 
 
@@ -195,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             Speed = 0;
-
+            Apuntar();
             if (Input.GetKey(KeyCode.R))
             {
                 anim.SetTrigger("Recargar");
@@ -208,10 +208,10 @@ public class PlayerMovement : MonoBehaviour
                 {
                     IA scriptEnemigo;
                     scriptEnemigo = scriptMirilla.devolverEnemigo().GetComponent<IA>();
-
+                    Debug.Log(scriptEnemigo.gameObject.name);
+                    scriptEnemigo.getHit();
                 }
             }
-            Apuntar();
         }
 
         Vector3 movement = transform.forward * Speed * Time.deltaTime;

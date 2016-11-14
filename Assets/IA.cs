@@ -72,7 +72,7 @@ public class IA : MonoBehaviour
 
     void Update()
     {
-        
+        Debug.Log(previousMode);
         switch (mode){
             case Mode.Patrol:
                 Patrol();
@@ -90,10 +90,10 @@ public class IA : MonoBehaviour
                 Shooting();
                 break;
             case Mode.Hit:
-                anim.SetTrigger("Hit");
                 agent.Stop();
+                anim.SetTrigger("Hit");
                 StartCoroutine("GetHit");
-
+                Alcanzado();
                 break;
             default:
                 break;
@@ -102,7 +102,7 @@ public class IA : MonoBehaviour
 
     private IEnumerator GetHit()
     {
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(0.8f);
     }
 
     private void Shooting()
@@ -114,7 +114,7 @@ public class IA : MonoBehaviour
             if (PlayerMovement.getMode() != PlayerMovement.Mode.Aiming)
                 agent.destination = player.transform.position;
             RotateTowards(player.transform);
-            if (PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
+            /*if (PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
             {
                 Transform Objetivo = CoverManagerMal.BuscarMasCercana(transform, (int) sphere.radius);
                 if (Objetivo != null)
@@ -132,7 +132,7 @@ public class IA : MonoBehaviour
                         anim.SetBool("Correr", false);
                     }
                 }
-            }
+            }*/
         }
         else
         {      
@@ -146,9 +146,13 @@ public class IA : MonoBehaviour
     {
         if(inSight == true)
         {
+            if (agent.remainingDistance <= 10f)
+            {
+                mode = Mode.Shooting;
+            }
             if (PlayerMovement.getMode() != PlayerMovement.Mode.Aiming)
                 agent.destination = player.transform.position;
-            if(PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
+           /* if(PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
             {
                 Transform Objetivo = CoverManagerMal.BuscarMasCercana(transform, (int) sphere.radius);
                 if (Objetivo != null)
@@ -156,7 +160,7 @@ public class IA : MonoBehaviour
                     runToCover = true;
                     agent.destination = Objetivo.position;
                 }
-            }
+            }*/
         }
         else
         {
@@ -169,10 +173,7 @@ public class IA : MonoBehaviour
                 agent.destination = currentPatrol;
             }
         }
-        if (agent.remainingDistance <= 8f && inSight)
-        {
-            mode = Mode.Shooting;
-        }    
+       
     }
 
     private void Patrol()
@@ -209,9 +210,32 @@ public class IA : MonoBehaviour
         }
     }
 
+    void Alcanzado()
+    {
+       
+        Transform Objetivo = CoverManagerMal.BuscarMasCercana(transform, (int)sphere.radius);
+        if (Objetivo != null)
+        {
+            Debug.Log("Corro p'allá");
+            runToCover = true;
+            agent.destination = Objetivo.position;
+            anim.SetBool("Disparar", false);
+            anim.SetBool("Correr", true);
+            agent.Resume();
+            if (agent.remainingDistance <= 1f)
+            {
+                agent.Stop();
+                anim.SetBool("Disparar", true);
+                anim.SetBool("Correr", false);
+            }
+        }
+        mode = previousMode;
+    }
+
     public void getHit()
     {
-        previousMode = mode;
+        if(mode != Mode.Hit)
+            previousMode = mode;
         mode = Mode.Hit;
     }
 }

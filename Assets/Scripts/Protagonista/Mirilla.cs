@@ -78,7 +78,7 @@ public class Mirilla : MonoBehaviour {
     
     public GameObject devolverEnemigo()
     {
-        return hit.collider.gameObject; 
+        return hit.collider.gameObject;
     }
 }
 
