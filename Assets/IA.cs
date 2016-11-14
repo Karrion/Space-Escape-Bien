@@ -15,6 +15,7 @@ public class IA : MonoBehaviour
     private float alertTime = 0.0f;
     private Vector3 currentPatrol;
     private bool inSight;
+    private GameObject sphereGameObject;
     private SphereCollider sphere;
     private Animator anim;
     private Rigidbody rigidbody;
@@ -27,7 +28,8 @@ public class IA : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         agent.autoBraking = false;
-        sphere = GetComponent<SphereCollider>();
+        sphereGameObject = GameObject.FindGameObjectWithTag("SphereEnemy");
+        sphere = sphereGameObject.GetComponent<SphereCollider>();
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
     }
