@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_Move;
     public Camera camera;
 
-
+    Mirilla scriptMirilla;
 
     [HideInInspector]
     public enum Mode { Standing, Crouching, Aiming, Crawling };
@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         meshRenderer = GetComponent<MeshRenderer>();
+        scriptMirilla = GetComponent<Mirilla>();
     }
 
 
@@ -134,8 +135,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         camaraFocus();
-
-
     }
 
 
@@ -201,12 +200,16 @@ public class PlayerMovement : MonoBehaviour
             {
                 anim.SetTrigger("Recargar");
                 StartCoroutine("finalizarCarga");
-
-
             }
             else if (Input.GetMouseButtonDown(0))
             {
                 anim.SetTrigger("Disparar");
+                if (scriptMirilla.enemigoApuntado == true)
+                {
+                    IA scriptEnemigo;
+                    scriptEnemigo = scriptMirilla.devolverEnemigo().GetComponent<IA>();
+
+                }
             }
             Apuntar();
         }
@@ -259,18 +262,12 @@ public class PlayerMovement : MonoBehaviour
                 //runningAudio.Stop ();
             }
         }
+
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             anim.SetBool("agachado", false);
         }
-        /* else
-         {
-             anim.SetBool("agachado", true);
-             //particle.SetActive (true);
-             Speed = Speed - Acceleration * Time.deltaTime;
-             if (Speed < -CrouchLimit) Speed = -SpeedLimit;
-             //runningAudio.Play();
-         }*/
+        
         Vector3 movement = transform.forward * Speed * Time.deltaTime;
         Rigidbody.MovePosition(Rigidbody.position + movement);
     }
@@ -289,9 +286,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-
-       
-       
 
         // calculate move direction to pass to character
         if (m_Cam != null && Mirilla.estaApuntando)//Si apunta y se mueve tiene menos velocidad
@@ -317,25 +311,6 @@ public class PlayerMovement : MonoBehaviour
             // we use world-relative directions in the case of no main camera
             m_Move = v * Vector3.forward + h * Vector3.right;
         }
-
-        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit apuntinho;
-
-        /*
-        if (Physics.Raycast(camRay, out apuntinho, camRayLength))
-        {
-            Vector3 playerToMouse = apuntinho.point - transform.position;
-            playerToMouse.y = 0f;
-
-            Quaternion RotaciónBrazos = Quaternion.LookRotation(playerToMouse);
-            Transform Arms = transform.GetChild(4).GetChild(2);
-
-            Arms.rotation = RotaciónBrazos;
-            //Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-            //Rigidbody.MoveRotation(newRotation);
-        }
-        */
-
     }
 
     void camaraFocus()
@@ -354,9 +329,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Turn()
     {
-        // Adjust the rotation of the tank based on the player's input.
-
-
         float turn = TurnInputValue * TurnSpeed * Time.deltaTime;
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
         Rigidbody.MoveRotation(Rigidbody.rotation * turnRotation);

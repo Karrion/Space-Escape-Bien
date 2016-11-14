@@ -10,7 +10,7 @@ public class IA : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject player;
     [HideInInspector] public int fieldOfViewDegrees = 110;
-    public enum Mode { Alert, Patrol, Shooting };
+    public enum Mode { Alert, Patrol, Shooting, Hit };
     public Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
     [HideInInspector] public Vector3 currentPatrol;
@@ -22,6 +22,7 @@ public class IA : MonoBehaviour
     public float rotationSpeed = 10f;
     bool delReves = false;
     public static bool runToCover = false;
+    private Mode previousMode;
 
     void Awake()
     {
@@ -59,61 +60,6 @@ public class IA : MonoBehaviour
         }
     }
 
-    /*public void OnTriggerStay(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            inSight = false;
-            RaycastHit hit;
-            Vector3 rayDirection = player.transform.position - transform.position + transform.up;
-            if ((Vector3.Angle(rayDirection, transform.forward)) <= fieldOfViewDegrees * 0.5f)
-            {
-                if (Physics.Raycast(transform.position + transform.up, rayDirection.normalized, out hit, sphere.radius))
-                {
-                    Debug.DrawLine(transform.position + transform.up, hit.point);
-                    if (hit.transform.CompareTag("Player"))
-                    {
-                        if (mode != Mode.Shooting)
-                        {
-                            currentPatrol = agent.destination;
-                            mode = Mode.Alert;
-                            inSight = true;
-                            agent.autoBraking = true;
-                        }
-                    }
-                    else {
-                        if (mode == Mode.Shooting)
-                          mode = Mode.Alert;
-                            
-                    }
-                }
-                else
-                {
-                    inSight = false;
-                }          
-            }
-            else if (PlayerMovement.Running && mode == Mode.Patrol)
-            {
-                escuchado();
-            }
-        }
-    }
-
-    void OnTriggerEnter(Collider collider)
-    {
-        if (collider.tag == "Player")
-            if (PlayerMovement.Running && mode == Mode.Patrol)
-            {
-                 currentPatrol = agent.destination;
-                 agent.destination = player.transform.position;
-                 if(agent.remainingDistance >= 0)
-                 {
-                     StartCoroutine("tiempoEspera");
-
-                 }
-                escuchado();
-            }
-    }*/
 
     IEnumerator tiempoEspera()
     {
@@ -123,9 +69,10 @@ public class IA : MonoBehaviour
         agent.Resume();
     }
 
+
     void Update()
     {
-        //Debug.Log(mode);
+        
         switch (mode){
             case Mode.Patrol:
                 Patrol();
@@ -142,10 +89,20 @@ public class IA : MonoBehaviour
                 anim.SetBool("Caminar", false);
                 Shooting();
                 break;
+            case Mode.Hit:
+                anim.SetTrigger("Hit");
+                agent.Stop();
+                StartCoroutine("GetHit");
+
+                break;
             default:
                 break;
         }
+    }
 
+    private IEnumerator GetHit()
+    {
+        yield return new WaitForSeconds(0.9f);
     }
 
     private void Shooting()
@@ -238,6 +195,7 @@ public class IA : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
+
     public void escuchado()
     {
         if (PlayerMovement.Running && mode != Mode.Shooting)
@@ -247,8 +205,13 @@ public class IA : MonoBehaviour
             if (agent.remainingDistance >= 0)
             {
                 StartCoroutine("tiempoEspera");
-
             }
         }
+    }
+
+    public void getHit()
+    {
+        previousMode = mode;
+        mode = Mode.Hit;
     }
 }

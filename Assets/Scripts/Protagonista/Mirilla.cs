@@ -8,6 +8,7 @@ public class Mirilla : MonoBehaviour {
     public SpriteRenderer mirillaPequeñaRenderer;//Imagen de la mirilla cuando apunta a un enemigo
     public GameObject camara;
     public bool enemigoApuntado = false;//Si esta apuntando a un enemigo.
+    private RaycastHit hit;
 
     // Use this for initialization
     void Start()
@@ -18,7 +19,6 @@ public class Mirilla : MonoBehaviour {
 
     void FixedUpdate()
     {
-        RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
@@ -76,6 +76,9 @@ public class Mirilla : MonoBehaviour {
         transform.position = Camera.main.ScreenToWorldPoint(pos);
     }
     
-   
+    public GameObject devolverEnemigo()
+    {
+        return hit.collider.gameObject; 
+    }
 }
 
