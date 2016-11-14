@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Cobertura
   - EsferaEnemiga
+  - Puerta
   layers:
   - Default
   - TransparentFX
