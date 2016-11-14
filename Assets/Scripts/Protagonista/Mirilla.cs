@@ -31,6 +31,7 @@ public class Mirilla : MonoBehaviour {
 
                 Debug.DrawLine(ray.origin, hit.point);
                 enemigoApuntado = true;
+                
                 shooting();//Aprovecho el script y disparo xD
             }
             else

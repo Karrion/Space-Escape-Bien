@@ -9,12 +9,12 @@ public class IA : MonoBehaviour
     private int destPoint = 0;
     private NavMeshAgent agent;
     private GameObject player;
-    private int fieldOfViewDegrees = 110;
-    enum Mode { Alert, Patrol, Shooting };
-    Mode mode = Mode.Patrol;
+    [HideInInspector] public int fieldOfViewDegrees = 110;
+    public enum Mode { Alert, Patrol, Shooting };
+    public Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
-    private Vector3 currentPatrol;
-    private bool inSight;
+    [HideInInspector] public Vector3 currentPatrol;
+    [HideInInspector] public bool inSight;
     private GameObject sphereGameObject;
     private SphereCollider sphere;
     private Animator anim;
@@ -59,7 +59,7 @@ public class IA : MonoBehaviour
         }
     }
 
-    public void OnTriggerStay(Collider other)
+    /*public void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player")
         {
@@ -104,16 +104,16 @@ public class IA : MonoBehaviour
         if (collider.tag == "Player")
             if (PlayerMovement.Running && mode == Mode.Patrol)
             {
-                /* currentPatrol = agent.destination;
+                 currentPatrol = agent.destination;
                  agent.destination = player.transform.position;
                  if(agent.remainingDistance >= 0)
                  {
                      StartCoroutine("tiempoEspera");
 
-                 }*/
+                 }
                 escuchado();
             }
-    }
+    }*/
 
     IEnumerator tiempoEspera()
     {
@@ -238,7 +238,7 @@ public class IA : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
-    private void escuchado()
+    public void escuchado()
     {
         if (PlayerMovement.Running && mode != Mode.Shooting)
         {
