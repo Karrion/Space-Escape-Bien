@@ -40,7 +40,7 @@ public class DoorController : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider != esferaEnemigo)
+        if(collider.tag != "EsferaEnemiga")
         {
             abrir = true;
             contador++;           
@@ -50,7 +50,7 @@ public class DoorController : MonoBehaviour {
    
     void OnTriggerExit(Collider collider)
     {
-        if (collider != esferaEnemigo)
+        if (collider.tag != "EsferaEnemiga")
         {
             if (contador > 0)
                 contador--;

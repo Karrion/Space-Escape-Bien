@@ -366,7 +366,7 @@ GameObject:
   - 114: {fileID: 153462957}
   m_Layer: 2
   m_Name: EsferaDeteccion
-  m_TagString: Untagged
+  m_TagString: EsferaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -498,7 +498,7 @@ GameObject:
   - 114: {fileID: 219622140}
   m_Layer: 2
   m_Name: EsferaDeteccion
-  m_TagString: Untagged
+  m_TagString: EsferaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -777,7 +777,7 @@ GameObject:
   - 114: {fileID: 345349198}
   m_Layer: 2
   m_Name: EsferaDeteccion
-  m_TagString: Untagged
+  m_TagString: EsferaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1580,7 +1580,7 @@ GameObject:
   - 114: {fileID: 544139441}
   m_Layer: 2
   m_Name: EsferaDeteccion
-  m_TagString: Untagged
+  m_TagString: EsferaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2035,22 +2035,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7a7a897ccae87742be64cd1c8284a38, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &676887674 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000010082075814, guid: c7a7a897ccae87742be64cd1c8284a38,
-    type: 2}
-  m_PrefabInternal: {fileID: 676887673}
---- !u!114 &676887675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 676887674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd9d85877b1a43446a6f202d4935437b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &676887681 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010575878854, guid: c7a7a897ccae87742be64cd1c8284a38,
@@ -2302,7 +2286,7 @@ GameObject:
   - 114: {fileID: 804674411}
   m_Layer: 2
   m_Name: EsferaDeteccion
-  m_TagString: Untagged
+  m_TagString: EsferaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2539,7 +2523,7 @@ GameObject:
   - 114: {fileID: 978648794}
   m_Layer: 2
   m_Name: EsferaDeteccion
-  m_TagString: Untagged
+  m_TagString: EsferaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2724,7 +2708,7 @@ GameObject:
   - 114: {fileID: 1028725656}
   m_Layer: 2
   m_Name: EsferaDeteccion
-  m_TagString: Untagged
+  m_TagString: EsferaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3098,7 +3082,7 @@ GameObject:
   - 114: {fileID: 1170041439}
   m_Layer: 2
   m_Name: EsferaDeteccion
-  m_TagString: Untagged
+  m_TagString: EsferaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5794,7 +5778,7 @@ GameObject:
   - 114: {fileID: 1947938550}
   m_Layer: 2
   m_Name: EsferaVision
-  m_TagString: Untagged
+  m_TagString: EsferaEnemiga
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
