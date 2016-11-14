@@ -28,8 +28,8 @@ public class IA : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         agent.autoBraking = false;
-        sphereGameObject = GameObject.FindGameObjectWithTag("SphereEnemy");
-        sphere = sphereGameObject.GetComponent<SphereCollider>();
+        //sphereGameObject = GameObject.FindGameObjectWithTag("SphereEnemy");
+        //sphere = sphereGameObject.GetComponent<SphereCollider>();
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
     }
