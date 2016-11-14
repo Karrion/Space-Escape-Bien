@@ -92,10 +92,6 @@ public class IA : MonoBehaviour
             }
             else if (PlayerMovement.Running && mode == Mode.Patrol)
             {
-                /*currentPatrol = agent.destination;
-                mode = Mode.Alert;
-                inSight = true;
-                agent.autoBraking = true;*/
                 escuchado();
             }
         }
@@ -115,9 +111,8 @@ public class IA : MonoBehaviour
                  }*/
                 escuchado();
             }
-            
-
     }
+
     IEnumerator tiempoEspera()
     {
         agent.Stop();

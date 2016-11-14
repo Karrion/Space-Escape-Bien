@@ -7,8 +7,6 @@ public class Mirilla : MonoBehaviour {
     private SpriteRenderer mirillaRenderer;//Imagen de la mirilla
     public SpriteRenderer mirillaPequeñaRenderer;//Imagen de la mirilla cuando apunta a un enemigo
     public GameObject camara;
-    public GameObject camaraCerca;//Gameobject que indica la posición de la camara cuando esta alejada
-    public GameObject camaraLejos;//Gameobject que indica la posición de la camara cuando esta apuntando(más cerca)
     public bool enemigoApuntado = false;//Si esta apuntando a un enemigo.
 
     // Use this for initialization
@@ -24,21 +22,25 @@ public class Mirilla : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log(hit.collider.name);
             if (hit.collider.gameObject.tag == "Enemy")
             {
                 mirillaPequeñaRenderer.enabled = true;
                 mirillaRenderer.enabled = false;
-              
+
                 Debug.DrawLine(ray.origin, hit.point);
                 enemigoApuntado = true;
-                shooting();//Aprobecho el script y disparo xD
+                shooting();//Aprovecho el script y disparo xD
             }
-            else {
-                
+            else
+            {
+
                 mirillaPequeñaRenderer.enabled = false;
                 mirillaRenderer.enabled = true;
                 enemigoApuntado = false;
             }
+        }
             
     }
 
@@ -68,9 +70,9 @@ public class Mirilla : MonoBehaviour {
             mirillaPequeñaRenderer.enabled = false;
         }
         Vector3 pos = Input.mousePosition;
-        // pos.z = transform.position.z - Camera.main.transform.position.z;
+        pos.z = transform.position.z - Camera.main.transform.position.z;
         pos.z = 2.0f;
-      //  transform.position = Camera.main.ScreenToWorldPoint(pos);
+        transform.position = Camera.main.ScreenToWorldPoint(pos);
     }
     
    
