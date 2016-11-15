@@ -36,7 +36,7 @@ public class Deteccion : MonoBehaviour {
                     {
                         if (IaPadre.mode != IA.Mode.Shooting)
                         {
-                            IaPadre.currentPatrol = agent.destination;
+                            if(IaPadre.points.Length != 0) IaPadre.currentPatrol = agent.destination;
                             IaPadre.mode = IA.Mode.Alert;
                             IaPadre.inSight = true;
                             agent.autoBraking = true;

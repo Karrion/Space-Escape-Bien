@@ -38,6 +38,7 @@ public class IA : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         interrogacion = transform.GetChild(2).GetComponent<SpriteRenderer>();
         exclamacion = transform.GetChild(1).GetComponent<SpriteRenderer>();
+        currentPatrol = transform.position;
     }
 
     public bool getRunToCover()
@@ -202,7 +203,7 @@ public class IA : MonoBehaviour
     {
         
         interrogacion.enabled = true;
-        currentPatrol = agent.destination;
+        if(points.Length != 0) currentPatrol = agent.destination;
         agent.destination = player.transform.position;
         if (transform.position == agent.destination)
         {
