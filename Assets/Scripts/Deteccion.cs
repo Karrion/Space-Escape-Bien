@@ -56,12 +56,14 @@ public class Deteccion : MonoBehaviour {
             }
             else if (PlayerMovement.Running && IaPadre.mode == IA.Mode.Patrol)
             {
+                
                 IaPadre.escuchado();
+
             }
         }
     }
 
-    void OnTriggerEnter(Collider collider)
+    /*void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
             if (PlayerMovement.Running && IaPadre.mode == IA.Mode.Patrol)
@@ -72,8 +74,9 @@ public class Deteccion : MonoBehaviour {
                  {
                      StartCoroutine("tiempoEspera");
 
-                 }*/
+                 }
+                Debug.Log("eh!2");
                 IaPadre.escuchado();
             }
-    }
+    }*/
 }

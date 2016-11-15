@@ -14,7 +14,7 @@ public class CoverManagerMal : MonoBehaviour {
         }
 	}
 
-    public static Transform BuscarMasCercana(Transform guardia, int radio)
+    public Transform BuscarMasCercana(Transform guardia, float radio)
     {
         Transform resultado = null;
         float minimo = float.MaxValue;

@@ -23,7 +23,6 @@ public class Mirilla : MonoBehaviour {
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log(hit.collider.name);
             if (hit.collider.gameObject.tag == "Enemy")
             {
                 mirillaPequeñaRenderer.enabled = true;
@@ -31,8 +30,6 @@ public class Mirilla : MonoBehaviour {
 
                 Debug.DrawLine(ray.origin, hit.point);
                 enemigoApuntado = true;
-                
-                shooting();//Aprovecho el script y disparo xD
             }
             else
             {
@@ -43,13 +40,6 @@ public class Mirilla : MonoBehaviour {
             }
         }
             
-    }
-
-    void shooting() {
-        if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("A dormir");
-            //TODO:Completar tirando un gameobject si vemos que queda mejor.
-        }
     }
 
     // Update is called once per frame

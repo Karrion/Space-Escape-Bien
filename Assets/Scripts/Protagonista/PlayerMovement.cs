@@ -128,7 +128,6 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetMouseButtonUp(1))
         {
             apuntando = false;
-           
             anim.SetBool("Aim", false);
             anim.SetBool("Disparar", false);
             mode = Mode.Standing;

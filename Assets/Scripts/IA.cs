@@ -23,16 +23,21 @@ public class IA : MonoBehaviour
     bool delReves = false;
     public static bool runToCover = false;
     private Mode previousMode;
+    private CoverManagerMal coverManager;
+    private SpriteRenderer interrogacion;
+    private SpriteRenderer exclamacion;
+
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         agent.autoBraking = false;
-        //sphereGameObject = GameObject.FindGameObjectWithTag("SphereEnemy");
-        //sphere = sphereGameObject.GetComponent<SphereCollider>();
+        sphere = transform.GetChild(0).GetComponent<SphereCollider>();
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
+        interrogacion = transform.GetChild(2).GetComponent<SpriteRenderer>();
+        exclamacion = transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 
     public bool getRunToCover()
@@ -65,6 +70,7 @@ public class IA : MonoBehaviour
     {
         agent.Stop();
         yield return new WaitForSeconds(5);
+        interrogacion.enabled = false;
         agent.destination = currentPatrol;
         agent.Resume();
     }
@@ -72,21 +78,21 @@ public class IA : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(previousMode);
+       // Debug.Log("Modo: " + mode);
         switch (mode){
             case Mode.Patrol:
                 Patrol();
                 break;
             case Mode.Alert:
+                if (interrogacion.enabled == true)
+                    interrogacion.enabled = false;
+                exclamacion.enabled = true;
                 anim.SetBool("Correr", true);
                 anim.SetBool("Caminar", false);
                 anim.SetBool("Disparar", false);
                 Alert();
                 break;
             case Mode.Shooting:
-                anim.SetBool("Disparar", true);
-                anim.SetBool("Correr", false);
-                anim.SetBool("Caminar", false);
                 Shooting();
                 break;
             case Mode.Hit:
@@ -107,32 +113,15 @@ public class IA : MonoBehaviour
 
     private void Shooting()
     {
-        
-        if (agent.remainingDistance <= 8f)
-        {         
+        agent.SetDestination(player.transform.position);
+        if (agent.remainingDistance <= 10f)
+        {
+            //Debug.Log(agent.remainingDistance);
             agent.Stop();
-            if (PlayerMovement.getMode() != PlayerMovement.Mode.Aiming)
-                agent.destination = player.transform.position;
+            anim.SetBool("Disparar", true);
+            anim.SetBool("Correr", false);
+            anim.SetBool("Caminar", false);
             RotateTowards(player.transform);
-            /*if (PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
-            {
-                Transform Objetivo = CoverManagerMal.BuscarMasCercana(transform, (int) sphere.radius);
-                if (Objetivo != null)
-                {
-                    Debug.Log("Corro p'allá");
-                    runToCover = true;
-                    agent.destination = Objetivo.position;
-                    anim.SetBool("Disparar", false);
-                    anim.SetBool("Correr", true);
-                    agent.Resume();
-                    if (agent.remainingDistance <= 1f)
-                    {
-                        agent.Stop();
-                        anim.SetBool("Disparar", true);
-                        anim.SetBool("Correr", false);
-                    }
-                }
-            }*/
         }
         else
         {      
@@ -169,6 +158,7 @@ public class IA : MonoBehaviour
             if(alertTime >= 10.0f)
             {
                 alertTime = 0;
+                exclamacion.enabled = false;
                 mode = Mode.Patrol;
                 agent.destination = currentPatrol;
             }
@@ -178,11 +168,22 @@ public class IA : MonoBehaviour
 
     private void Patrol()
     {
-        if (points.Length != 0) anim.SetBool("Caminar", true);
-        else anim.SetBool("Caminar", false);
-        anim.SetBool("Correr", false);
-        anim.SetBool("Disparar", false);
-        if (agent.autoBraking == true) agent.autoBraking = false;
+        if (points.Length != 0)
+        {
+            anim.SetBool("Caminar", true);
+        }
+        else
+        {
+            anim.SetBool("Caminar", false);
+            anim.SetBool("Correr", false);
+            anim.SetBool("Disparar", false);
+        }
+
+        if (agent.autoBraking == true)
+        {
+            agent.autoBraking = false;
+        }
+
         if (agent.remainingDistance < 1)
         {
             GotoNextPoint();
@@ -199,23 +200,25 @@ public class IA : MonoBehaviour
 
     public void escuchado()
     {
-        if (PlayerMovement.Running && mode != Mode.Shooting)
+        
+        interrogacion.enabled = true;
+        currentPatrol = agent.destination;
+        agent.destination = player.transform.position;
+        if (transform.position == agent.destination)
         {
-            currentPatrol = agent.destination;
-            agent.destination = player.transform.position;
-            if (agent.remainingDistance >= 0)
-            {
-                StartCoroutine("tiempoEspera");
-            }
+       
+            StartCoroutine("tiempoEspera");
+         
         }
+      
     }
 
     void Alcanzado()
     {
        
-        Transform Objetivo = CoverManagerMal.BuscarMasCercana(transform, (int)sphere.radius);
-        if (Objetivo != null)
-        {
+       if (coverManager.BuscarMasCercana(transform, sphere.radius) != null)
+       {
+            Transform Objetivo = coverManager.BuscarMasCercana(transform, sphere.radius);
             Debug.Log("Corro p'allá");
             runToCover = true;
             agent.destination = Objetivo.position;
@@ -227,15 +230,21 @@ public class IA : MonoBehaviour
                 agent.Stop();
                 anim.SetBool("Disparar", true);
                 anim.SetBool("Correr", false);
+                mode = Mode.Shooting;
+                return;
             }
         }
-        mode = previousMode;
+        agent.SetDestination(player.transform.position);
+        agent.Resume();
+        mode = Mode.Alert;
     }
 
     public void getHit()
     {
-        if(mode != Mode.Hit)
-            previousMode = mode;
         mode = Mode.Hit;
+        anim.SetBool("Caminar", false);
+        anim.SetBool("Correr", false);
+        anim.SetBool("Disparar", false);
+        Debug.Log("Au");
     }
 }
