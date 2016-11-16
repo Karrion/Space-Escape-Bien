@@ -26,6 +26,7 @@ public class IA : MonoBehaviour
     private CoverManagerMal coverManager;
     private SpriteRenderer interrogacion;
     private SpriteRenderer exclamacion;
+    private bool escuchaAlgo = false;
 
 
     void Awake()
@@ -69,6 +70,7 @@ public class IA : MonoBehaviour
 
     IEnumerator tiempoEspera()
     {
+        escuchaAlgo = false;
         agent.Stop();
         yield return new WaitForSeconds(5);
         interrogacion.enabled = false;
@@ -83,6 +85,8 @@ public class IA : MonoBehaviour
         switch (mode){
             case Mode.Patrol:
                 Patrol();
+                if (escuchaAlgo)
+                    calcularDistanciaEscuchado();
                 break;
             case Mode.Alert:
                 if (interrogacion.enabled == true)
@@ -187,7 +191,8 @@ public class IA : MonoBehaviour
 
         if (agent.remainingDistance < 1)
         {
-            GotoNextPoint();
+                GotoNextPoint();
+    
         }
     }
 
@@ -205,12 +210,13 @@ public class IA : MonoBehaviour
         interrogacion.enabled = true;
         if(points.Length != 0) currentPatrol = agent.destination;
         agent.destination = player.transform.position;
-        if (transform.position == agent.destination)
+        escuchaAlgo = true;
+        /*if (transform.position == agent.destination)
         {
        
             StartCoroutine("tiempoEspera");
          
-        }
+        }*/
       
     }
 
@@ -247,5 +253,13 @@ public class IA : MonoBehaviour
         anim.SetBool("Correr", false);
         anim.SetBool("Disparar", false);
         Debug.Log("Au");
+    }
+
+    public void calcularDistanciaEscuchado()
+    {       
+        if (agent.remainingDistance <= 0.6)
+        {
+            StartCoroutine("tiempoEspera");
+        }       
     }
 }
