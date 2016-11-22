@@ -27,19 +27,20 @@ public class IA : MonoBehaviour
     private SpriteRenderer interrogacion;
     private SpriteRenderer exclamacion;
     private bool escuchaAlgo = false;
+    private Quaternion rotacionInicial;
 
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
-        agent.autoBraking = false;
         sphere = transform.GetChild(0).GetComponent<SphereCollider>();
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
         interrogacion = transform.GetChild(2).GetComponent<SpriteRenderer>();
         exclamacion = transform.GetChild(1).GetComponent<SpriteRenderer>();
         currentPatrol = transform.position;
+        rotacionInicial = transform.rotation;
     }
 
     public bool getRunToCover()
@@ -70,18 +71,21 @@ public class IA : MonoBehaviour
 
     IEnumerator tiempoEspera()
     {
-        escuchaAlgo = false;
+       
         agent.Stop();
+        anim.SetBool("Caminar", false);
         yield return new WaitForSeconds(5);
         interrogacion.enabled = false;
         agent.destination = currentPatrol;
+        escuchaAlgo = false;
         agent.Resume();
     }
 
 
     void Update()
     {
-       // Debug.Log("Modo: " + mode);
+        // Debug.Log("Modo: " + mode);
+        //Debug.Log(agent.remainingDistance);
         switch (mode){
             case Mode.Patrol:
                 Patrol();
@@ -179,15 +183,29 @@ public class IA : MonoBehaviour
         }
         else
         {
-            anim.SetBool("Caminar", false);
+            if(!escuchaAlgo)
+                anim.SetBool("Caminar", false);
             anim.SetBool("Correr", false);
             anim.SetBool("Disparar", false);
+            if(agent.remainingDistance > 1.5f && !escuchaAlgo)
+            {
+                anim.SetBool("Caminar", true);
+
+            }
+            else
+            {
+                if (!escuchaAlgo)
+                {
+                    anim.SetBool("Caminar", false);
+                    transform.rotation = rotacionInicial;
+                    agent.Stop();
+                }
+                   
+                
+            }
+
         }
 
-        if (agent.autoBraking == true)
-        {
-            agent.autoBraking = false;
-        }
 
         if (agent.remainingDistance < 1)
         {
@@ -206,7 +224,8 @@ public class IA : MonoBehaviour
 
     public void escuchado()
     {
-        
+        anim.SetBool("Caminar", true);
+        agent.Resume();
         interrogacion.enabled = true;
         if(points.Length != 0) currentPatrol = agent.destination;
         agent.destination = player.transform.position;
