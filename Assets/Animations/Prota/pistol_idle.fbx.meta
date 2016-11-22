@@ -219,7 +219,7 @@ ModelImporter:
       name: pistol_idle
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 80
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
