@@ -102,6 +102,9 @@ public class IA : MonoBehaviour
                 Alert();
                 break;
             case Mode.Shooting:
+                anim.SetBool("Disparar", true);
+                anim.SetBool("Correr", false);
+                anim.SetBool("Caminar", false);
                 Shooting();
                 break;
             case Mode.Hit:
@@ -125,11 +128,7 @@ public class IA : MonoBehaviour
         agent.SetDestination(player.transform.position);
         if (agent.remainingDistance <= 10f)
         {
-            //Debug.Log(agent.remainingDistance);
             agent.Stop();
-            anim.SetBool("Disparar", true);
-            anim.SetBool("Correr", false);
-            anim.SetBool("Caminar", false);
             RotateTowards(player.transform);
         }
         else
@@ -242,7 +241,7 @@ public class IA : MonoBehaviour
     void Alcanzado()
     {
        
-       if (coverManager.BuscarMasCercana(transform, sphere.radius) != null)
+      /* if (coverManager.BuscarMasCercana(transform, sphere.radius) != null)
        {
             Transform Objetivo = coverManager.BuscarMasCercana(transform, sphere.radius);
             Debug.Log("Corro p'allá");
@@ -250,7 +249,7 @@ public class IA : MonoBehaviour
             agent.destination = Objetivo.position;
             anim.SetBool("Disparar", false);
             anim.SetBool("Correr", true);
-            agent.Resume();
+            agent.Resume();*/
             if (agent.remainingDistance <= 1f)
             {
                 agent.Stop();
@@ -259,7 +258,7 @@ public class IA : MonoBehaviour
                 mode = Mode.Shooting;
                 return;
             }
-        }
+     //   }
         agent.SetDestination(player.transform.position);
         agent.Resume();
         mode = Mode.Alert;
