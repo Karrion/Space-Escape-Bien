@@ -16,8 +16,9 @@
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
-    <UnityVersion>5.4.2f1</UnityVersion>
+    <UnityVersion>5.4.2f2</UnityVersion>
     <RootNamespace></RootNamespace>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -90,6 +91,7 @@
     <Compile Include="Assets\Scripts\Protagonista\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Protagonista\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\Scripts\Protagonista\ThirdPersonUserControl.cs" />
+    <Compile Include="Assets\Scripts\WaypointBehaviour.cs" />
     <Compile Include="Assets\Single TPS Controller\Scripts\ControladorDePersonagem.cs" />
     <Compile Include="Assets\Single TPS Controller\Scripts\ControleOrbital.cs" />
   </ItemGroup>
