@@ -3,9 +3,11 @@ using System.Collections;
 
 public class CoverManagerMal : MonoBehaviour {
 
+    GameObject player;
 	static GameObject[] coberturas;
 
 	void Start () {
+        player = GameObject.FindGameObjectWithTag("Player");
 
         coberturas = new GameObject[transform.childCount];
         for(int i = 0;i < coberturas.Length; i++)
@@ -25,8 +27,17 @@ public class CoverManagerMal : MonoBehaviour {
                 float distancia = Vector3.Distance(guardia.position, cobertura.transform.position);
                 if (distancia < minimo)
                 {
-                    minimo = distancia;
-                    resultado = cobertura.transform;
+                    RaycastHit hit;
+                    Vector3 rayDirection = player.transform.position - transform.position;
+
+                    if (Physics.Raycast(transform.position, rayDirection.normalized, out hit))
+                    {
+                        if (hit.collider.gameObject.tag != "Player")
+                        {
+                            minimo = distancia;
+                            resultado = cobertura.transform;
+                        }
+                    }
                 }
             }
         }
