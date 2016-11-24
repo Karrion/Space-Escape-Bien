@@ -3,19 +3,10 @@ using System.Collections.Generic;
 
 public class GraphVisibility : Graph {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     public override void Load()
     {
         Vertex[] verts = GameObject.FindObjectsOfType<Vertex>();
+        Debug.Log(verts.Length);
         vertices = new List<Vertex>(verts);
         for (int i = 0; i < vertices.Count; i++)
         {
@@ -24,6 +15,19 @@ public class GraphVisibility : Graph {
             vv.FindNeighbours(vertices);
         }
     }
+
+
+    // Use this for initialization
+    void Start () {
+        Load();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+   
 
     public override Vertex GetNearestVertex(Vector3 position)
     {
