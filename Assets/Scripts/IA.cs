@@ -89,6 +89,7 @@ public class IA : MonoBehaviour
     {
         zona = GameController.zona;
         Debug.Log(zona);
+
         // Debug.Log("Modo: " + mode);
         //Debug.Log(agent.remainingDistance);
         switch (mode){
