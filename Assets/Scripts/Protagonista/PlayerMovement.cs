@@ -37,7 +37,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_Move;
     public Camera camera;
 
-    
+    //Cosas guays para cambios de zona:
+    private GameObject deUnaADos;
+    private GameObject deTresADos;
+
+
 
     Mirilla scriptMirilla;
 
@@ -57,7 +61,10 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         meshRenderer = GetComponent<MeshRenderer>();
         scriptMirilla = transform.GetChild(0).GetComponent<Mirilla>();
-        
+        deUnaADos = GameObject.FindGameObjectWithTag("DesdeZona1");
+        deTresADos = GameObject.FindGameObjectWithTag("DesdeZona3");
+        deUnaADos.SetActive(false);
+        deTresADos.SetActive(false);
     }
 
 
@@ -367,7 +374,14 @@ public class PlayerMovement : MonoBehaviour
         if (collider.tag == "Zona1")
         {
             GameController.zona = 1;
+            GameController.zonaAnterior = 2;
+            deUnaADos.SetActive(true);
+            deTresADos.SetActive(false);
         }
+        else if (collider.tag == "DesdeZona1")
+            GameController.zonaAnterior = 1;
+        else if (collider.tag == "DesdeZona3")
+            GameController.zonaAnterior = 3;
         else if (collider.tag == "Zona2")
         {
             GameController.zona = 2;
@@ -375,6 +389,9 @@ public class PlayerMovement : MonoBehaviour
         else if (collider.tag == "Zona3")
         {
             GameController.zona = 3;
+            GameController.zonaAnterior = 2;
+            deUnaADos.SetActive(false);
+            deTresADos.SetActive(true);
         }
     }
 

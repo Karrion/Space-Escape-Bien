@@ -6,7 +6,7 @@ public class GraphVisibility : Graph {
     public override void Load()
     {
         Vertex[] verts = GameObject.FindObjectsOfType<Vertex>();
-        Debug.Log(verts.Length);
+        //Debug.Log(verts.Length);
         vertices = new List<Vertex>(verts);
         for (int i = 0; i < vertices.Count; i++)
         {

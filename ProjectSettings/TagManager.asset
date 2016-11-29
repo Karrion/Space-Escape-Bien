@@ -15,6 +15,11 @@ TagManager:
   - Zona1
   - Zona2
   - Zona3
+  - VertexZona1
+  - VertexZona2
+  - VertexZona3
+  - DesdeZona1
+  - DesdeZona3
   layers:
   - Default
   - TransparentFX

@@ -42,7 +42,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: a7bed68887a07e34394d4191b3081359, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09193077, g: 0.14170921, b: 0.1832768, a: 1}
+  m_IndirectSpecularColor: {r: 0.09193068, g: 0.14170903, b: 0.18327668, a: 1}
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -293,7 +293,7 @@ GameObject:
   - 114: {fileID: 55366052}
   m_Layer: 0
   m_Name: GameObject (1)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -335,9 +335,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 413586060}
-  - {fileID: 614854635}
-  - {fileID: 946372187}
+  - {fileID: 413586057}
+  - {fileID: 614854632}
+  - {fileID: 946372184}
   values: []
 --- !u!114 &55366052
 MonoBehaviour:
@@ -426,7 +426,7 @@ GameObject:
   - 114: {fileID: 92934403}
   m_Layer: 0
   m_Name: GameObject (6)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -468,9 +468,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1686939549}
-  - {fileID: 381675890}
-  - {fileID: 1128926621}
+  - {fileID: 1686939546}
+  - {fileID: 381675887}
+  - {fileID: 1128926618}
   values: []
 --- !u!114 &92934403
 MonoBehaviour:
@@ -876,7 +876,7 @@ GameObject:
   - 114: {fileID: 230591586}
   m_Layer: 0
   m_Name: GameObject (16)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -918,8 +918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1037212529}
-  - {fileID: 593099883}
+  - {fileID: 1037212526}
+  - {fileID: 593099880}
   values: []
 --- !u!114 &230591586
 MonoBehaviour:
@@ -978,7 +978,7 @@ GameObject:
   - 114: {fileID: 277253010}
   m_Layer: 0
   m_Name: GameObject (22)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1020,11 +1020,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 449547422}
-  - {fileID: 1940238966}
-  - {fileID: 1095643744}
-  - {fileID: 469702641}
-  - {fileID: 1634331442}
+  - {fileID: 449547419}
+  - {fileID: 1095643741}
+  - {fileID: 1940238963}
+  - {fileID: 469702638}
+  - {fileID: 1634331439}
   values: []
 --- !u!114 &277253010
 MonoBehaviour:
@@ -1874,7 +1874,7 @@ GameObject:
   - 114: {fileID: 381675891}
   m_Layer: 0
   m_Name: GameObject (7)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1916,8 +1916,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1686939549}
-  - {fileID: 92934402}
+  - {fileID: 92934399}
+  - {fileID: 1686939546}
   values: []
 --- !u!114 &381675891
 MonoBehaviour:
@@ -2071,7 +2071,7 @@ GameObject:
   - 114: {fileID: 413586061}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2113,10 +2113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 55366051}
-  - {fileID: 1912407235}
-  - {fileID: 946372187}
-  - {fileID: 1128926621}
+  - {fileID: 55366048}
+  - {fileID: 1912407232}
+  - {fileID: 946372184}
+  - {fileID: 1128926618}
   values: []
 --- !u!114 &413586061
 MonoBehaviour:
@@ -2145,7 +2145,7 @@ GameObject:
   - 114: {fileID: 417362470}
   m_Layer: 0
   m_Name: GameObject (4)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2187,10 +2187,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1912407235}
-  - {fileID: 1128926621}
-  - {fileID: 2129343659}
-  - {fileID: 1686939549}
+  - {fileID: 1912407232}
+  - {fileID: 1128926618}
+  - {fileID: 2129343656}
+  - {fileID: 1686939546}
   values: []
 --- !u!114 &417362470
 MonoBehaviour:
@@ -2219,7 +2219,7 @@ GameObject:
   - 114: {fileID: 449547423}
   m_Layer: 0
   m_Name: GameObject (21)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2261,8 +2261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 277253009}
-  - {fileID: 1095643744}
+  - {fileID: 1095643741}
+  - {fileID: 277253006}
   values: []
 --- !u!114 &449547423
 MonoBehaviour:
@@ -2291,7 +2291,7 @@ GameObject:
   - 114: {fileID: 464571097}
   m_Layer: 0
   m_Name: GameObject (35)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2333,12 +2333,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1847185580}
-  - {fileID: 1749906567}
-  - {fileID: 1212176791}
-  - {fileID: 2104231809}
-  - {fileID: 856956487}
-  - {fileID: 1296114173}
+  - {fileID: 1749906564}
+  - {fileID: 1212176788}
+  - {fileID: 2104231806}
+  - {fileID: 1242037092}
+  - {fileID: 1847185577}
+  - {fileID: 856956484}
   values: []
 --- !u!114 &464571097
 MonoBehaviour:
@@ -2367,7 +2367,7 @@ GameObject:
   - 114: {fileID: 469702642}
   m_Layer: 0
   m_Name: GameObject (26)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2409,11 +2409,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 622193242}
-  - {fileID: 1634331442}
-  - {fileID: 1940238966}
-  - {fileID: 1564154475}
-  - {fileID: 537123583}
+  - {fileID: 622193239}
+  - {fileID: 1634331439}
+  - {fileID: 1940238963}
+  - {fileID: 1564154472}
+  - {fileID: 537123580}
+  - {fileID: 277253006}
   values: []
 --- !u!114 &469702642
 MonoBehaviour:
@@ -3058,7 +3059,7 @@ GameObject:
   - 114: {fileID: 530984436}
   m_Layer: 0
   m_Name: GameObject (20)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3100,10 +3101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1294752957}
-  - {fileID: 1482684377}
-  - {fileID: 1037212529}
-  - {fileID: 1095643744}
+  - {fileID: 1294752954}
+  - {fileID: 1482684374}
+  - {fileID: 1037212526}
+  - {fileID: 1095643741}
   values: []
 --- !u!114 &530984436
 MonoBehaviour:
@@ -3197,7 +3198,7 @@ GameObject:
   - 114: {fileID: 537123584}
   m_Layer: 0
   m_Name: GameObject (29)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3239,9 +3240,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1940238966}
-  - {fileID: 1564154475}
-  - {fileID: 579538147}
+  - {fileID: 579538144}
+  - {fileID: 1940238963}
+  - {fileID: 1564154472}
+  - {fileID: 622193239}
+  - {fileID: 469702638}
+  - {fileID: 1634331439}
   values: []
 --- !u!114 &537123584
 MonoBehaviour:
@@ -3257,6 +3261,85 @@ MonoBehaviour:
   id: 0
   neighbours: []
   prev: {fileID: 0}
+--- !u!1 &537920590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 537920594}
+  - 33: {fileID: 537920593}
+  - 65: {fileID: 537920592}
+  - 23: {fileID: 537920591}
+  m_Layer: 0
+  m_Name: Desde1
+  m_TagString: DesdeZona1
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &537920591
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537920590}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!65 &537920592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537920590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &537920593
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537920590}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &537920594
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537920590}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 32.6, y: 1.4, z: 2.5}
+  m_LocalScale: {x: 10.946313, y: 14.646368, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
 --- !u!4 &541205388
 Transform:
   m_ObjectHideFlags: 0
@@ -3604,7 +3687,7 @@ GameObject:
   - 114: {fileID: 579538148}
   m_Layer: 0
   m_Name: GameObject (30)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3646,7 +3729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 537123583}
+  - {fileID: 537123580}
   values: []
 --- !u!114 &579538148
 MonoBehaviour:
@@ -3675,7 +3758,7 @@ GameObject:
   - 114: {fileID: 593099884}
   m_Layer: 0
   m_Name: GameObject (17)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3717,8 +3800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 230591585}
-  - {fileID: 1697647364}
+  - {fileID: 230591582}
+  - {fileID: 1697647361}
   values: []
 --- !u!114 &593099884
 MonoBehaviour:
@@ -3747,7 +3830,7 @@ GameObject:
   - 114: {fileID: 614854636}
   m_Layer: 0
   m_Name: GameObject (2)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3789,8 +3872,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 55366051}
-  - {fileID: 946372187}
+  - {fileID: 55366048}
+  - {fileID: 946372184}
   values: []
 --- !u!114 &614854636
 MonoBehaviour:
@@ -3890,7 +3973,7 @@ GameObject:
   - 114: {fileID: 622193243}
   m_Layer: 0
   m_Name: GameObject (25)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3932,10 +4015,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 469702641}
-  - {fileID: 1564154475}
-  - {fileID: 537123583}
-  - {fileID: 1940238966}
+  - {fileID: 469702638}
+  - {fileID: 1940238963}
+  - {fileID: 1564154472}
+  - {fileID: 537123580}
   values: []
 --- !u!114 &622193243
 MonoBehaviour:
@@ -4322,7 +4405,7 @@ GameObject:
   - 114: {fileID: 725549976}
   m_Layer: 0
   m_Name: GameObject (38)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4364,7 +4447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 2104231809}
+  - {fileID: 2104231806}
   values: []
 --- !u!114 &725549976
 MonoBehaviour:
@@ -4706,7 +4789,7 @@ GameObject:
   - 114: {fileID: 856956488}
   m_Layer: 0
   m_Name: GameObject (40)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4748,9 +4831,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1549880460}
-  - {fileID: 1242037095}
-  - {fileID: 2104231809}
+  - {fileID: 1549880457}
+  - {fileID: 2104231806}
+  - {fileID: 1242037092}
+  - {fileID: 1749906564}
+  - {fileID: 1212176788}
+  - {fileID: 464571093}
+  - {fileID: 1296114171}
   values: []
 --- !u!114 &856956488
 MonoBehaviour:
@@ -4783,7 +4870,7 @@ GameObject:
   - 114: {fileID: 881453581}
   m_Layer: 0
   m_Name: GameObject (13)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4825,7 +4912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1294752957}
+  - {fileID: 1294752954}
   values: []
 --- !u!114 &881453581
 MonoBehaviour:
@@ -5007,7 +5094,7 @@ GameObject:
   - 114: {fileID: 946372188}
   m_Layer: 0
   m_Name: GameObject (9)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5049,10 +5136,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1686939549}
-  - {fileID: 1128926621}
-  - {fileID: 413586060}
-  - {fileID: 55366051}
+  - {fileID: 413586057}
+  - {fileID: 55366048}
+  - {fileID: 614854632}
+  - {fileID: 1128926618}
   values: []
 --- !u!114 &946372188
 MonoBehaviour:
@@ -5517,7 +5604,7 @@ GameObject:
   - 114: {fileID: 1037212530}
   m_Layer: 0
   m_Name: GameObject (15)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5559,12 +5646,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 230591585}
-  - {fileID: 593099883}
-  - {fileID: 1294752957}
-  - {fileID: 1482684377}
-  - {fileID: 1095643744}
-  - {fileID: 530984435}
+  - {fileID: 1294752954}
+  - {fileID: 1482684374}
+  - {fileID: 230591582}
+  - {fileID: 593099880}
+  - {fileID: 1095643741}
+  - {fileID: 530984432}
   values: []
 --- !u!114 &1037212530
 MonoBehaviour:
@@ -6002,7 +6089,7 @@ GameObject:
   - 114: {fileID: 1095643745}
   m_Layer: 0
   m_Name: GameObject (19)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6044,12 +6131,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1037212529}
-  - {fileID: 530984435}
-  - {fileID: 1294752957}
-  - {fileID: 1482684377}
-  - {fileID: 449547422}
-  - {fileID: 277253009}
+  - {fileID: 1294752954}
+  - {fileID: 1482684374}
+  - {fileID: 1037212526}
+  - {fileID: 530984432}
+  - {fileID: 449547419}
+  - {fileID: 277253006}
   values: []
 --- !u!114 &1095643745
 MonoBehaviour:
@@ -6133,7 +6220,7 @@ GameObject:
   - 114: {fileID: 1128926622}
   m_Layer: 0
   m_Name: GameObject (10)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6175,11 +6262,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 946372187}
-  - {fileID: 1686939549}
-  - {fileID: 413586060}
-  - {fileID: 1912407235}
-  - {fileID: 417362469}
+  - {fileID: 413586057}
+  - {fileID: 1912407232}
+  - {fileID: 417362466}
+  - {fileID: 92934399}
+  - {fileID: 946372184}
+  - {fileID: 2129343656}
+  - {fileID: 1686939546}
   values: []
 --- !u!114 &1128926622
 MonoBehaviour:
@@ -6261,7 +6350,7 @@ GameObject:
   - 114: {fileID: 1212176792}
   m_Layer: 0
   m_Name: GameObject (34)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6303,12 +6392,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1749906567}
-  - {fileID: 464571096}
-  - {fileID: 2104231809}
-  - {fileID: 856956487}
-  - {fileID: 1296114173}
-  - {fileID: 1242037095}
+  - {fileID: 464571093}
+  - {fileID: 1749906564}
+  - {fileID: 2104231806}
+  - {fileID: 1242037092}
+  - {fileID: 856956484}
+  - {fileID: 1296114171}
   values: []
 --- !u!114 &1212176792
 MonoBehaviour:
@@ -6580,7 +6669,7 @@ GameObject:
   - 114: {fileID: 1242037096}
   m_Layer: 0
   m_Name: GameObject (39)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6622,9 +6711,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 856956487}
-  - {fileID: 1296114173}
-  - {fileID: 2104231809}
+  - {fileID: 856956484}
+  - {fileID: 2104231806}
+  - {fileID: 1296114171}
+  - {fileID: 464571093}
+  - {fileID: 1749906564}
+  - {fileID: 1212176788}
+  - {fileID: 464571093}
   values: []
 --- !u!114 &1242037096
 MonoBehaviour:
@@ -7005,7 +7098,7 @@ GameObject:
   - 114: {fileID: 1294752958}
   m_Layer: 0
   m_Name: GameObject (12)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7047,11 +7140,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 881453580}
-  - {fileID: 1482684377}
-  - {fileID: 1037212529}
-  - {fileID: 1095643744}
-  - {fileID: 530984435}
+  - {fileID: 881453577}
+  - {fileID: 1482684374}
+  - {fileID: 1037212526}
+  - {fileID: 1095643741}
+  - {fileID: 530984432}
   values: []
 --- !u!114 &1294752958
 MonoBehaviour:
@@ -7080,7 +7173,7 @@ GameObject:
   - 114: {fileID: 1296114175}
   m_Layer: 0
   m_Name: GameObject (42)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7110,12 +7203,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 856956487}
-  - {fileID: 1242037095}
-  - {fileID: 2104231809}
-  - {fileID: 1212176791}
-  - {fileID: 1749906567}
-  - {fileID: 464571096}
+  - {fileID: 1242037092}
+  - {fileID: 856956484}
+  - {fileID: 2104231806}
+  - {fileID: 1212176788}
+  - {fileID: 464571093}
+  - {fileID: 1749906564}
   values: []
 --- !u!135 &1296114174
 SphereCollider:
@@ -7516,6 +7609,85 @@ Rigidbody:
 Transform:
   m_PrefabParentObject: {fileID: 400014, guid: 661ae282bfe23844e94d1e153f285b07, type: 3}
   m_PrefabInternal: {fileID: 1316400518}
+--- !u!1 &1326888043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1326888047}
+  - 33: {fileID: 1326888046}
+  - 65: {fileID: 1326888045}
+  - 23: {fileID: 1326888044}
+  m_Layer: 0
+  m_Name: Desde3
+  m_TagString: DesdeZona3
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1326888044
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1326888043}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!65 &1326888045
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1326888043}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1326888046
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1326888043}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1326888047
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1326888043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.1, y: 2.9, z: 2.33}
+  m_LocalScale: {x: 1.313841, y: 11.2, z: 7.8791256}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
 --- !u!4 &1369370479 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400094, guid: 661ae282bfe23844e94d1e153f285b07, type: 3}
@@ -7630,7 +7802,7 @@ GameObject:
   - 114: {fileID: 1426780185}
   m_Layer: 0
   m_Name: GameObject (33)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7672,7 +7844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1974926984}
+  - {fileID: 1974926981}
   values: []
 --- !u!114 &1426780185
 MonoBehaviour:
@@ -7838,7 +8010,7 @@ GameObject:
   - 114: {fileID: 1482684378}
   m_Layer: 0
   m_Name: GameObject (14)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7880,9 +8052,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1095643744}
-  - {fileID: 1294752957}
-  - {fileID: 277253009}
+  - {fileID: 1294752954}
+  - {fileID: 1037212526}
+  - {fileID: 1095643741}
+  - {fileID: 530984432}
   values: []
 --- !u!114 &1482684378
 MonoBehaviour:
@@ -8480,7 +8653,7 @@ GameObject:
   - 114: {fileID: 1549880461}
   m_Layer: 0
   m_Name: GameObject (41)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8522,7 +8695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 856956487}
+  - {fileID: 856956484}
   values: []
 --- !u!114 &1549880461
 MonoBehaviour:
@@ -8580,7 +8753,7 @@ GameObject:
   - 114: {fileID: 1564154476}
   m_Layer: 0
   m_Name: GameObject (24)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8622,10 +8795,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1940238966}
-  - {fileID: 537123583}
-  - {fileID: 622193242}
-  - {fileID: 469702641}
+  - {fileID: 537123580}
+  - {fileID: 1940238963}
+  - {fileID: 622193239}
+  - {fileID: 469702638}
   values: []
 --- !u!114 &1564154476
 MonoBehaviour:
@@ -8870,7 +9043,7 @@ GameObject:
   - 114: {fileID: 1634331443}
   m_Layer: 0
   m_Name: GameObject (27)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8912,10 +9085,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1652771506}
-  - {fileID: 469702641}
-  - {fileID: 277253009}
-  - {fileID: 1940238966}
+  - {fileID: 469702638}
+  - {fileID: 277253006}
+  - {fileID: 1940238963}
+  - {fileID: 1652771503}
   values: []
 --- !u!114 &1634331443
 MonoBehaviour:
@@ -8944,7 +9117,7 @@ GameObject:
   - 114: {fileID: 1652771507}
   m_Layer: 0
   m_Name: GameObject (28)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8986,7 +9159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1634331442}
+  - {fileID: 1634331439}
   values: []
 --- !u!114 &1652771507
 MonoBehaviour:
@@ -9273,7 +9446,7 @@ GameObject:
   - 114: {fileID: 1686939550}
   m_Layer: 0
   m_Name: GameObject (11)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9315,11 +9488,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1128926621}
-  - {fileID: 92934402}
-  - {fileID: 381675890}
-  - {fileID: 2129343659}
-  - {fileID: 417362469}
+  - {fileID: 417362466}
+  - {fileID: 2129343656}
+  - {fileID: 92934399}
+  - {fileID: 381675887}
+  - {fileID: 1128926618}
   values: []
 --- !u!114 &1686939550
 MonoBehaviour:
@@ -9413,7 +9586,7 @@ GameObject:
   - 114: {fileID: 1697647365}
   m_Layer: 0
   m_Name: GameObject (18)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9455,7 +9628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 593099883}
+  - {fileID: 593099880}
   values: []
 --- !u!114 &1697647365
 MonoBehaviour:
@@ -9567,7 +9740,7 @@ GameObject:
   - 114: {fileID: 1749906568}
   m_Layer: 0
   m_Name: GameObject (31)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9609,9 +9782,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1974926984}
-  - {fileID: 1212176791}
-  - {fileID: 464571096}
+  - {fileID: 1974926981}
+  - {fileID: 1212176788}
+  - {fileID: 464571093}
+  - {fileID: 856956484}
   values: []
 --- !u!114 &1749906568
 MonoBehaviour:
@@ -10259,7 +10433,7 @@ GameObject:
   - 114: {fileID: 1847185581}
   m_Layer: 0
   m_Name: GameObject (36)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10301,7 +10475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 464571096}
+  - {fileID: 464571093}
   values: []
 --- !u!114 &1847185581
 MonoBehaviour:
@@ -10611,7 +10785,7 @@ GameObject:
   - 114: {fileID: 1912407236}
   m_Layer: 0
   m_Name: GameObject (3)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10653,9 +10827,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 413586060}
-  - {fileID: 417362469}
-  - {fileID: 1128926621}
+  - {fileID: 413586057}
+  - {fileID: 417362466}
+  - {fileID: 1128926618}
   values: []
 --- !u!114 &1912407236
 MonoBehaviour:
@@ -10765,7 +10939,7 @@ GameObject:
   - 114: {fileID: 1940238967}
   m_Layer: 0
   m_Name: GameObject (23)
-  m_TagString: Vertex
+  m_TagString: VertexZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10807,12 +10981,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 277253009}
-  - {fileID: 1564154475}
-  - {fileID: 622193242}
-  - {fileID: 469702641}
-  - {fileID: 1634331442}
-  - {fileID: 537123583}
+  - {fileID: 277253006}
+  - {fileID: 622193239}
+  - {fileID: 469702638}
+  - {fileID: 1634331439}
+  - {fileID: 1564154472}
+  - {fileID: 537123580}
   values: []
 --- !u!114 &1940238967
 MonoBehaviour:
@@ -11014,7 +11188,7 @@ GameObject:
   - 114: {fileID: 1974926985}
   m_Layer: 0
   m_Name: GameObject (32)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11056,8 +11230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 1749906567}
-  - {fileID: 1426780184}
+  - {fileID: 1749906564}
+  - {fileID: 1426780181}
   values: []
 --- !u!114 &1974926985
 MonoBehaviour:
@@ -11915,7 +12089,7 @@ GameObject:
   - 114: {fileID: 2104231810}
   m_Layer: 0
   m_Name: GameObject (37)
-  m_TagString: Vertex
+  m_TagString: VertexZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11957,13 +12131,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 464571096}
-  - {fileID: 1212176791}
-  - {fileID: 1749906567}
-  - {fileID: 1242037095}
-  - {fileID: 725549975}
-  - {fileID: 856956487}
-  - {fileID: 1296114173}
+  - {fileID: 725549972}
+  - {fileID: 1749906564}
+  - {fileID: 1212176788}
+  - {fileID: 464571093}
+  - {fileID: 1242037092}
+  - {fileID: 856956484}
+  - {fileID: 1296114171}
   values: []
 --- !u!114 &2104231810
 MonoBehaviour:
@@ -12112,7 +12286,7 @@ GameObject:
   - 114: {fileID: 2129343660}
   m_Layer: 0
   m_Name: GameObject (5)
-  m_TagString: Vertex
+  m_TagString: VertexZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12154,8 +12328,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
-  - {fileID: 417362469}
-  - {fileID: 1686939549}
+  - {fileID: 417362466}
+  - {fileID: 1686939546}
+  - {fileID: 1128926618}
   values: []
 --- !u!114 &2129343660
 MonoBehaviour:

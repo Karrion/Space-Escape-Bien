@@ -4,17 +4,13 @@ using System.Collections.Generic;
 
 public class WaypointBehaviour : MonoBehaviour {
     
-    public List<WaypointBehaviour> neighbours;
+    public List<GameObject> neighbours;
     public List<float> values = new List<float>();
 
-    // Use this for initialization
-    void Start () {
-        
-    }
+    
 	void Awake()
     {
-        int index = 0;
-        foreach(WaypointBehaviour neighbour in neighbours)
+        foreach(GameObject neighbour in neighbours)
         {
             Vector3 direction = Vector3.zero;
             Vector3 origin = transform.position;
@@ -25,8 +21,4 @@ public class WaypointBehaviour : MonoBehaviour {
             values.Add(distance);
         }
     }
-	// Update is called once per frame
-	void Update () {
-        
-	}
 }

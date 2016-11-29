@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 using System;
+using System.Collections.Generic;
 
 public class IA : MonoBehaviour
 {
@@ -28,7 +30,8 @@ public class IA : MonoBehaviour
     private SpriteRenderer exclamacion;
     private bool escuchaAlgo = false;
     private Quaternion rotacionInicial;
-    private int zona = 0;
+    private int zona = 1;
+    private int zonaAnterior;
 
 
     void Awake()
@@ -87,8 +90,9 @@ public class IA : MonoBehaviour
 
     void Update()
     {
+        zonaAnterior = GameController.zonaAnterior;
         zona = GameController.zona;
-        Debug.Log(zona);
+        
 
         // Debug.Log("Modo: " + mode);
         //Debug.Log(agent.remainingDistance);
@@ -167,15 +171,32 @@ public class IA : MonoBehaviour
         }
         else
         {
-            agent.destination = player.transform.position;
+            //agent.destination = player.transform.position;
             alertTime += Time.deltaTime;
-            if(alertTime >= 10.0f)
+            if(alertTime >= 4f && alertTime < 6f)
+            {
+                switch (zona)
+                {
+                    case 1:
+                        Buscar(1);
+                        break;
+                    case 2:
+                        Buscar(2);
+                        break;
+                    case 3:
+                        Buscar(3);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            /*if(alertTime >= 10.0f)
             {
                 alertTime = 0;
                 exclamacion.enabled = false;
                 mode = Mode.Patrol;
                 agent.destination = currentPatrol;
-            }
+            }*/
         }
        
     }
@@ -285,5 +306,80 @@ public class IA : MonoBehaviour
         {
             StartCoroutine("tiempoEspera");
         }       
+    }
+    void Buscar(int zonaBusqueda)
+    {
+        Debug.Log(zonaBusqueda);
+
+        GameObject nodoInicial = null;
+        GameObject[] lista = new GameObject[0];
+        GameObject nodoDestino;
+        List<GameObject> listaOpen = new List<GameObject>();
+        List<GameObject> listaClosed = new List<GameObject>();
+        
+        int contador = 0;
+        float costeTotal = 0;
+        Debug.Log(zonaAnterior);
+        switch (zonaBusqueda)
+        {
+            case 1:
+                lista = GameObject.FindGameObjectWithTag("Zona1").GetComponentsInChildren<GameObject>();
+                nodoInicial = lista[10];
+                break;
+            case 2:
+                lista = GameObject.FindGameObjectWithTag("Zona2").GetComponentsInChildren<GameObject>();
+                if(zonaAnterior == 1)
+                    nodoInicial = lista[8];
+                else if(zonaAnterior == 3)
+                    nodoInicial = lista[18];
+                break;
+            case 3:
+                lista = GameObject.FindGameObjectWithTag("Zona3").GetComponentsInChildren<GameObject>();
+                nodoInicial = lista[0];
+                break;
+        }
+        Debug.Log(nodoInicial);
+        if(nodoInicial == null)
+            Debug.Log("no..");
+        listaOpen.Add(nodoInicial);
+        contador++;
+        nodoDestino  = lista[UnityEngine.Random.Range(0, lista.Length)];
+       
+       
+        while(contador != 0)
+        {
+            if (nodoInicial == nodoDestino)
+                Debug.Log("ya he entrado");
+            else
+            {
+                listaOpen.Remove(nodoInicial);
+                contador--;
+                listaClosed.Add(nodoInicial);
+                int indice = 0;
+                foreach (GameObject vecino in nodoInicial.GetComponent<WaypointBehaviour>().neighbours)
+                {
+                    if (!listaClosed.Contains(vecino))
+                    {
+                        costeTotal = costeTotal + nodoInicial.GetComponent<WaypointBehaviour>().values[indice];
+                        if (!listaOpen.Contains(vecino))
+                        {
+                            listaOpen.Add(vecino);
+                            contador++;
+                        }
+                        else if (costeTotal < nodoInicial.GetComponent<WaypointBehaviour>().values[indice])
+                        {
+                            agent.destination = nodoInicial.transform.position;
+                            nodoInicial = vecino;
+                            nodoInicial.GetComponent<WaypointBehaviour>().values[indice] = costeTotal;
+                        }
+
+                    }
+                             
+                    
+                }
+
+            }
+        }
+
     }
 }
