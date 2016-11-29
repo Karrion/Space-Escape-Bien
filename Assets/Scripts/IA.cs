@@ -28,6 +28,7 @@ public class IA : MonoBehaviour
     private SpriteRenderer exclamacion;
     private bool escuchaAlgo = false;
     private Quaternion rotacionInicial;
+    private int zona = 0;
 
 
     void Awake()
@@ -41,6 +42,8 @@ public class IA : MonoBehaviour
         exclamacion = transform.GetChild(1).GetComponent<SpriteRenderer>();
         currentPatrol = transform.position;
         rotacionInicial = transform.rotation;
+
+       
     }
 
     public bool getRunToCover()
@@ -84,6 +87,8 @@ public class IA : MonoBehaviour
 
     void Update()
     {
+        zona = GameController.zona;
+        Debug.Log(zona);
         // Debug.Log("Modo: " + mode);
         //Debug.Log(agent.remainingDistance);
         switch (mode){

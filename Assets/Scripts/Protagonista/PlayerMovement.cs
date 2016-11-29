@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_Move;
     public Camera camera;
 
+    
+
     Mirilla scriptMirilla;
 
     [HideInInspector]
@@ -55,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         meshRenderer = GetComponent<MeshRenderer>();
         scriptMirilla = transform.GetChild(0).GetComponent<Mirilla>();
+        
     }
 
 
@@ -356,6 +359,22 @@ public class PlayerMovement : MonoBehaviour
             {
                 meshRenderer.enabled = true;
             }
+        }
+    }
+
+    void OnTriggerStay(Collider collider)
+    {
+        if (collider.tag == "Zona1")
+        {
+            GameController.zona = 1;
+        }
+        else if (collider.tag == "Zona2")
+        {
+            GameController.zona = 2;
+        }
+        else if (collider.tag == "Zona3")
+        {
+            GameController.zona = 3;
         }
     }
 
