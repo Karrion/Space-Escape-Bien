@@ -42,7 +42,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: a7bed68887a07e34394d4191b3081359, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.091930754, g: 0.14170927, b: 0.18327686, a: 1}
+  m_IndirectSpecularColor: {r: 0.09193077, g: 0.14170921, b: 0.1832768, a: 1}
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -334,11 +334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 413586060}
   - {fileID: 614854635}
   - {fileID: 946372187}
+  values: []
 --- !u!114 &55366052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ GameObject:
   - 65: {fileID: 58449101}
   m_Layer: 0
   m_Name: Zona 2
-  m_TagString: Untagged
+  m_TagString: Zona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -467,11 +467,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1686939549}
   - {fileID: 381675890}
   - {fileID: 1128926621}
+  values: []
 --- !u!114 &92934403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +486,46 @@ MonoBehaviour:
   id: 0
   neighbours: []
   prev: {fileID: 0}
+--- !u!1 &96416499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 96416501}
+  - 114: {fileID: 96416500}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &96416500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 96416499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ddbc6a20ffc6184fb587c228e14d310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &96416501
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 96416499}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.903929, y: -1.7911777, z: 14.673265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
 --- !u!1001 &124740730
 Prefab:
   m_ObjectHideFlags: 0
@@ -877,10 +917,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1037212529}
   - {fileID: 593099883}
+  values: []
 --- !u!114 &230591586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -979,13 +1019,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 449547422}
   - {fileID: 1940238966}
   - {fileID: 1095643744}
   - {fileID: 469702641}
   - {fileID: 1634331442}
+  values: []
 --- !u!114 &277253010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1875,10 +1915,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1686939549}
   - {fileID: 92934402}
+  values: []
 --- !u!114 &381675891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2072,12 +2112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 55366051}
   - {fileID: 1912407235}
   - {fileID: 946372187}
   - {fileID: 1128926621}
+  values: []
 --- !u!114 &413586061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2146,12 +2186,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1912407235}
   - {fileID: 1128926621}
   - {fileID: 2129343659}
   - {fileID: 1686939549}
+  values: []
 --- !u!114 &417362470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2220,10 +2260,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 277253009}
   - {fileID: 1095643744}
+  values: []
 --- !u!114 &449547423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2292,7 +2332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1847185580}
   - {fileID: 1749906567}
@@ -2300,6 +2339,7 @@ MonoBehaviour:
   - {fileID: 2104231809}
   - {fileID: 856956487}
   - {fileID: 1296114173}
+  values: []
 --- !u!114 &464571097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2368,13 +2408,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 622193242}
   - {fileID: 1634331442}
   - {fileID: 1940238966}
   - {fileID: 1564154475}
   - {fileID: 537123583}
+  values: []
 --- !u!114 &469702642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3059,12 +3099,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1294752957}
   - {fileID: 1482684377}
   - {fileID: 1037212529}
   - {fileID: 1095643744}
+  values: []
 --- !u!114 &530984436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3198,11 +3238,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1940238966}
   - {fileID: 1564154475}
   - {fileID: 579538147}
+  values: []
 --- !u!114 &537123584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3605,9 +3645,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 537123583}
+  values: []
 --- !u!114 &579538148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3676,10 +3716,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 230591585}
   - {fileID: 1697647364}
+  values: []
 --- !u!114 &593099884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3748,10 +3788,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 55366051}
   - {fileID: 946372187}
+  values: []
 --- !u!114 &614854636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3891,12 +3931,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 469702641}
   - {fileID: 1564154475}
   - {fileID: 537123583}
   - {fileID: 1940238966}
+  values: []
 --- !u!114 &622193243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4323,9 +4363,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 2104231809}
+  values: []
 --- !u!114 &725549976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4707,11 +4747,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1549880460}
   - {fileID: 1242037095}
   - {fileID: 2104231809}
+  values: []
 --- !u!114 &856956488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4784,9 +4824,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1294752957}
+  values: []
 --- !u!114 &881453581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5008,12 +5048,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1686939549}
   - {fileID: 1128926621}
   - {fileID: 413586060}
   - {fileID: 55366051}
+  values: []
 --- !u!114 &946372188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5518,7 +5558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 230591585}
   - {fileID: 593099883}
@@ -5526,6 +5565,7 @@ MonoBehaviour:
   - {fileID: 1482684377}
   - {fileID: 1095643744}
   - {fileID: 530984435}
+  values: []
 --- !u!114 &1037212530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6003,7 +6043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1037212529}
   - {fileID: 530984435}
@@ -6011,6 +6050,7 @@ MonoBehaviour:
   - {fileID: 1482684377}
   - {fileID: 449547422}
   - {fileID: 277253009}
+  values: []
 --- !u!114 &1095643745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6134,13 +6174,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 946372187}
   - {fileID: 1686939549}
   - {fileID: 413586060}
   - {fileID: 1912407235}
   - {fileID: 417362469}
+  values: []
 --- !u!114 &1128926622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6262,7 +6302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1749906567}
   - {fileID: 464571096}
@@ -6270,6 +6309,7 @@ MonoBehaviour:
   - {fileID: 856956487}
   - {fileID: 1296114173}
   - {fileID: 1242037095}
+  values: []
 --- !u!114 &1212176792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6581,11 +6621,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 856956487}
   - {fileID: 1296114173}
   - {fileID: 2104231809}
+  values: []
 --- !u!114 &1242037096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7006,13 +7046,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 881453580}
   - {fileID: 1482684377}
   - {fileID: 1037212529}
   - {fileID: 1095643744}
   - {fileID: 530984435}
+  values: []
 --- !u!114 &1294752958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7069,7 +7109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 856956487}
   - {fileID: 1242037095}
@@ -7077,6 +7116,7 @@ MonoBehaviour:
   - {fileID: 1212176791}
   - {fileID: 1749906567}
   - {fileID: 464571096}
+  values: []
 --- !u!135 &1296114174
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7631,9 +7671,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1974926984}
+  values: []
 --- !u!114 &1426780185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7839,11 +7879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1095643744}
   - {fileID: 1294752957}
   - {fileID: 277253009}
+  values: []
 --- !u!114 &1482684378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8481,9 +8521,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 856956487}
+  values: []
 --- !u!114 &1549880461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8581,12 +8621,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1940238966}
   - {fileID: 537123583}
   - {fileID: 622193242}
   - {fileID: 469702641}
+  values: []
 --- !u!114 &1564154476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8871,12 +8911,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1652771506}
   - {fileID: 469702641}
   - {fileID: 277253009}
   - {fileID: 1940238966}
+  values: []
 --- !u!114 &1634331443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8945,9 +8985,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1634331442}
+  values: []
 --- !u!114 &1652771507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9274,13 +9314,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1128926621}
   - {fileID: 92934402}
   - {fileID: 381675890}
   - {fileID: 2129343659}
   - {fileID: 417362469}
+  values: []
 --- !u!114 &1686939550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9414,9 +9454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 593099883}
+  values: []
 --- !u!114 &1697647365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9568,11 +9608,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1974926984}
   - {fileID: 1212176791}
   - {fileID: 464571096}
+  values: []
 --- !u!114 &1749906568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10260,9 +10300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 464571096}
+  values: []
 --- !u!114 &1847185581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10612,11 +10652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 413586060}
   - {fileID: 417362469}
   - {fileID: 1128926621}
+  values: []
 --- !u!114 &1912407236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10766,7 +10806,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 277253009}
   - {fileID: 1564154475}
@@ -10774,6 +10813,7 @@ MonoBehaviour:
   - {fileID: 469702641}
   - {fileID: 1634331442}
   - {fileID: 537123583}
+  values: []
 --- !u!114 &1940238967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11015,10 +11055,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 1749906567}
   - {fileID: 1426780184}
+  values: []
 --- !u!114 &1974926985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11362,7 +11402,7 @@ GameObject:
   - 65: {fileID: 2019808032}
   m_Layer: 0
   m_Name: Zona 1
-  m_TagString: Untagged
+  m_TagString: Zona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11916,7 +11956,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 464571096}
   - {fileID: 1212176791}
@@ -11925,6 +11964,7 @@ MonoBehaviour:
   - {fileID: 725549975}
   - {fileID: 856956487}
   - {fileID: 1296114173}
+  values: []
 --- !u!114 &2104231810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11982,7 +12022,7 @@ GameObject:
   - 65: {fileID: 2106657554}
   m_Layer: 0
   m_Name: Zona 3
-  m_TagString: Untagged
+  m_TagString: Zona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12113,10 +12153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77665b94a94f0a440b4539dfda7a36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  values: []
   neighbours:
   - {fileID: 417362469}
   - {fileID: 1686939549}
+  values: []
 --- !u!114 &2129343660
 MonoBehaviour:
   m_ObjectHideFlags: 0

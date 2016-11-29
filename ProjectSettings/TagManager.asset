@@ -11,6 +11,10 @@ TagManager:
   - EsferaEnemiga
   - Puerta
   - CoverManager
+  - Vertex
+  - Zona1
+  - Zona2
+  - Zona3
   layers:
   - Default
   - TransparentFX
