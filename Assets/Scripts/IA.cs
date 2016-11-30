@@ -35,6 +35,7 @@ public class IA : MonoBehaviour
     private bool empezarBusqueda = true;
     List<GameObject> listaNodos = new List<GameObject>();
     GameObject nodoDestino = null;
+    private int r;
 
     void Awake()
     {
@@ -196,34 +197,43 @@ public class IA : MonoBehaviour
                 agent.destination = nodoDestino.transform.position;
             }
 
-            foreach (GameObject nodo in listaNodos)
+           /* foreach (GameObject nodo in listaNodos)
             {
                 Debug.Log(nodo);
-            }
+            }*/
 
-            if (agent.remainingDistance <= 0.3f)
+            if (agent.remainingDistance <= 0.3f && listaNodos.Count > 0)
             {
+                Debug.Log("Llego a mi nodo");
+                agent.Stop();
                 nuevoNodo(nodoDestino);
                 StartCoroutine("esperaBusqueda");
-                agent.destination = nodoDestino.transform.position;
-            }
 
-            /*if(alertTime >= 10.0f)
-            {
-                alertTime = 0;
-                exclamacion.enabled = false;
-                mode = Mode.Patrol;
-                agent.destination = currentPatrol;
-            }*/
+                if (listaNodos.Count <= 0)
+                {
+                    exclamacion.enabled = false;
+                    mode = Mode.Patrol;
+                    agent.destination = currentPatrol;
+                }
+
+                agent.Resume();
+            }
         }
-       
     }
 
     private void nuevoNodo(GameObject nodoDestino)
     {
         //Debug.Log("Yo debería ir segundo");
-        listaNodos.Remove(nodoDestino);
-        nodoDestino = listaNodos.ElementAt(UnityEngine.Random.Range(1, 3));
+        listaNodos.RemoveAt(r);
+        if (listaNodos.Count != 0)
+        {
+            r = UnityEngine.Random.Range(0, listaNodos.Count);
+            Debug.Log("Random: " + r + " Tamaño: " + listaNodos.Count);
+            listaNodos.Remove(nodoDestino);
+            nodoDestino = listaNodos[r];
+            agent.destination = nodoDestino.transform.position;
+        }
+        //Debug.Log(nodoDestino);
     }
 
     private IEnumerator esperaBusqueda()
@@ -360,7 +370,8 @@ public class IA : MonoBehaviour
                 nodoDestino = vectorNodos[0];
                 break;
         }
-        //Debug.Log("Yo debería ir primero");
+        Debug.Log("Genero lista de nodos");
         listaNodos = vectorNodos.ToList();
+        r = listaNodos.IndexOf(nodoDestino);
     }
 }

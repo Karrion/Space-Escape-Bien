@@ -23,19 +23,15 @@ public class DoorController : MonoBehaviour {
         {
             if (transform.position.y - Yinicial >= -4.5)
             {
-                transform.Translate((3 * Vector3.down) * Time.deltaTime);
-              
+                transform.Translate((10 * Vector3.up) * Time.deltaTime);
             }
-         
         }
         else {
             if (transform.position.y < Yinicial)
             {
-                transform.Translate((3 * Vector3.up) * Time.deltaTime);
-              
+                transform.Translate((10 * Vector3.down) * Time.deltaTime);
             }
         }
-	
 	}
 
     void OnTriggerEnter(Collider collider)
@@ -45,7 +41,6 @@ public class DoorController : MonoBehaviour {
             abrir = true;
             contador++;           
         }
-         
     }
    
     void OnTriggerExit(Collider collider)
@@ -57,6 +52,5 @@ public class DoorController : MonoBehaviour {
             if (contador == 0)
                 abrir = false;
         }
-
     }
 }
