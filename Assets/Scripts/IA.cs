@@ -32,7 +32,9 @@ public class IA : MonoBehaviour
     private Quaternion rotacionInicial;
     private int zona = 1;
     private int zonaAnterior;
-
+    private bool empezarBusqueda = true;
+    List<GameObject> listaNodos = new List<GameObject>();
+    GameObject nodoDestino = null;
 
     void Awake()
     {
@@ -173,7 +175,7 @@ public class IA : MonoBehaviour
         {
             //agent.destination = player.transform.position;
             alertTime += Time.deltaTime;
-            if(alertTime >= 4f && alertTime < 6f)
+            if(alertTime >= 4f && alertTime < 6f && empezarBusqueda)
             {
                 switch (zona)
                 {
@@ -187,9 +189,25 @@ public class IA : MonoBehaviour
                         Buscar(3);
                         break;
                     default:
+                        Debug.Log("Tengo la zona mal puesta");
                         break;
                 }
+                empezarBusqueda = false;
+                agent.destination = nodoDestino.transform.position;
             }
+
+            foreach (GameObject nodo in listaNodos)
+            {
+                Debug.Log(nodo);
+            }
+
+            if (agent.remainingDistance <= 0.3f)
+            {
+                nuevoNodo(nodoDestino);
+                StartCoroutine("esperaBusqueda");
+                agent.destination = nodoDestino.transform.position;
+            }
+
             /*if(alertTime >= 10.0f)
             {
                 alertTime = 0;
@@ -199,6 +217,18 @@ public class IA : MonoBehaviour
             }*/
         }
        
+    }
+
+    private void nuevoNodo(GameObject nodoDestino)
+    {
+        //Debug.Log("Yo debería ir segundo");
+        listaNodos.Remove(nodoDestino);
+        nodoDestino = listaNodos.ElementAt(UnityEngine.Random.Range(1, 3));
+    }
+
+    private IEnumerator esperaBusqueda()
+    {
+        yield return new WaitForSeconds(2f);
     }
 
     private void Patrol()
@@ -309,77 +339,28 @@ public class IA : MonoBehaviour
     }
     void Buscar(int zonaBusqueda)
     {
-        Debug.Log(zonaBusqueda);
+        GameObject[] vectorNodos = new GameObject[100];
+        List<GameObject> listaVisitados = new List<GameObject>();
 
-        GameObject nodoInicial = null;
-        GameObject[] lista = new GameObject[0];
-        GameObject nodoDestino;
-        List<GameObject> listaOpen = new List<GameObject>();
-        List<GameObject> listaClosed = new List<GameObject>();
-        
-        int contador = 0;
-        float costeTotal = 0;
-        Debug.Log(zonaAnterior);
         switch (zonaBusqueda)
         {
             case 1:
-                lista = GameObject.FindGameObjectWithTag("Zona1").GetComponentsInChildren<GameObject>();
-                nodoInicial = lista[10];
+                vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona1");
+                nodoDestino = vectorNodos[10];
                 break;
             case 2:
-                lista = GameObject.FindGameObjectWithTag("Zona2").GetComponentsInChildren<GameObject>();
-                if(zonaAnterior == 1)
-                    nodoInicial = lista[8];
-                else if(zonaAnterior == 3)
-                    nodoInicial = lista[18];
+                vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona2");
+                if (zonaAnterior == 1)
+                    nodoDestino = vectorNodos[8];
+                else if (zonaAnterior == 3)
+                    nodoDestino = vectorNodos[18];
                 break;
             case 3:
-                lista = GameObject.FindGameObjectWithTag("Zona3").GetComponentsInChildren<GameObject>();
-                nodoInicial = lista[0];
+                vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona3");
+                nodoDestino = vectorNodos[0];
                 break;
         }
-        Debug.Log(nodoInicial);
-        if(nodoInicial == null)
-            Debug.Log("no..");
-        listaOpen.Add(nodoInicial);
-        contador++;
-        nodoDestino  = lista[UnityEngine.Random.Range(0, lista.Length)];
-       
-       
-        while(contador != 0)
-        {
-            if (nodoInicial == nodoDestino)
-                Debug.Log("ya he entrado");
-            else
-            {
-                listaOpen.Remove(nodoInicial);
-                contador--;
-                listaClosed.Add(nodoInicial);
-                int indice = 0;
-                foreach (GameObject vecino in nodoInicial.GetComponent<WaypointBehaviour>().neighbours)
-                {
-                    if (!listaClosed.Contains(vecino))
-                    {
-                        costeTotal = costeTotal + nodoInicial.GetComponent<WaypointBehaviour>().values[indice];
-                        if (!listaOpen.Contains(vecino))
-                        {
-                            listaOpen.Add(vecino);
-                            contador++;
-                        }
-                        else if (costeTotal < nodoInicial.GetComponent<WaypointBehaviour>().values[indice])
-                        {
-                            agent.destination = nodoInicial.transform.position;
-                            nodoInicial = vecino;
-                            nodoInicial.GetComponent<WaypointBehaviour>().values[indice] = costeTotal;
-                        }
-
-                    }
-                             
-                    
-                }
-
-            }
-        }
-
+        //Debug.Log("Yo debería ir primero");
+        listaNodos = vectorNodos.ToList();
     }
 }
