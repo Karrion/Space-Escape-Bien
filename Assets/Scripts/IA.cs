@@ -32,6 +32,8 @@ public class IA : MonoBehaviour
     private Quaternion rotacionInicial;
     private int zona = 1;
     private int zonaAnterior;
+    private int miZona;
+    private int miZonaActual;
     private bool empezarBusqueda = true;
     List<GameObject> listaNodos = new List<GameObject>();
     GameObject nodoDestino = null;
@@ -49,8 +51,13 @@ public class IA : MonoBehaviour
         currentPatrol = transform.position;
         rotacionInicial = transform.rotation;
 
-       
+        
     }
+
+    /*public int getZone()
+    {
+        if
+    }*/
 
     public bool getRunToCover()
     {
@@ -197,11 +204,6 @@ public class IA : MonoBehaviour
                 agent.destination = nodoDestino.transform.position;
             }
 
-           /* foreach (GameObject nodo in listaNodos)
-            {
-                Debug.Log(nodo);
-            }*/
-
             if (agent.remainingDistance <= 0.3f && listaNodos.Count > 0)
             {
                 Debug.Log("Llego a mi nodo");
@@ -243,7 +245,7 @@ public class IA : MonoBehaviour
 
     private void Patrol()
     {
-        if (points.Length != 0)
+        if (points.Length != 0 || agent.remainingDistance > 0.1f)
         {
             anim.SetBool("Caminar", true);
         }
@@ -266,10 +268,7 @@ public class IA : MonoBehaviour
                     transform.rotation = rotacionInicial;
                     agent.Stop();
                 }
-                   
-                
             }
-
         }
 
 

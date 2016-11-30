@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\Grafos\Vertex.cs" />
     <Compile Include="Assets\Scripts\Grafos\WayPointVisibility.cs" />
     <Compile Include="Assets\Scripts\IA.cs" />
+    <Compile Include="Assets\Scripts\IAManagement.cs" />
     <Compile Include="Assets\Scripts\Protagonista\Mirilla.cs" />
     <Compile Include="Assets\Scripts\Protagonista\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Protagonista\ThirdPersonCharacter.cs" />

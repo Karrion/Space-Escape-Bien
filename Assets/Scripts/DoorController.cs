@@ -23,13 +23,13 @@ public class DoorController : MonoBehaviour {
         {
             if (transform.position.y - Yinicial >= -4.5)
             {
-                transform.Translate((10 * Vector3.up) * Time.deltaTime);
+                transform.Translate((15 * Vector3.down) * Time.deltaTime);
             }
         }
         else {
             if (transform.position.y < Yinicial)
             {
-                transform.Translate((10 * Vector3.down) * Time.deltaTime);
+                transform.Translate((15 * Vector3.up) * Time.deltaTime);
             }
         }
 	}
