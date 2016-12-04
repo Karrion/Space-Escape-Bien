@@ -63,6 +63,10 @@ public class Deteccion : MonoBehaviour {
                 IaPadre.escuchaBuscando = true;
                 agent.destination = player.transform.position;
             }
+            if((IaPadre.mode == IA.Mode.Shooting) && (PlayerMovement.Running || PlayerMovement.apuntando))
+            {
+                IaPadre.disparar = true;
+            }
         }
     }
 

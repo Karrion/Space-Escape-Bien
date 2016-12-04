@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public static bool enConducto = false;
     bool agachando = false;
     bool levantando = false;
-    bool apuntando = false;
+    public static bool apuntando = false;
 
 
     private string MovementAxisName;

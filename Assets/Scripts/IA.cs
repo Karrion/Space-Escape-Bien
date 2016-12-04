@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class IA : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class IA : MonoBehaviour
     GameObject nodoDestino = null;
     private int r;
     public bool escuchaBuscando = false;
+    public bool disparar = true;
+    public float ShootTimer = 0.0f;
 
     void Awake()
     {
@@ -115,10 +118,12 @@ public class IA : MonoBehaviour
                 anim.SetBool("Correr", true);
                 anim.SetBool("Caminar", false);
                 anim.SetBool("Disparar", false);
+                anim.SetBool("Apuntar", false);
                 Alert();
                 break;
             case Mode.Shooting:
-                anim.SetBool("Disparar", true);
+                anim.SetBool("Apuntar", true);
+                anim.SetBool("Disparar", false);
                 anim.SetBool("Correr", false);
                 anim.SetBool("Caminar", false);
                 Shooting();
@@ -133,6 +138,7 @@ public class IA : MonoBehaviour
                 anim.SetBool("Correr", false);
                 anim.SetBool("Caminar", true);
                 anim.SetBool("Disparar", false);
+                anim.SetBool("Apuntar", false);
                 Search();
                 break;
             default:
@@ -147,15 +153,29 @@ public class IA : MonoBehaviour
 
     private void Shooting()
     {
+        ShootTimer += Time.deltaTime;
         agent.SetDestination(player.transform.position);
         if (agent.remainingDistance <= 10f)
         {
             agent.Stop();
             RotateTowards(player.transform);
+            Debug.Log(ShootTimer);
+            
+            if (disparar)
+            {
+                anim.SetBool("Apuntar", false);
+                anim.SetBool("Disparar", true);
+                ShootTimer = 0.0f;
+            }
+            else if(ShootTimer >= 8f)
+            {
+                SceneManager.LoadScene("CharacterThirdPerson");
+            }
         }
         else
         {      
             agent.Resume();
+            disparar = false;
             mode = Mode.Alert;           
         }
         rigidbody.constraints = RigidbodyConstraints.FreezeRotationY;
