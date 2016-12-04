@@ -12,7 +12,7 @@ public class IA : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject player;
     [HideInInspector] public int fieldOfViewDegrees = 110;
-    public enum Mode { Alert, Patrol, Shooting, Hit };
+    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado};
     public Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
     [HideInInspector] public Vector3 currentPatrol;
@@ -133,6 +133,14 @@ public class IA : MonoBehaviour
                 StartCoroutine("GetHit");
                 Alcanzado();
                 break;
+            case Mode.Search:
+                anim.SetBool("Correr", false);
+                anim.SetBool("Caminar", true);
+                anim.SetBool("Disparar", false);
+                Search();
+                break;
+
+
             default:
                 break;
         }
@@ -161,6 +169,7 @@ public class IA : MonoBehaviour
 
     private void Alert()
     {
+        escuchaAlgo = false;
         if(inSight == true)
         {
             if (agent.remainingDistance <= 10f)
@@ -181,7 +190,7 @@ public class IA : MonoBehaviour
         }
         else
         {
-            //agent.destination = player.transform.position;
+           // agent.destination = player.transform.position;
             alertTime += Time.deltaTime;
             if(alertTime >= 4f && alertTime < 6f && empezarBusqueda)
             {
@@ -202,8 +211,32 @@ public class IA : MonoBehaviour
                 }
                 empezarBusqueda = false;
                 agent.destination = nodoDestino.transform.position;
+                mode = Mode.Search;
             }
 
+            /*if (agent.remainingDistance <= 0.3f && listaNodos.Count > 0)
+            {
+                Debug.Log("Llego a mi nodo");
+                agent.Stop();
+                nuevoNodo(nodoDestino);
+                StartCoroutine("esperaBusqueda");
+
+                if (listaNodos.Count <= 0)
+                {
+                    exclamacion.enabled = false;
+                    mode = Mode.Patrol;
+                    agent.destination = currentPatrol;
+                }
+
+                agent.Resume();
+            }*/
+        }
+    }
+
+    private void Search()
+    {
+        if (!escuchaAlgo)
+        {
             if (agent.remainingDistance <= 0.3f && listaNodos.Count > 0)
             {
                 Debug.Log("Llego a mi nodo");
@@ -221,7 +254,13 @@ public class IA : MonoBehaviour
                 agent.Resume();
             }
         }
+        else
+        {
+            escuchado();
+        }
+
     }
+  
 
     private void nuevoNodo(GameObject nodoDestino)
     {
@@ -230,7 +269,7 @@ public class IA : MonoBehaviour
         if (listaNodos.Count != 0)
         {
             r = UnityEngine.Random.Range(0, listaNodos.Count);
-            Debug.Log("Random: " + r + " Tamaño: " + listaNodos.Count);
+            //Debug.Log("Random: " + r + " Tamaño: " + listaNodos.Count);
             listaNodos.Remove(nodoDestino);
             nodoDestino = listaNodos[r];
             agent.destination = nodoDestino.transform.position;
@@ -295,12 +334,12 @@ public class IA : MonoBehaviour
         if(points.Length != 0) currentPatrol = agent.destination;
         agent.destination = player.transform.position;
         escuchaAlgo = true;
-        /*if (transform.position == agent.destination)
+        if (transform.position == agent.destination)
         {
        
             StartCoroutine("tiempoEspera");
          
-        }*/
+        }
       
     }
 
