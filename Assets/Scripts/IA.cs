@@ -38,6 +38,7 @@ public class IA : MonoBehaviour
     List<GameObject> listaNodos = new List<GameObject>();
     GameObject nodoDestino = null;
     private int r;
+    public bool escuchaBuscando = false;
 
     void Awake()
     {
@@ -50,8 +51,6 @@ public class IA : MonoBehaviour
         exclamacion = transform.GetChild(1).GetComponent<SpriteRenderer>();
         currentPatrol = transform.position;
         rotacionInicial = transform.rotation;
-
-        
     }
 
     /*public int getZone()
@@ -66,7 +65,6 @@ public class IA : MonoBehaviour
 
     void GotoNextPoint()
     {
-
         if (points.Length == 0)
             return;
 
@@ -103,9 +101,7 @@ public class IA : MonoBehaviour
         zonaAnterior = GameController.zonaAnterior;
         zona = GameController.zona;
         
-
-        // Debug.Log("Modo: " + mode);
-        //Debug.Log(agent.remainingDistance);
+        //Debug.Log(zona);
         switch (mode){
             case Mode.Patrol:
                 Patrol();
@@ -139,8 +135,6 @@ public class IA : MonoBehaviour
                 anim.SetBool("Disparar", false);
                 Search();
                 break;
-
-
             default:
                 break;
         }
@@ -172,6 +166,7 @@ public class IA : MonoBehaviour
         escuchaAlgo = false;
         if(inSight == true)
         {
+            empezarBusqueda = true;
             if (agent.remainingDistance <= 10f)
             {
                 mode = Mode.Shooting;
@@ -192,18 +187,22 @@ public class IA : MonoBehaviour
         {
            // agent.destination = player.transform.position;
             alertTime += Time.deltaTime;
-            if(alertTime >= 4f && alertTime < 6f && empezarBusqueda)
+            if (alertTime < 4f)
+            {
+                agent.destination = player.transform.position;
+            }
+            if (alertTime >= 4f && alertTime < 6f && empezarBusqueda)
             {
                 switch (zona)
                 {
                     case 1:
-                        Buscar(1);
+                        generarLista(1);
                         break;
                     case 2:
-                        Buscar(2);
+                        generarLista(2);
                         break;
                     case 3:
-                        Buscar(3);
+                        generarLista(3);
                         break;
                     default:
                         Debug.Log("Tengo la zona mal puesta");
@@ -211,31 +210,15 @@ public class IA : MonoBehaviour
                 }
                 empezarBusqueda = false;
                 agent.destination = nodoDestino.transform.position;
+                alertTime = 0;
                 mode = Mode.Search;
             }
-
-            /*if (agent.remainingDistance <= 0.3f && listaNodos.Count > 0)
-            {
-                Debug.Log("Llego a mi nodo");
-                agent.Stop();
-                nuevoNodo(nodoDestino);
-                StartCoroutine("esperaBusqueda");
-
-                if (listaNodos.Count <= 0)
-                {
-                    exclamacion.enabled = false;
-                    mode = Mode.Patrol;
-                    agent.destination = currentPatrol;
-                }
-
-                agent.Resume();
-            }*/
         }
     }
 
     private void Search()
     {
-        if (!escuchaAlgo)
+        if (!escuchaBuscando)
         {
             if (agent.remainingDistance <= 0.3f && listaNodos.Count > 0)
             {
@@ -256,15 +239,20 @@ public class IA : MonoBehaviour
         }
         else
         {
-            escuchado();
+            if (agent.remainingDistance <= 0.3f)
+            {
+                agent.Stop();
+                StartCoroutine("tiempoEspera");
+                agent.destination = nodoDestino.transform.position;
+                agent.Resume();
+                escuchaBuscando = false;
+            }
         }
-
     }
   
 
     private void nuevoNodo(GameObject nodoDestino)
     {
-        //Debug.Log("Yo debería ir segundo");
         listaNodos.RemoveAt(r);
         if (listaNodos.Count != 0)
         {
@@ -274,7 +262,7 @@ public class IA : MonoBehaviour
             nodoDestino = listaNodos[r];
             agent.destination = nodoDestino.transform.position;
         }
-        //Debug.Log(nodoDestino);
+        Debug.Log(listaNodos.Count);
     }
 
     private IEnumerator esperaBusqueda()
@@ -310,7 +298,6 @@ public class IA : MonoBehaviour
             }
         }
 
-
         if (agent.remainingDistance < 1)
         {
                 GotoNextPoint();
@@ -336,11 +323,8 @@ public class IA : MonoBehaviour
         escuchaAlgo = true;
         if (transform.position == agent.destination)
         {
-       
             StartCoroutine("tiempoEspera");
-         
         }
-      
     }
 
     void Alcanzado()
@@ -385,19 +369,22 @@ public class IA : MonoBehaviour
             StartCoroutine("tiempoEspera");
         }       
     }
-    void Buscar(int zonaBusqueda)
+
+    void generarLista(int zonaBusqueda)
     {
         GameObject[] vectorNodos = new GameObject[100];
-        List<GameObject> listaVisitados = new List<GameObject>();
+        listaNodos = new List<GameObject>();
 
         switch (zonaBusqueda)
         {
             case 1:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona1");
+                Debug.Log("Genero lista de nodos de zona 1");
                 nodoDestino = vectorNodos[10];
                 break;
             case 2:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona2");
+                Debug.Log("Genero lista de nodos de zona 2");
                 if (zonaAnterior == 1)
                     nodoDestino = vectorNodos[8];
                 else if (zonaAnterior == 3)
@@ -405,10 +392,10 @@ public class IA : MonoBehaviour
                 break;
             case 3:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona3");
+                Debug.Log("Genero lista de nodos de zona 3");
                 nodoDestino = vectorNodos[0];
                 break;
         }
-        Debug.Log("Genero lista de nodos");
         listaNodos = vectorNodos.ToList();
         r = listaNodos.IndexOf(nodoDestino);
     }

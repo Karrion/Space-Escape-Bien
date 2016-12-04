@@ -46,7 +46,7 @@ public class Deteccion : MonoBehaviour {
                     {
                         if (IaPadre.mode == IA.Mode.Shooting)
                             IaPadre.mode = IA.Mode.Alert;
-
+                        
                     }
                 }
                 else
@@ -56,9 +56,12 @@ public class Deteccion : MonoBehaviour {
             }
             else if (PlayerMovement.Running && IaPadre.mode == IA.Mode.Patrol)
             {
-                
                 IaPadre.escuchado();
-
+            }
+            else if(PlayerMovement.Running && IaPadre.mode == IA.Mode.Search)
+            {
+                IaPadre.escuchaBuscando = true;
+                agent.destination = player.transform.position;
             }
         }
     }
