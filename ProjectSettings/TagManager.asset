@@ -20,6 +20,7 @@ TagManager:
   - VertexZona3
   - DesdeZona1
   - DesdeZona3
+  - IaManagement
   layers:
   - Default
   - TransparentFX

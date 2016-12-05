@@ -31,10 +31,8 @@ public class IA : MonoBehaviour
     private SpriteRenderer exclamacion;
     private bool escuchaAlgo = false;
     private Quaternion rotacionInicial;
-    private int zona = 1;
+    [HideInInspector]public int zona = 1;
     private int zonaAnterior;
-    private int miZona;
-    private int miZonaActual;
     private bool empezarBusqueda = true;
     List<GameObject> listaNodos = new List<GameObject>();
     GameObject nodoDestino = null;
@@ -42,6 +40,8 @@ public class IA : MonoBehaviour
     public bool escuchaBuscando = false;
     public bool disparar = true;
     public float ShootTimer = 0.0f;
+    public int zonaEnemigo;
+    private IAManagement iamanagement;
 
     void Awake()
     {
@@ -54,6 +54,7 @@ public class IA : MonoBehaviour
         exclamacion = transform.GetChild(1).GetComponent<SpriteRenderer>();
         currentPatrol = transform.position;
         rotacionInicial = transform.rotation;
+        iamanagement = GameObject.FindGameObjectWithTag("IaManagement").GetComponent<IAManagement>();
     }
 
     /*public int getZone()
@@ -207,33 +208,39 @@ public class IA : MonoBehaviour
         {
            // agent.destination = player.transform.position;
             alertTime += Time.deltaTime;
+            iamanagement.EnemigoVisto(gameObject);
             if (alertTime < 4f)
             {
                 agent.destination = player.transform.position;
             }
             if (alertTime >= 4f && alertTime < 6f && empezarBusqueda)
             {
-                switch (zona)
-                {
-                    case 1:
-                        generarLista(1);
-                        break;
-                    case 2:
-                        generarLista(2);
-                        break;
-                    case 3:
-                        generarLista(3);
-                        break;
-                    default:
-                        Debug.Log("Tengo la zona mal puesta");
-                        break;
-                }
-                empezarBusqueda = false;
-                agent.destination = nodoDestino.transform.position;
-                alertTime = 0;
-                mode = Mode.Search;
+                switchGenerarListas();
             }
         }
+    }
+
+    public void switchGenerarListas() {
+        switch (zona)
+        {
+            case 1:
+                generarLista(1);
+                break;
+            case 2:
+                generarLista(2);
+                break;
+            case 3:
+                generarLista(3);
+                break;
+            default:
+                Debug.Log("Tengo la zona mal puesta");
+                break;
+        }
+
+        empezarBusqueda = false;
+        agent.destination = nodoDestino.transform.position;
+        alertTime = 0;
+        mode = Mode.Search;
     }
 
     private void Search()
