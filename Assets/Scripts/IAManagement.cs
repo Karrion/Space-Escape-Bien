@@ -30,6 +30,10 @@ public class IAManagement : MonoBehaviour {
                     enemigo.GetComponent<IA>().mode = IA.Mode.Search;
                     //enemigo.GetComponent<NavMeshAgent>().destination = playerPosition.position;
                 }
+                if (enemigo.GetComponent<IA>().zonaEnemigo != guardia.GetComponent<IA>().zona)
+                {
+                    enemigo.GetComponent<IA>().mode = IA.Mode.Tapon;
+                }
             }
         }
     }

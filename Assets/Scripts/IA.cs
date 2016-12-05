@@ -13,7 +13,7 @@ public class IA : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject player;
     [HideInInspector] public int fieldOfViewDegrees = 110;
-    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado};
+    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado, Tapon};
     public Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
     [HideInInspector] public Vector3 currentPatrol;
@@ -32,9 +32,9 @@ public class IA : MonoBehaviour
     private bool escuchaAlgo = false;
     private Quaternion rotacionInicial;
     [HideInInspector]public int zona = 1;
-    private int zonaAnterior;
+    [HideInInspector]public int zonaAnterior;
     private bool empezarBusqueda = true;
-    List<GameObject> listaNodos = new List<GameObject>();
+    public List<GameObject> listaNodos = new List<GameObject>();
     GameObject nodoDestino = null;
     private int r;
     public bool escuchaBuscando = false;
@@ -142,8 +142,30 @@ public class IA : MonoBehaviour
                 anim.SetBool("Apuntar", false);
                 Search();
                 break;
+            case Mode.Tapon:
+                taponando();
+
+                break;
             default:
                 break;
+        }
+    }
+
+    private void taponando() {
+        if (zonaEnemigo == 1 && zona == 2) {
+            switchGenerarListas();
+            agent.SetDestination(listaNodos[11].transform.position);
+            agent.Resume();
+        }else if (zonaEnemigo == 3 && zona == 2)
+        {
+            switchGenerarListas();
+            agent.SetDestination(listaNodos[0].transform.position);
+            agent.Resume();
+        }
+
+        if (agent.remainingDistance <= 1f) {
+            agent.Stop();
+            agent.Resume();
         }
     }
 
