@@ -21,6 +21,9 @@ TagManager:
   - DesdeZona1
   - DesdeZona3
   - IaManagement
+  - TaponarZona1
+  - TaponarZona2
+  - TaponarZona3
   layers:
   - Default
   - TransparentFX

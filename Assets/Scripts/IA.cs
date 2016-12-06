@@ -31,7 +31,7 @@ public class IA : MonoBehaviour
     private SpriteRenderer exclamacion;
     private bool escuchaAlgo = false;
     private Quaternion rotacionInicial;
-    [HideInInspector]public int zona = 1;
+    [HideInInspector]public int zonaPersonaje = 1;
     [HideInInspector]public int zonaAnterior;
     private bool empezarBusqueda = true;
     public List<GameObject> listaNodos = new List<GameObject>();
@@ -103,7 +103,8 @@ public class IA : MonoBehaviour
     void Update()
     {
         zonaAnterior = GameController.zonaAnterior;
-        zona = GameController.zona;
+        zonaPersonaje = GameController.zona;
+        Debug.Log(gameObject.name + ", " + mode);
         
         //Debug.Log(zona);
         switch (mode){
@@ -152,20 +153,16 @@ public class IA : MonoBehaviour
     }
 
     private void taponando() {
-        if (zonaEnemigo == 1 && zona == 2) {
-            switchGenerarListas();
-            agent.SetDestination(listaNodos[11].transform.position);
-            agent.Resume();
-        }else if (zonaEnemigo == 3 && zona == 2)
-        {
-            switchGenerarListas();
-            agent.SetDestination(listaNodos[0].transform.position);
-            agent.Resume();
-        }
 
-        if (agent.remainingDistance <= 1f) {
+        if (agent.remainingDistance <= 0.3f) {
             agent.Stop();
             agent.Resume();
+
+            anim.SetBool("Correr", false);
+            anim.SetBool("Caminar", false);
+            anim.SetBool("Disparar", false);
+            anim.SetBool("Apuntar", false);
+
         }
     }
 
@@ -238,12 +235,16 @@ public class IA : MonoBehaviour
             if (alertTime >= 4f && alertTime < 6f && empezarBusqueda)
             {
                 switchGenerarListas();
+                empezarBusqueda = false;
+                agent.destination = nodoDestino.transform.position;
+                alertTime = 0;
+                mode = Mode.Search;
             }
         }
     }
 
     public void switchGenerarListas() {
-        switch (zona)
+        switch (zonaPersonaje)
         {
             case 1:
                 generarLista(1);
@@ -258,11 +259,6 @@ public class IA : MonoBehaviour
                 Debug.Log("Tengo la zona mal puesta");
                 break;
         }
-
-        empezarBusqueda = false;
-        agent.destination = nodoDestino.transform.position;
-        alertTime = 0;
-        mode = Mode.Search;
     }
 
     private void Search()
