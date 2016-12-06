@@ -42,6 +42,7 @@ public class IA : MonoBehaviour
     public float ShootTimer = 0.0f;
     public int zonaEnemigo;
     private IAManagement iamanagement;
+    public bool busquedaTerminado = false;
 
     void Awake()
     {
@@ -157,7 +158,7 @@ public class IA : MonoBehaviour
         if (agent.remainingDistance <= 0.3f) {
             agent.Stop();
             agent.Resume();
-
+            Debug.Log("sin taponar");
             anim.SetBool("Correr", false);
             anim.SetBool("Caminar", false);
             anim.SetBool("Disparar", false);
@@ -275,6 +276,8 @@ public class IA : MonoBehaviour
                 if (listaNodos.Count <= 0)
                 {
                     exclamacion.enabled = false;
+                    busquedaTerminado = true;
+                    iamanagement.terminarBusqueda();
                     mode = Mode.Patrol;
                     agent.destination = currentPatrol;
                 }

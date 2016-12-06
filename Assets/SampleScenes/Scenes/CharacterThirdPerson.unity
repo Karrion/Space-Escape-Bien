@@ -1347,7 +1347,7 @@ GameObject:
   - 4: {fileID: 335000620}
   m_Layer: 0
   m_Name: TaponarZona1
-  m_TagString: TaponarZona1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1377,7 +1377,7 @@ GameObject:
   - 135: {fileID: 340088547}
   m_Layer: 0
   m_Name: NodoTaponar
-  m_TagString: Untagged
+  m_TagString: TaponarZona1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1822,6 +1822,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 2
+  busquedaTerminado: 0
 --- !u!136 &354632056
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3711,6 +3712,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 0
+  busquedaTerminado: 0
 --- !u!136 &567304270
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4371,6 +4373,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010575878854, guid: c7a7a897ccae87742be64cd1c8284a38,
     type: 2}
   m_PrefabInternal: {fileID: 2035975450}
+--- !u!1 &694081135 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012838571288, guid: c7a7a897ccae87742be64cd1c8284a38,
+    type: 2}
+  m_PrefabInternal: {fileID: 2035975450}
 --- !u!1 &695540252
 GameObject:
   m_ObjectHideFlags: 0
@@ -4775,7 +4782,7 @@ GameObject:
   - 135: {fileID: 761078813}
   m_Layer: 0
   m_Name: NodoTaponar (1)
-  m_TagString: Untagged
+  m_TagString: TaponarZona3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4816,7 +4823,7 @@ GameObject:
   - 135: {fileID: 792295147}
   m_Layer: 0
   m_Name: NodoTaponar (1)
-  m_TagString: Untagged
+  m_TagString: TaponarZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6066,6 +6073,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 0
+  busquedaTerminado: 0
 --- !u!136 &1058515769
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7038,6 +7046,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 0
+  busquedaTerminado: 0
 --- !u!136 &1235488455
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7401,6 +7410,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 2
+  busquedaTerminado: 0
 --- !u!136 &1265126044
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8009,6 +8019,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 0
+  busquedaTerminado: 0
 --- !u!136 &1316400522
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8154,7 +8165,7 @@ GameObject:
   - 4: {fileID: 1373294066}
   m_Layer: 0
   m_Name: TaponarZona2
-  m_TagString: TaponarZona2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8490,7 +8501,7 @@ GameObject:
   - 135: {fileID: 1473130295}
   m_Layer: 0
   m_Name: NodoTaponar
-  m_TagString: Untagged
+  m_TagString: TaponarZona2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8608,7 +8619,7 @@ GameObject:
   - 4: {fileID: 1486099305}
   m_Layer: 0
   m_Name: TaponarZona3
-  m_TagString: TaponarZona3
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8803,6 +8814,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 0
+  busquedaTerminado: 0
 --- !u!195 &1492027524
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9910,6 +9922,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4351531b943d444aa3510048ddc0c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taponador1: {fileID: 1862025599}
+  taponador2: {fileID: 354632053}
+  taponador3: {fileID: 694081135}
+  taponZona1: {fileID: 340088545}
+  taponZona2: {fileID: 1473130293}
+  taponZona3: {fileID: 761078811}
   listaNodos: []
 --- !u!4 &1669842813
 Transform:
@@ -10567,6 +10585,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 2
+  busquedaTerminado: 0
 --- !u!136 &1763227077
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11247,6 +11266,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 1
+  busquedaTerminado: 0
 --- !u!195 &1862025602
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -11434,6 +11454,7 @@ MonoBehaviour:
   disparar: 1
   ShootTimer: 0
   zonaEnemigo: 0
+  busquedaTerminado: 0
 --- !u!195 &1882744834
 NavMeshAgent:
   m_ObjectHideFlags: 0
