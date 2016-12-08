@@ -105,7 +105,7 @@ public class IA : MonoBehaviour
     {
         zonaAnterior = GameController.zonaAnterior;
         zonaPersonaje = GameController.zona;
-        Debug.Log(gameObject.name + ", " + mode);
+        //Debug.Log(gameObject.name + ", " + mode);
         
         //Debug.Log(zona);
         switch (mode){
@@ -158,7 +158,8 @@ public class IA : MonoBehaviour
         if (agent.remainingDistance <= 0.3f) {
             agent.Stop();
             agent.Resume();
-            Debug.Log("sin taponar");
+            interrogacion.enabled = false;
+            exclamacion.enabled = false;
             anim.SetBool("Correr", false);
             anim.SetBool("Caminar", false);
             anim.SetBool("Disparar", false);
@@ -180,7 +181,7 @@ public class IA : MonoBehaviour
         {
             agent.Stop();
             RotateTowards(player.transform);
-            Debug.Log(ShootTimer);
+            //Debug.Log(ShootTimer);
             
             if (disparar)
             {
@@ -257,7 +258,7 @@ public class IA : MonoBehaviour
                 generarLista(3);
                 break;
             default:
-                Debug.Log("Tengo la zona mal puesta");
+                //Debug.Log("Tengo la zona mal puesta");
                 break;
         }
     }
