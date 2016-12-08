@@ -13,7 +13,7 @@ public class IA : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject player;
     [HideInInspector] public int fieldOfViewDegrees = 110;
-    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado, Tapon};
+    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado, Tapon, Puerta};
     public Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
     [HideInInspector] public Vector3 currentPatrol;
@@ -148,6 +148,10 @@ public class IA : MonoBehaviour
                 taponando();
 
                 break;
+            case Mode.Puerta:
+                enPuerta();
+                break;
+
             default:
                 break;
         }
@@ -447,5 +451,11 @@ public class IA : MonoBehaviour
         }
         listaNodos = vectorNodos.ToList();
         r = listaNodos.IndexOf(nodoDestino);
+    }
+
+    public void enPuerta()
+    {
+        
+    
     }
 }

@@ -17,6 +17,9 @@ public class IAManagement : MonoBehaviour {
     public GameObject taponZona2;
     public GameObject taponZona3;
 
+    private GameObject formacion11;
+    private GameObject formacion12;
+
     public List<GameObject> listaNodos = new List<GameObject>();
     GameObject nodoDestino = null;
 
@@ -25,48 +28,38 @@ public class IAManagement : MonoBehaviour {
     // Use this for initialization
     void Start () {
         guardias = GameObject.FindGameObjectsWithTag("Enemy");
-
-       /* nodosZ1 = GameObject.FindGameObjectsWithTag("TaponarZona1").ToList<GameObject>();
-        nodosZ2 = GameObject.FindGameObjectsWithTag("TaponarZona2").ToList<GameObject>();
-        nodosZ3 = GameObject.FindGameObjectsWithTag("TaponarZona3").ToList<GameObject>();*/
+        formacion11 = GameObject.FindGameObjectWithTag("Formacion11");
+        formacion12 = GameObject.FindGameObjectWithTag("Formacion12");
     }
 
-   /* void generarLista(GameObject guardia, GameObject enemigo) {
-        GameObject[] vectorNodos = new GameObject[10];
-        listaNodos = new List<GameObject>();
-        switch (guardia.GetComponent<IA>().zonaEnemigo)
-        {
-            case 1:
-                //if (enemigo.GetComponent<IA>().zonaEnemigo == 2 || enemigo.GetComponent<IA>().zonaEnemigo == 1)
-                //{
-                    vectorNodos = GameObject.FindGameObjectsWithTag("TaponarZona1");
-                    Debug.Log("Genero lista de nodos para taponar de zona 1");
-                    nodoDestino = vectorNodos[0];
-                //}
-                break;
-            case 2:
-                
-                    vectorNodos = GameObject.FindGameObjectsWithTag("TaponarZona2");
-                    Debug.Log("Genero lista de nodos para taponar de zona 2");
-                    nodoDestino = vectorNodos[0];
-                
-                break;
-            case 3:
-               // if (enemigo.GetComponent<IA>().zonaEnemigo == 2 || enemigo.GetComponent<IA>().zonaEnemigo == 1)
-                //{
-                    vectorNodos = GameObject.FindGameObjectsWithTag("TaponarZona3");
-                    Debug.Log("Genero lista de nodos para taponar de zona 3");
-                    nodoDestino = vectorNodos[0];
-                //}
-                break;
-        }
-    }*/
+   
 	
 	// Update is called once per frame
 	void Update () {
        
     }
 
+    public void EnemigoEnSala(GameObject guardia)
+    {
+        int random;
+        foreach (GameObject enemigo in guardias)
+        {
+            if (enemigo != guardia)
+            {
+                if (enemigo.GetComponent<IA>().zonaEnemigo == guardia.GetComponent<IA>().zonaEnemigo) {
+                    random = UnityEngine.Random.Range(1,2);
+                    switch(random){
+                        case 1:
+                            enemigo.GetComponent<NavMeshAgent>().destination = formacion11.transform.position;
+                            break;
+                        case 2:
+                            enemigo.GetComponent<NavMeshAgent>().destination = formacion12.transform.position;
+                            break;
+                    }
+                }
+            }
+        }
+    }
     public void EnemigoVisto(GameObject guardia)
     {
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -107,4 +100,6 @@ public class IAManagement : MonoBehaviour {
         taponador2.GetComponent<IA>().mode = IA.Mode.Patrol;
         taponador3.GetComponent<IA>().mode = IA.Mode.Patrol;
     }
+
+
 }

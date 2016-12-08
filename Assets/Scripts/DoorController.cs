@@ -7,6 +7,7 @@ public class DoorController : MonoBehaviour {
     Collider esferaEnemigo;
     int contador = 0;
     float Yinicial;
+   
 	// Use this for initialization
 	void Start()
     {
@@ -14,7 +15,6 @@ public class DoorController : MonoBehaviour {
         enemigo = GameObject.FindGameObjectWithTag("Enemy");
         esferaEnemigo = enemigo.GetComponent<SphereCollider>();
         Yinicial = transform.position.y;
-      
     }
 	
 	// Update is called once per frame
@@ -41,6 +41,9 @@ public class DoorController : MonoBehaviour {
             abrir = true;
             contador++;           
         }
+         
+       
+
     }
    
     void OnTriggerExit(Collider collider)
@@ -52,5 +55,11 @@ public class DoorController : MonoBehaviour {
             if (contador == 0)
                 abrir = false;
         }
+
+       /* if (collider.tag == "Enemigo" && ia.mode == IA.Mode.Alert)
+        {
+            Destroy(formacion1);
+        }*/
+
     }
 }
