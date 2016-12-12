@@ -146,12 +146,10 @@ public class IA : MonoBehaviour
                 break;
             case Mode.Tapon:
                 taponando();
-
                 break;
             case Mode.Puerta:
                 enPuerta();
                 break;
-
             default:
                 break;
         }
@@ -273,7 +271,6 @@ public class IA : MonoBehaviour
         {
             if (agent.remainingDistance <= 0.3f && listaNodos.Count > 0)
             {
-                Debug.Log("Llego a mi nodo");
                 agent.Stop();
                 nuevoNodo(nodoDestino);
                 StartCoroutine("esperaBusqueda");
@@ -315,7 +312,7 @@ public class IA : MonoBehaviour
             nodoDestino = listaNodos[r];
             agent.destination = nodoDestino.transform.position;
         }
-        Debug.Log(listaNodos.Count);
+        //Debug.Log(listaNodos.Count);
     }
 
     private IEnumerator esperaBusqueda()
@@ -412,7 +409,7 @@ public class IA : MonoBehaviour
         anim.SetBool("Caminar", false);
         anim.SetBool("Correr", false);
         anim.SetBool("Disparar", false);
-        Debug.Log("Au");
+        //Debug.Log("Au");
     }
 
     public void calcularDistanciaEscuchado()
@@ -432,12 +429,12 @@ public class IA : MonoBehaviour
         {
             case 1:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona1");
-                Debug.Log("Genero lista de nodos de zona 1");
+                //Debug.Log("Genero lista de nodos de zona 1");
                 nodoDestino = vectorNodos[10];
                 break;
             case 2:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona2");
-                Debug.Log("Genero lista de nodos de zona 2");
+                //Debug.Log("Genero lista de nodos de zona 2");
                 if (zonaAnterior == 1)
                     nodoDestino = vectorNodos[8];
                 else if (zonaAnterior == 3)
@@ -445,7 +442,7 @@ public class IA : MonoBehaviour
                 break;
             case 3:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona3");
-                Debug.Log("Genero lista de nodos de zona 3");
+                //Debug.Log("Genero lista de nodos de zona 3");
                 nodoDestino = vectorNodos[0];
                 break;
         }
@@ -455,7 +452,11 @@ public class IA : MonoBehaviour
 
     public void enPuerta()
     {
-        
-    
+        if (agent.remainingDistance < 0.3f)
+        {
+            agent.Stop();
+            anim.SetBool("Caminar", false);
+            anim.SetBool("Correr", false);
+        }
     }
 }

@@ -41,25 +41,32 @@ public class IAManagement : MonoBehaviour {
 
     public void EnemigoEnSala(GameObject guardia)
     {
-        int random;
+        int nodos = 1;
         foreach (GameObject enemigo in guardias)
         {
             if (enemigo != guardia)
             {
                 if (enemigo.GetComponent<IA>().zonaEnemigo == guardia.GetComponent<IA>().zonaEnemigo) {
-                    random = UnityEngine.Random.Range(1,2);
-                    switch(random){
+                    switch(nodos){
                         case 1:
                             enemigo.GetComponent<NavMeshAgent>().destination = formacion11.transform.position;
+                            enemigo.GetComponent<IA>().mode = IA.Mode.Puerta;
+                            nodos++;
                             break;
                         case 2:
                             enemigo.GetComponent<NavMeshAgent>().destination = formacion12.transform.position;
+                            enemigo.GetComponent<IA>().mode = IA.Mode.Puerta;
+                            nodos++;
+                            break;
+                        default:
                             break;
                     }
+                    if (nodos > 2) return;
                 }
             }
         }
     }
+
     public void EnemigoVisto(GameObject guardia)
     {
         playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -91,7 +98,6 @@ public class IAManagement : MonoBehaviour {
             taponador2.GetComponent<NavMeshAgent>().destination = taponZona3.transform.position;
             taponador2.GetComponent<IA>().mode = IA.Mode.Tapon;
         }
-
     }
 
     public void terminarBusqueda()
@@ -100,6 +106,4 @@ public class IAManagement : MonoBehaviour {
         taponador2.GetComponent<IA>().mode = IA.Mode.Patrol;
         taponador3.GetComponent<IA>().mode = IA.Mode.Patrol;
     }
-
-
 }
