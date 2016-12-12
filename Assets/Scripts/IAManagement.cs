@@ -39,7 +39,7 @@ public class IAManagement : MonoBehaviour {
        
     }
 
-    public void EnemigoEnSala(GameObject guardia)
+    public void EnemigoEnSala(GameObject guardia, GameObject nodo1, GameObject nodo2)
     {
         int nodos = 1;
         foreach (GameObject enemigo in guardias)
@@ -49,12 +49,12 @@ public class IAManagement : MonoBehaviour {
                 if (enemigo.GetComponent<IA>().zonaEnemigo == guardia.GetComponent<IA>().zonaEnemigo) {
                     switch(nodos){
                         case 1:
-                            enemigo.GetComponent<NavMeshAgent>().destination = formacion11.transform.position;
+                            enemigo.GetComponent<NavMeshAgent>().destination = nodo1.transform.position;
                             enemigo.GetComponent<IA>().mode = IA.Mode.Puerta;
                             nodos++;
                             break;
                         case 2:
-                            enemigo.GetComponent<NavMeshAgent>().destination = formacion12.transform.position;
+                            enemigo.GetComponent<NavMeshAgent>().destination = nodo2.transform.position;
                             enemigo.GetComponent<IA>().mode = IA.Mode.Puerta;
                             nodos++;
                             break;
@@ -74,7 +74,7 @@ public class IAManagement : MonoBehaviour {
         {
             if (enemigo != guardia)
             {
-                if (enemigo.GetComponent<IA>().zonaEnemigo == guardia.GetComponent<IA>().zonaEnemigo)
+                if (enemigo.GetComponent<IA>().zonaEnemigo == guardia.GetComponent<IA>().zonaEnemigo && enemigo.GetComponent<IA>().mode != IA.Mode.Puerta)
                 {
                     enemigo.GetComponent<IA>().switchGenerarListas();
                     enemigo.GetComponent<IA>().mode = IA.Mode.Search;

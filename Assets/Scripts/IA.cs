@@ -43,6 +43,7 @@ public class IA : MonoBehaviour
     public int zonaEnemigo;
     private IAManagement iamanagement;
     public bool busquedaTerminado = false;
+    private float cuentaPuerta = 0;
 
     void Awake()
     {
@@ -106,8 +107,8 @@ public class IA : MonoBehaviour
         zonaAnterior = GameController.zonaAnterior;
         zonaPersonaje = GameController.zona;
         //Debug.Log(gameObject.name + ", " + mode);
-        
         //Debug.Log(zona);
+        if (gameObject.name == "EnemigoMixamoGrande3") Debug.Log(gameObject.name + " " + mode);
         switch (mode){
             case Mode.Patrol:
                 Patrol();
@@ -148,6 +149,7 @@ public class IA : MonoBehaviour
                 taponando();
                 break;
             case Mode.Puerta:
+                Debug.Log(gameObject.name + ": el porta");
                 enPuerta();
                 break;
             default:
@@ -210,6 +212,7 @@ public class IA : MonoBehaviour
         escuchaAlgo = false;
         if(inSight == true)
         {
+            alertTime = 0;
             empezarBusqueda = true;
             if (agent.remainingDistance <= 10f)
             {
@@ -236,8 +239,9 @@ public class IA : MonoBehaviour
             {
                 agent.destination = player.transform.position;
             }
-            if (alertTime >= 4f && alertTime < 6f && empezarBusqueda)
+            if (alertTime >= 8f && empezarBusqueda)
             {
+                Debug.Log("busco");
                 switchGenerarListas();
                 empezarBusqueda = false;
                 agent.destination = nodoDestino.transform.position;
@@ -452,11 +456,23 @@ public class IA : MonoBehaviour
 
     public void enPuerta()
     {
+
         if (agent.remainingDistance < 0.3f)
         {
+            Debug.Log("Acompañeme");
             agent.Stop();
             anim.SetBool("Caminar", false);
             anim.SetBool("Correr", false);
+            if(cuentaPuerta < 6f)
+            {
+                cuentaPuerta += Time.deltaTime;
+            }else
+            {
+                agent.Resume();
+                mode = Mode.Search;
+                agent.destination = player.transform.position;
+                cuentaPuerta = 0;
+            }
         }
     }
 }

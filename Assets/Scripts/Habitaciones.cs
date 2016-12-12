@@ -21,16 +21,7 @@ public class Habitaciones : MonoBehaviour {
     {
         if (collider.tag == "Enemy" && (collider.gameObject.GetComponent<IA>().mode == IA.Mode.Alert || collider.gameObject.GetComponent<IA>().mode == IA.Mode.Shooting))
         {
-            Instantiate(formacion1, transform.position, transform.rotation);
-            iam.EnemigoEnSala(collider.gameObject);
-        }
-    }
-
-    void OnTriggerStay(Collider collider)
-    {
-        if (collider.tag == "Puerta")
-        {
-            Debug.Log("ay la puertica la puertica");
+            iam.EnemigoEnSala(collider.gameObject, transform.GetChild(0).gameObject, transform.GetChild(1).gameObject);
         }
     }
 }
