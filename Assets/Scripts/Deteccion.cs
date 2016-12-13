@@ -15,11 +15,6 @@ public class Deteccion : MonoBehaviour {
         agent = transform.GetComponentInParent<NavMeshAgent>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     public void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
@@ -34,16 +29,19 @@ public class Deteccion : MonoBehaviour {
                     Debug.DrawLine(transform.position + transform.up, hit.point);
                     if (hit.transform.CompareTag("Player"))
                     {
+                        IaPadre.inSight = true;
+                        Debug.Log("Te veo");
                         if (IaPadre.mode != IA.Mode.Shooting)
                         {
                             if(IaPadre.points.Length != 0) IaPadre.currentPatrol = agent.destination;
                             IaPadre.mode = IA.Mode.Alert;
-                            IaPadre.inSight = true;
-                            agent.autoBraking = true;
+                          
                         }
                     }
                     else
                     {
+                        IaPadre.inSight = false;
+                        Debug.Log("No te veo");
                         if (IaPadre.mode == IA.Mode.Shooting)
                             IaPadre.mode = IA.Mode.Alert;
                         
@@ -54,7 +52,7 @@ public class Deteccion : MonoBehaviour {
                     IaPadre.inSight = false;
                 }
             }
-            else if (PlayerMovement.Running && IaPadre.mode == IA.Mode.Patrol)
+            else if (PlayerMovement.Running && (IaPadre.mode == IA.Mode.Patrol || IaPadre.mode == IA.Mode.Alert|| IaPadre.mode == IA.Mode.Tapon))
             {
                 IaPadre.escuchado();
             }
@@ -70,20 +68,5 @@ public class Deteccion : MonoBehaviour {
         }
     }
 
-    /*void OnTriggerEnter(Collider collider)
-    {
-        if (collider.tag == "Player")
-            if (PlayerMovement.Running && IaPadre.mode == IA.Mode.Patrol)
-            {
-                /* currentPatrol = agent.destination;
-                 agent.destination = player.transform.position;
-                 if(agent.remainingDistance >= 0)
-                 {
-                     StartCoroutine("tiempoEspera");
-
-                 }
-                Debug.Log("eh!2");
-                IaPadre.escuchado();
-            }
-    }*/
+    
 }

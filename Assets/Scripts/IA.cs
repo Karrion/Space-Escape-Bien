@@ -39,6 +39,7 @@ public class IA : MonoBehaviour
     private int r;
     public bool escuchaBuscando = false;
     public bool disparar = true;
+    [HideInInspector]public bool taponando = false;
     public float ShootTimer = 0.0f;
     public int zonaEnemigo;
     private IAManagement iamanagement;
@@ -106,9 +107,10 @@ public class IA : MonoBehaviour
     {
         zonaAnterior = GameController.zonaAnterior;
         zonaPersonaje = GameController.zona;
-        //Debug.Log(gameObject.name + ", " + mode);
+        Debug.Log(gameObject.name + ", " + mode);
         //Debug.Log(zona);
-        if (gameObject.name == "EnemigoMixamoGrande3") Debug.Log(gameObject.name + " " + mode);
+        //Debug.Log(inSight);
+        //if (gameObject.name == "EnemigoMixamoGrande3") Debug.Log(gameObject.name + " " + mode);
         switch (mode){
             case Mode.Patrol:
                 Patrol();
@@ -145,11 +147,10 @@ public class IA : MonoBehaviour
                 anim.SetBool("Apuntar", false);
                 Search();
                 break;
-            case Mode.Tapon:
+           /* case Mode.Tapon:
                 taponando();
-                break;
+                break;*/
             case Mode.Puerta:
-                Debug.Log(gameObject.name + ": el porta");
                 enPuerta();
                 break;
             default:
@@ -157,7 +158,7 @@ public class IA : MonoBehaviour
         }
     }
 
-    private void taponando() {
+   /* private void taponando() {
 
         if (agent.remainingDistance <= 0.3f) {
             agent.Stop();
@@ -170,7 +171,7 @@ public class IA : MonoBehaviour
             anim.SetBool("Apuntar", false);
 
         }
-    }
+    }*/
 
     private IEnumerator GetHit()
     {
@@ -210,6 +211,8 @@ public class IA : MonoBehaviour
     private void Alert()
     {
         escuchaAlgo = false;
+        if (taponando)
+            taponando = false;
         if(inSight == true)
         {
             alertTime = 0;
@@ -218,8 +221,8 @@ public class IA : MonoBehaviour
             {
                 mode = Mode.Shooting;
             }
-            if (PlayerMovement.getMode() != PlayerMovement.Mode.Aiming)
-                agent.destination = player.transform.position;
+            /*if (PlayerMovement.getMode() != PlayerMovement.Mode.Aiming)
+                agent.destination = player.transform.position;*/
            /* if(PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
             {
                 Transform Objetivo = CoverManagerMal.BuscarMasCercana(transform, (int) sphere.radius);
@@ -232,22 +235,24 @@ public class IA : MonoBehaviour
         }
         else
         {
-           // agent.destination = player.transform.position;
-            alertTime += Time.deltaTime;
-            iamanagement.EnemigoVisto(gameObject);
-            if (alertTime < 4f)
-            {
-                agent.destination = player.transform.position;
-            }
-            if (alertTime >= 8f && empezarBusqueda)
-            {
-                Debug.Log("busco");
-                switchGenerarListas();
-                empezarBusqueda = false;
-                agent.destination = nodoDestino.transform.position;
-                alertTime = 0;
-                mode = Mode.Search;
-            }
+              alertTime += Time.deltaTime;
+            
+            
+                iamanagement.EnemigoVisto(gameObject);
+            
+              if (alertTime < 8f)
+              {
+                  agent.destination = player.transform.position;
+              }
+              if (alertTime >= 8f && empezarBusqueda)
+              {
+                  //Debug.Log("busco");
+                  switchGenerarListas();
+                  empezarBusqueda = false;
+                  agent.destination = nodoDestino.transform.position;
+                  alertTime = 0;
+                  mode = Mode.Search;
+              }
         }
     }
 
@@ -326,13 +331,13 @@ public class IA : MonoBehaviour
 
     private void Patrol()
     {
-        if (points.Length != 0 || agent.remainingDistance > 0.1f)
+        if (taponando == false && (points.Length != 0 || agent.remainingDistance > 0.1f))
         {
             anim.SetBool("Caminar", true);
         }
         else
         {
-            if(!escuchaAlgo)
+            if(!escuchaAlgo && taponando == true)
                 anim.SetBool("Caminar", false);
             anim.SetBool("Correr", false);
             anim.SetBool("Disparar", false);
@@ -354,7 +359,10 @@ public class IA : MonoBehaviour
 
         if (agent.remainingDistance < 1)
         {
+            if (!taponando)
                 GotoNextPoint();
+            else
+                agent.Stop();
     
         }
     }
@@ -442,7 +450,7 @@ public class IA : MonoBehaviour
                 if (zonaAnterior == 1)
                     nodoDestino = vectorNodos[8];
                 else if (zonaAnterior == 3)
-                    nodoDestino = vectorNodos[18];
+                    nodoDestino = vectorNodos[6];
                 break;
             case 3:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona3");

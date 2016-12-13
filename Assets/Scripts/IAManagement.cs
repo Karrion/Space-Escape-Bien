@@ -32,13 +32,6 @@ public class IAManagement : MonoBehaviour {
         formacion12 = GameObject.FindGameObjectWithTag("Formacion12");
     }
 
-   
-	
-	// Update is called once per frame
-	void Update () {
-       
-    }
-
     public void EnemigoEnSala(GameObject guardia, GameObject nodo1, GameObject nodo2)
     {
         int nodos = 1;
@@ -81,22 +74,38 @@ public class IAManagement : MonoBehaviour {
                 }
             }
         }
-        if (guardia.GetComponent<IA>().zonaPersonaje == 1)
+        if (guardia.GetComponent<IA>().zonaPersonaje == 1 && taponador2.GetComponent<IA>().mode != IA.Mode.Alert)
         {
             taponador2.GetComponent<NavMeshAgent>().destination = taponZona1.transform.position;
-            taponador2.GetComponent<IA>().mode = IA.Mode.Tapon;
+            // taponador2.GetComponent<IA>().mode = IA.Mode.Tapon;
+            taponador2.GetComponent<IA>().taponando = true;
+            taponador2.GetComponent<IA>().mode = IA.Mode.Patrol;
+
+
+
         }
-        else if (guardia.GetComponent<IA>().zonaPersonaje == 2)
+        else if (guardia.GetComponent<IA>().zonaPersonaje == 2 && taponador3.GetComponent<IA>().mode != IA.Mode.Alert)
         {
             taponador3.GetComponent<NavMeshAgent>().destination = taponZona2.transform.position;
             taponador1.GetComponent<NavMeshAgent>().destination = taponZona1.transform.position;
-            taponador3.GetComponent<IA>().mode = IA.Mode.Tapon;
-            taponador1.GetComponent<IA>().mode = IA.Mode.Tapon;
+
+            taponador1.GetComponent<IA>().taponando = true;
+            taponador3.GetComponent<IA>().taponando = true;
+            // taponador3.GetComponent<IA>().mode = IA.Mode.Tapon;
+            //taponador1.GetComponent<IA>().mode = IA.Mode.Tapon;
+
+            taponador3.GetComponent<IA>().mode = IA.Mode.Patrol;
+            taponador1.GetComponent<IA>().mode = IA.Mode.Patrol;
+
         }
-        else if (guardia.GetComponent<IA>().zonaPersonaje == 3)
+        else if (guardia.GetComponent<IA>().zonaPersonaje == 3 && taponador3.GetComponent<IA>().mode != IA.Mode.Alert)
         {
             taponador2.GetComponent<NavMeshAgent>().destination = taponZona3.transform.position;
-            taponador2.GetComponent<IA>().mode = IA.Mode.Tapon;
+            // taponador2.GetComponent<IA>().mode = IA.Mode.Tapon;
+
+            taponador2.GetComponent<IA>().taponando = true;
+
+            taponador2.GetComponent<IA>().mode = IA.Mode.Patrol;
         }
     }
 
