@@ -84,19 +84,21 @@ public class IAManagement : MonoBehaviour {
 
 
         }
-        else if (guardia.GetComponent<IA>().zonaPersonaje == 2 && taponador3.GetComponent<IA>().mode != IA.Mode.Alert)
+        else if (guardia.GetComponent<IA>().zonaPersonaje == 2)
         {
-            taponador3.GetComponent<NavMeshAgent>().destination = taponZona2.transform.position;
-            taponador1.GetComponent<NavMeshAgent>().destination = taponZona1.transform.position;
+            if (taponador3.GetComponent<IA>().mode != IA.Mode.Alert)
+            {
+                taponador3.GetComponent<NavMeshAgent>().destination = taponZona2.transform.position;
+                taponador3.GetComponent<IA>().taponando = true;
+                taponador3.GetComponent<IA>().mode = IA.Mode.Patrol;
 
-            taponador1.GetComponent<IA>().taponando = true;
-            taponador3.GetComponent<IA>().taponando = true;
-            // taponador3.GetComponent<IA>().mode = IA.Mode.Tapon;
-            //taponador1.GetComponent<IA>().mode = IA.Mode.Tapon;
-
-            taponador3.GetComponent<IA>().mode = IA.Mode.Patrol;
-            taponador1.GetComponent<IA>().mode = IA.Mode.Patrol;
-
+            }
+            if (taponador1.GetComponent<IA>().mode != IA.Mode.Alert)
+            {
+                taponador1.GetComponent<NavMeshAgent>().destination = taponZona1.transform.position;
+                taponador1.GetComponent<IA>().taponando = true;
+                taponador1.GetComponent<IA>().mode = IA.Mode.Patrol;
+            }
         }
         else if (guardia.GetComponent<IA>().zonaPersonaje == 3 && taponador3.GetComponent<IA>().mode != IA.Mode.Alert)
         {
