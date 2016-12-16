@@ -46,6 +46,9 @@ public class IA : MonoBehaviour
     public bool busquedaTerminado = false;
     private float cuentaPuerta = 0;
 
+    public bool esCobarde;
+    [HideInInspector]public bool escondiendose;
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -107,7 +110,8 @@ public class IA : MonoBehaviour
     {
         zonaAnterior = GameController.zonaAnterior;
         zonaPersonaje = GameController.zona;
-        Debug.Log(gameObject.name + ", " + mode);
+        //Debug.Log(gameObject.name + ", " + mode);
+        Debug.Log(escondiendose);
         //Debug.Log(zona);
         //Debug.Log(inSight);
         //if (gameObject.name == "EnemigoMixamoGrande3") Debug.Log(gameObject.name + " " + mode);
@@ -210,6 +214,7 @@ public class IA : MonoBehaviour
 
     private void Alert()
     {
+        
         escuchaAlgo = false;
         if (taponando)
             taponando = false;
@@ -217,7 +222,7 @@ public class IA : MonoBehaviour
         {
             alertTime = 0;
             empezarBusqueda = true;
-            if (agent.remainingDistance <= 10f)
+            if (agent.remainingDistance <= 10f && !escondiendose && !esCobarde)
             {
                 mode = Mode.Shooting;
             }
@@ -236,23 +241,30 @@ public class IA : MonoBehaviour
         else
         {
               alertTime += Time.deltaTime;
-            
-            
+
+            if (esCobarde)//Se tiene que alejar
+            {
+                escondiendose = true;
+                iamanagement.huir(gameObject);
+            }
+            else
+            {
                 iamanagement.EnemigoVisto(gameObject);
-            
-              if (alertTime < 8f)
-              {
-                  agent.destination = player.transform.position;
-              }
-              if (alertTime >= 8f && empezarBusqueda)
-              {
-                  //Debug.Log("busco");
-                  switchGenerarListas();
-                  empezarBusqueda = false;
-                  agent.destination = nodoDestino.transform.position;
-                  alertTime = 0;
-                  mode = Mode.Search;
-              }
+
+                if (alertTime < 8f)
+                {
+                    agent.destination = player.transform.position;
+                }
+                if (alertTime >= 8f && empezarBusqueda)
+                {
+                    //Debug.Log("busco");
+                    switchGenerarListas();
+                    empezarBusqueda = false;
+                    agent.destination = nodoDestino.transform.position;
+                    alertTime = 0;
+                    mode = Mode.Search;
+                }
+            }
         }
     }
 
@@ -377,15 +389,18 @@ public class IA : MonoBehaviour
 
     public void escuchado()
     {
-        anim.SetBool("Caminar", true);
-        agent.Resume();
-        interrogacion.enabled = true;
-        if(points.Length != 0) currentPatrol = agent.destination;
-        agent.destination = player.transform.position;
-        escuchaAlgo = true;
-        if (transform.position == agent.destination)
+        if (!escondiendose)
         {
-            StartCoroutine("tiempoEspera");
+            anim.SetBool("Caminar", true);
+            agent.Resume();
+            interrogacion.enabled = true;
+            if (points.Length != 0) currentPatrol = agent.destination;
+            agent.destination = player.transform.position;
+            escuchaAlgo = true;
+            if (transform.position == agent.destination)
+            {
+                StartCoroutine("tiempoEspera");
+            }
         }
     }
 

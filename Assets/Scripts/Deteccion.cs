@@ -27,7 +27,7 @@ public class Deteccion : MonoBehaviour {
                 if (Physics.Raycast(transform.position + transform.up, rayDirection.normalized, out hit, sphere.radius))
                 {
                     Debug.DrawLine(transform.position + transform.up, hit.point);
-                    if (hit.transform.CompareTag("Player"))
+                    if (hit.transform.CompareTag("Player") )
                     {
                         IaPadre.inSight = true;
                         Debug.Log("Te veo");
@@ -52,16 +52,16 @@ public class Deteccion : MonoBehaviour {
                     IaPadre.inSight = false;
                 }
             }
-            else if (PlayerMovement.Running && (IaPadre.mode == IA.Mode.Patrol || IaPadre.mode == IA.Mode.Alert|| IaPadre.mode == IA.Mode.Tapon))
+            else if (PlayerMovement.Running && (IaPadre.mode == IA.Mode.Patrol || IaPadre.mode == IA.Mode.Alert|| IaPadre.mode == IA.Mode.Tapon) && !IaPadre.escondiendose && !IaPadre.esCobarde)
             {
                 IaPadre.escuchado();
             }
-            else if(PlayerMovement.Running && IaPadre.mode == IA.Mode.Search)
+            else if(PlayerMovement.Running && IaPadre.mode == IA.Mode.Search && !IaPadre.escondiendose && !IaPadre.esCobarde)
             {
                 IaPadre.escuchaBuscando = true;
                 agent.destination = player.transform.position;
             }
-            if((IaPadre.mode == IA.Mode.Shooting) && (PlayerMovement.Running || PlayerMovement.apuntando))
+            if((IaPadre.mode == IA.Mode.Shooting) && (PlayerMovement.Running || PlayerMovement.apuntando) && !IaPadre.escondiendose && !IaPadre.esCobarde)
             {
                 IaPadre.disparar = true;
             }

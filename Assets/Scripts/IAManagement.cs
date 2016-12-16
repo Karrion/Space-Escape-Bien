@@ -17,11 +17,17 @@ public class IAManagement : MonoBehaviour {
     public GameObject taponZona2;
     public GameObject taponZona3;
 
+    public GameObject esconditeZona1;
+    public GameObject esconditeZona2;
+    public GameObject esconditeZona3;
+
+
     private GameObject formacion11;
     private GameObject formacion12;
 
-    public List<GameObject> listaNodos = new List<GameObject>();
+    public List<GameObject> listaNodosSalas = new List<GameObject>();
     GameObject nodoDestino = null;
+
 
 
 
@@ -67,7 +73,7 @@ public class IAManagement : MonoBehaviour {
         {
             if (enemigo != guardia)
             {
-                if (enemigo.GetComponent<IA>().zonaEnemigo == guardia.GetComponent<IA>().zonaEnemigo && enemigo.GetComponent<IA>().mode != IA.Mode.Puerta)
+                if (enemigo.GetComponent<IA>().zonaEnemigo == guardia.GetComponent<IA>().zonaEnemigo && enemigo.GetComponent<IA>().mode != IA.Mode.Puerta && !enemigo.GetComponent<IA>().escondiendose)
                 {
                     enemigo.GetComponent<IA>().switchGenerarListas();
                     enemigo.GetComponent<IA>().mode = IA.Mode.Search;
@@ -116,5 +122,34 @@ public class IAManagement : MonoBehaviour {
         taponador1.GetComponent<IA>().mode = IA.Mode.Patrol;
         taponador2.GetComponent<IA>().mode = IA.Mode.Patrol;
         taponador3.GetComponent<IA>().mode = IA.Mode.Patrol;
+    }
+
+    public void huir(GameObject guardia) {
+        switch (guardia.GetComponent<IA>().zonaAnterior)
+        {
+            case 1:
+                guardia.GetComponent<NavMeshAgent>().destination = esconditeZona3.transform.position;
+                break;
+            case 2:
+                guardia.GetComponent<NavMeshAgent>().destination = esconditeZona2.transform.position;
+                break;
+            case 3:
+                guardia.GetComponent<NavMeshAgent>().destination = esconditeZona1.transform.position;
+                break;
+        }
+        if (guardia.GetComponent<NavMeshAgent>().remainingDistance < 0.3f)
+        {
+            StartCoroutine("esperaEscondido",guardia);
+            
+        }
+    }
+
+    private IEnumerator esperaEscondido(GameObject guardia)
+    {
+        guardia.GetComponent<NavMeshAgent>().Stop();
+        yield return new WaitForSeconds(5f);
+        guardia.GetComponent<NavMeshAgent>().Resume();
+        guardia.GetComponent<IA>().escondiendose = false;
+        guardia.GetComponent<IA>().mode = IA.Mode.Patrol;
     }
 }
