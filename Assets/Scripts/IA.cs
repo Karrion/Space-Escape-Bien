@@ -110,8 +110,8 @@ public class IA : MonoBehaviour
     {
         zonaAnterior = GameController.zonaAnterior;
         zonaPersonaje = GameController.zona;
-        //Debug.Log(gameObject.name + ", " + mode);
-        Debug.Log(escondiendose);
+        Debug.Log(gameObject.name + ", " + mode);
+        //Debug.Log(escondiendose);
         //Debug.Log(zona);
         //Debug.Log(inSight);
         //if (gameObject.name == "EnemigoMixamoGrande3") Debug.Log(gameObject.name + " " + mode);
@@ -151,9 +151,6 @@ public class IA : MonoBehaviour
                 anim.SetBool("Apuntar", false);
                 Search();
                 break;
-           /* case Mode.Tapon:
-                taponando();
-                break;*/
             case Mode.Puerta:
                 enPuerta();
                 break;
@@ -161,21 +158,6 @@ public class IA : MonoBehaviour
                 break;
         }
     }
-
-   /* private void taponando() {
-
-        if (agent.remainingDistance <= 0.3f) {
-            agent.Stop();
-            agent.Resume();
-            interrogacion.enabled = false;
-            exclamacion.enabled = false;
-            anim.SetBool("Correr", false);
-            anim.SetBool("Caminar", false);
-            anim.SetBool("Disparar", false);
-            anim.SetBool("Apuntar", false);
-
-        }
-    }*/
 
     private IEnumerator GetHit()
     {
@@ -222,10 +204,27 @@ public class IA : MonoBehaviour
         {
             alertTime = 0;
             empezarBusqueda = true;
-            if (agent.remainingDistance <= 10f && !escondiendose && !esCobarde)
+            if (!esCobarde)
             {
-                mode = Mode.Shooting;
+                if (agent.remainingDistance <= 8f)
+                    mode = Mode.Shooting;
+                Debug.Log("piñau 1");
             }
+            else 
+                if (esCobarde && iamanagement.hayMasGenteApuntando)
+                {
+                    if (agent.remainingDistance <= 12f)
+                    {
+                        mode = Mode.Shooting;
+                        Debug.Log("piñau 2 " + "Hay mas gente apuntando? " + iamanagement.hayMasGenteApuntando);
+                    }
+                }
+                else
+                {
+                    escondiendose = true;
+                    iamanagement.huir(gameObject);
+                 }
+                
             /*if (PlayerMovement.getMode() != PlayerMovement.Mode.Aiming)
                 agent.destination = player.transform.position;*/
            /* if(PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
@@ -242,7 +241,7 @@ public class IA : MonoBehaviour
         {
               alertTime += Time.deltaTime;
 
-            if (esCobarde)//Se tiene que alejar
+            if (esCobarde && !iamanagement.hayMasGenteApuntando)//Se tiene que alejar
             {
                 escondiendose = true;
                 iamanagement.huir(gameObject);

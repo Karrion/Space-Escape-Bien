@@ -27,6 +27,7 @@ public class IAManagement : MonoBehaviour {
 
     public List<GameObject> listaNodosSalas = new List<GameObject>();
     GameObject nodoDestino = null;
+    public bool hayMasGenteApuntando = false;
 
 
 
@@ -125,22 +126,34 @@ public class IAManagement : MonoBehaviour {
     }
 
     public void huir(GameObject guardia) {
-        switch (guardia.GetComponent<IA>().zonaAnterior)
+        foreach(GameObject enemigo in guardias)
         {
-            case 1:
-                guardia.GetComponent<NavMeshAgent>().destination = esconditeZona3.transform.position;
+            if(enemigo.GetComponent<IA>().mode == IA.Mode.Shooting)
+            {
+                hayMasGenteApuntando = true;
                 break;
-            case 2:
-                guardia.GetComponent<NavMeshAgent>().destination = esconditeZona2.transform.position;
-                break;
-            case 3:
-                guardia.GetComponent<NavMeshAgent>().destination = esconditeZona1.transform.position;
-                break;
+            }
+            hayMasGenteApuntando = false;
         }
-        if (guardia.GetComponent<NavMeshAgent>().remainingDistance < 0.3f)
+        if (!hayMasGenteApuntando)
         {
-            StartCoroutine("esperaEscondido",guardia);
-            
+            switch (guardia.GetComponent<IA>().zonaAnterior)
+            {
+                case 1:
+                    guardia.GetComponent<NavMeshAgent>().destination = esconditeZona3.transform.position;
+                    break;
+                case 2:
+                    guardia.GetComponent<NavMeshAgent>().destination = esconditeZona2.transform.position;
+                    break;
+                case 3:
+                    guardia.GetComponent<NavMeshAgent>().destination = esconditeZona1.transform.position;
+                    break;
+            }
+            if (guardia.GetComponent<NavMeshAgent>().remainingDistance < 0.3f)
+            {
+                StartCoroutine("esperaEscondido", guardia);
+
+            }
         }
     }
 

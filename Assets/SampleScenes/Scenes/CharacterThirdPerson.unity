@@ -42,7 +42,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: a7bed68887a07e34394d4191b3081359, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09193077, g: 0.14170921, b: 0.1832768, a: 1}
+  m_IndirectSpecularColor: {r: 0.09193068, g: 0.14170903, b: 0.18327668, a: 1}
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3174,7 +3174,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000014258283696, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 26.5
+      value: 26.48
       objectReference: {fileID: 0}
     - target: {fileID: 4000014258283696, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3182,7 +3182,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014258283696, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -16.9
+      value: -17.54
       objectReference: {fileID: 0}
     - target: {fileID: 4000014258283696, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3861,6 +3861,10 @@ Prefab:
     - target: {fileID: 114000011191502970, guid: 20221f2b0ff6e6344b189a26f238bbbc,
         type: 2}
       propertyPath: esCobarde
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013760195318, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -8285,6 +8289,7 @@ MonoBehaviour:
   esconditeZona2: {fileID: 1697647361}
   esconditeZona3: {fileID: 725549972}
   listaNodosSalas: []
+  hayMasGenteApuntando: 0
 --- !u!4 &1669842813
 Transform:
   m_ObjectHideFlags: 0
@@ -11286,7 +11291,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000014258283696, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 49.16
+      value: 49.34
       objectReference: {fileID: 0}
     - target: {fileID: 4000014258283696, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
       propertyPath: m_LocalPosition.y
@@ -11294,7 +11299,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014258283696, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 15.04
+      value: 22.77
       objectReference: {fileID: 0}
     - target: {fileID: 4000014258283696, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
       propertyPath: m_LocalRotation.x
@@ -11326,6 +11331,11 @@ Prefab:
       propertyPath: points.Array.data[1]
       value: 
       objectReference: {fileID: 1995431260}
+    - target: {fileID: 114000011191502970, guid: 20221f2b0ff6e6344b189a26f238bbbc,
+        type: 2}
+      propertyPath: esCobarde
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20221f2b0ff6e6344b189a26f238bbbc, type: 2}
   m_IsPrefabParent: 0
@@ -11353,7 +11363,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2129343656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.45, y: -2.01, z: -6.82}
+  m_LocalPosition: {x: 7.07, y: -2.01, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
