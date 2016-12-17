@@ -48,9 +48,7 @@ public class Deteccion : MonoBehaviour {
                             }
                             else
                             {
-                                if (other.tag == "Enemy") {
-                                    buscaMuertos(other);
-                                }
+                                
                                 IaPadre.inSight = false;
                                 //Debug.Log("No te veo");
                                 if (IaPadre.mode == IA.Mode.Shooting)
@@ -77,6 +75,12 @@ public class Deteccion : MonoBehaviour {
                         IaPadre.disparar = true;
                     }
                 }
+
+                else if (other.tag == "Enemy")
+                {
+                    buscaMuertos(other
+                        );
+                }
             }
         }
     }
@@ -86,12 +90,14 @@ public class Deteccion : MonoBehaviour {
          if ( collider.gameObject.GetComponent<IA>().muerto)
          {
                IaPadre.agent.destination = collider.gameObject.transform.position;
-               if (IaPadre.agent.remainingDistance < 0.3f) {
+               if (IaPadre.agent.remainingDistance < 2f) {
                     collider.gameObject.GetComponent<IA>().vida = 3;
                     collider.gameObject.GetComponent<IA>().muerto = false;
-                    collider.gameObject.GetComponent<IA>().agent.Resume();
+                    collider.gameObject.GetComponent<IA>().anim.SetBool("Caminar", true);
+                    collider.gameObject.GetComponent<IA>().anim.SetBool("Caminar", true);
                     collider.gameObject.GetComponent<IA>().mode = IA.Mode.Patrol;
-               }
+                    collider.gameObject.GetComponent<IA>().agent.Resume();                                      
+            }
         }
     }
     

@@ -20,7 +20,7 @@ public class IA : MonoBehaviour
     [HideInInspector] public bool inSight;
     private GameObject sphereGameObject;
     private SphereCollider sphere;
-    private Animator anim;
+    public Animator anim;
     private Rigidbody rigidbody;
     public float rotationSpeed = 10f;
     bool delReves = false;
@@ -109,6 +109,7 @@ public class IA : MonoBehaviour
         {
             if (muerto == false)
             {
+                muerto = true;
                 anim.SetBool("Correr", false);
                 anim.SetBool("Caminar", false);
                 anim.SetBool("Disparar", false);
@@ -117,8 +118,15 @@ public class IA : MonoBehaviour
                 agent.Stop();
                 if (exclamacion.isVisible) exclamacion.enabled = false;
                 if (interrogacion.isVisible) interrogacion.enabled = false;
-                muerto = true;
+                
             }
+            else{
+                anim.SetBool("Correr", false);
+                anim.SetBool("Caminar", false);
+                anim.SetBool("Disparar", false);
+                anim.SetBool("Apuntar", false);
+            }
+            
         }
         else
         {
