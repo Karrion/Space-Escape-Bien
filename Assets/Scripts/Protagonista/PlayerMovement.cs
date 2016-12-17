@@ -210,15 +210,16 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetTrigger("Recargar");
                 StartCoroutine("finalizarCarga");
             }
-            else if (Input.GetMouseButtonDown(0))
+            else if (Input.GetMouseButtonUp(0))
             {
                 anim.SetTrigger("Disparar");
                 if (scriptMirilla.enemigoApuntado == true)
                 {
                     IA scriptEnemigo;
                     scriptEnemigo = scriptMirilla.devolverEnemigo().GetComponent<IA>();
-                    Debug.Log(scriptEnemigo.gameObject.name);
-                    scriptEnemigo.getHit();
+                    Debug.Log("miro enemigo");
+                    if(!scriptEnemigo.muerto)
+                        scriptEnemigo.getHit();
                 }
             }
         }

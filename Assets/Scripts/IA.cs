@@ -10,7 +10,7 @@ public class IA : MonoBehaviour
 
     public Transform[] points;
     private int destPoint = 0;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private GameObject player;
     [HideInInspector] public int fieldOfViewDegrees = 110;
     public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado, Tapon, Puerta};
@@ -45,6 +45,9 @@ public class IA : MonoBehaviour
     private IAManagement iamanagement;
     public bool busquedaTerminado = false;
     private float cuentaPuerta = 0;
+    public bool pupa = false;
+    public int vida = 3;
+    public bool muerto = false;
 
     public bool esCobarde;
     [HideInInspector]public bool escondiendose;
@@ -62,12 +65,6 @@ public class IA : MonoBehaviour
         rotacionInicial = transform.rotation;
         iamanagement = GameObject.FindGameObjectWithTag("IaManagement").GetComponent<IAManagement>();
     }
-
-    /*public int getZone()
-    {
-        if
-    }*/
-
     public bool getRunToCover()
     {
         return runToCover;
@@ -108,60 +105,75 @@ public class IA : MonoBehaviour
 
     void Update()
     {
-        zonaAnterior = GameController.zonaAnterior;
-        zonaPersonaje = GameController.zona;
-        Debug.Log(gameObject.name + ", " + mode);
-        //Debug.Log(escondiendose);
-        //Debug.Log(zona);
-        //Debug.Log(inSight);
-        //if (gameObject.name == "EnemigoMixamoGrande3") Debug.Log(gameObject.name + " " + mode);
-        switch (mode){
-            case Mode.Patrol:
-                Patrol();
-                if (escuchaAlgo)
-                    calcularDistanciaEscuchado();
-                break;
-            case Mode.Alert:
-                if (interrogacion.enabled == true)
-                    interrogacion.enabled = false;
-                exclamacion.enabled = true;
-                anim.SetBool("Correr", true);
+        if (vida <= 0)
+        {
+            if (muerto == false)
+            {
+                anim.SetBool("Correr", false);
                 anim.SetBool("Caminar", false);
                 anim.SetBool("Disparar", false);
                 anim.SetBool("Apuntar", false);
-                Alert();
-                break;
-            case Mode.Shooting:
-                anim.SetBool("Apuntar", true);
-                anim.SetBool("Disparar", false);
-                anim.SetBool("Correr", false);
-                anim.SetBool("Caminar", false);
-                Shooting();
-                break;
-            case Mode.Hit:
+                anim.SetTrigger("Headshot");
                 agent.Stop();
-                anim.SetTrigger("Hit");
-                StartCoroutine("GetHit");
-                Alcanzado();
-                break;
-            case Mode.Search:
-                anim.SetBool("Correr", false);
-                anim.SetBool("Caminar", true);
-                anim.SetBool("Disparar", false);
-                anim.SetBool("Apuntar", false);
-                Search();
-                break;
-            case Mode.Puerta:
-                enPuerta();
-                break;
-            default:
-                break;
+                if (exclamacion.isVisible) exclamacion.enabled = false;
+                if (interrogacion.isVisible) interrogacion.enabled = false;
+                muerto = true;
+            }
+        }
+        else
+        {
+            zonaAnterior = GameController.zonaAnterior;
+            zonaPersonaje = GameController.zona;
+            Debug.Log(gameObject.name + ", " + mode);
+            switch (mode)
+            {
+                case Mode.Patrol:
+                    Patrol();
+                    if (escuchaAlgo)
+                        calcularDistanciaEscuchado();
+                    break;
+                case Mode.Alert:
+                    if (interrogacion.enabled == true)
+                        interrogacion.enabled = false;
+                    exclamacion.enabled = true;
+                    anim.SetBool("Correr", true);
+                    anim.SetBool("Caminar", false);
+                    anim.SetBool("Disparar", false);
+                    anim.SetBool("Apuntar", false);
+                    Alert();
+                    break;
+                case Mode.Shooting:
+                    anim.SetBool("Apuntar", true);
+                    anim.SetBool("Disparar", false);
+                    anim.SetBool("Correr", false);
+                    anim.SetBool("Caminar", false);
+                    Shooting();
+                    break;
+                case Mode.Hit:
+                    Debug.Log("dolor");
+                    break;
+                case Mode.Search:
+                    anim.SetBool("Correr", false);
+                    anim.SetBool("Caminar", true);
+                    anim.SetBool("Disparar", false);
+                    anim.SetBool("Apuntar", false);
+                    Search();
+                    break;
+                case Mode.Puerta:
+                    enPuerta();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     private IEnumerator GetHit()
     {
+        agent.Stop();
+        anim.SetTrigger("Hit");
         yield return new WaitForSeconds(0.8f);
+        Alcanzado();
     }
 
     private void Shooting()
@@ -415,26 +427,31 @@ public class IA : MonoBehaviour
             anim.SetBool("Disparar", false);
             anim.SetBool("Correr", true);
             agent.Resume();*/
-            if (agent.remainingDistance <= 1f)
+            if (agent.remainingDistance <= 10f)
             {
                 agent.Stop();
                 anim.SetBool("Disparar", true);
                 anim.SetBool("Correr", false);
-                mode = Mode.Shooting;
+                pupa = false;
+                vida--;
                 return;
             }
      //   }
         agent.SetDestination(player.transform.position);
         agent.Resume();
+        pupa = false;
+        vida--;
         mode = Mode.Alert;
     }
 
     public void getHit()
     {
+        pupa = true;
         mode = Mode.Hit;
         anim.SetBool("Caminar", false);
         anim.SetBool("Correr", false);
         anim.SetBool("Disparar", false);
+        StartCoroutine("GetHit");
         //Debug.Log("Au");
     }
 
