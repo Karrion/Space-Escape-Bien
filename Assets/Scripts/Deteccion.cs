@@ -7,6 +7,7 @@ public class Deteccion : MonoBehaviour {
     SphereCollider sphere;
     NavMeshAgent agent;
     IAManagement iam;
+    private bool playerDentro = false;
 
 	// Use this for initialization
 	void Start () {
@@ -76,13 +77,22 @@ public class Deteccion : MonoBehaviour {
                     }
                 }
 
-                else if (other.tag == "Enemy")
+                else if (other.tag == "Enemy" && !playerDentro)
                 {
-                    buscaMuertos(other
-                        );
+                    buscaMuertos(other);
                 }
             }
         }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player") playerDentro = true; 
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player") playerDentro = false;
     }
 
     public void buscaMuertos(Collider collider)
