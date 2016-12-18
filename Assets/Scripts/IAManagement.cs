@@ -21,9 +21,13 @@ public class IAManagement : MonoBehaviour {
     public GameObject esconditeZona2;
     public GameObject esconditeZona3;
 
+    public GameObject cobertura1;
+    public GameObject cobertura2;
+    public GameObject cobertura3;
+    public bool estoyCubierto;
 
-    private GameObject formacion11;
-    private GameObject formacion12;
+
+
 
     public List<GameObject> listaNodosSalas = new List<GameObject>();
     GameObject nodoDestino = null;
@@ -35,8 +39,7 @@ public class IAManagement : MonoBehaviour {
     // Use this for initialization
     void Start () {
         guardias = GameObject.FindGameObjectsWithTag("Enemy");
-        formacion11 = GameObject.FindGameObjectWithTag("Formacion11");
-        formacion12 = GameObject.FindGameObjectWithTag("Formacion12");
+        
     }
 
     public void EnemigoEnSala(GameObject guardia, GameObject nodo1, GameObject nodo2)
@@ -107,7 +110,7 @@ public class IAManagement : MonoBehaviour {
         else if (guardia.GetComponent<IA>().zonaPersonaje == 3 && taponador3.GetComponent<IA>().mode != IA.Mode.Alert)
         {
             taponador2.GetComponent<NavMeshAgent>().destination = taponZona3.transform.position;
-            // taponador2.GetComponent<IA>().mode = IA.Mode.Tapon;
+            
 
             taponador2.GetComponent<IA>().taponando = true;
 
@@ -161,5 +164,34 @@ public class IAManagement : MonoBehaviour {
         guardia.GetComponent<NavMeshAgent>().Resume();
         guardia.GetComponent<IA>().escondiendose = false;
         guardia.GetComponent<IA>().mode = IA.Mode.Patrol;
+    }
+
+    public void Coberturas(GameObject guardia)
+    {
+        if (guardia.transform.GetChild(0).GetComponent<Deteccion>().irACobertura) {
+            estoyCubierto = true;
+            Debug.Log("de camino a la cobertura");
+           // guardia.GetComponent<IA>().mode = IA.Mode.Hit;
+            switch (guardia.GetComponent<IA>().zonaEnemigo)
+            {
+                case 1:
+                    guardia.GetComponent<NavMeshAgent>().destination = cobertura1.transform.position;
+                    break;
+                case 2:
+                    guardia.GetComponent<NavMeshAgent>().destination = cobertura2.transform.position;
+                    break;
+                case 3:
+                    guardia.GetComponent<NavMeshAgent>().destination = cobertura3.transform.position;
+                    break;
+            }
+            
+            /*if (guardia.GetComponent<NavMeshAgent>().remainingDistance < 1f) {
+                Debug.Log("me paro");
+                guardia.GetComponent<NavMeshAgent>().Stop();
+                estoyCubierto = false;
+            } else {
+              //  estoyCubierto = false;
+            };*/
+        }
     }
 }

@@ -24,8 +24,6 @@ TagManager:
   - TaponarZona1
   - TaponarZona2
   - TaponarZona3
-  - Formacion11
-  - Formacion12
   layers:
   - Default
   - TransparentFX

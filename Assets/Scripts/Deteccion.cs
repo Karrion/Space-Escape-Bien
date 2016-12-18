@@ -8,6 +8,7 @@ public class Deteccion : MonoBehaviour {
     NavMeshAgent agent;
     IAManagement iam;
     private bool playerDentro = false;
+    public bool irACobertura;
 
 	// Use this for initialization
 	void Start () {
@@ -21,78 +22,77 @@ public class Deteccion : MonoBehaviour {
 
     public void OnTriggerStay(Collider other)
     {
-        if (!IaPadre.pupa)
+        if (!IaPadre.pupa && !iam.estoyCubierto && !IaPadre.muerto)
         {
-            if (!IaPadre.muerto)
+            if (other.tag == "Player")
             {
-                if (other.tag == "Player")
+                IaPadre.inSight = false;
+                RaycastHit hit;
+                Vector3 rayDirection = player.transform.position - transform.position + transform.up;
+                if ((Vector3.Angle(rayDirection, transform.forward)) <= IaPadre.fieldOfViewDegrees * 0.5f)
                 {
-                    IaPadre.inSight = false;
-                    RaycastHit hit;
-                    Vector3 rayDirection = player.transform.position - transform.position + transform.up;
-                    if ((Vector3.Angle(rayDirection, transform.forward)) <= IaPadre.fieldOfViewDegrees * 0.5f)
+                    if (Physics.Raycast(transform.position + transform.up, rayDirection.normalized, out hit, sphere.radius))
                     {
-                        if (Physics.Raycast(transform.position + transform.up, rayDirection.normalized, out hit, sphere.radius))
+                        Debug.DrawLine(transform.position + transform.up, hit.point);
+
+                        if (hit.transform.CompareTag("Player"))
                         {
-                            Debug.DrawLine(transform.position + transform.up, hit.point);
-
-                            if (hit.transform.CompareTag("Player"))
+                            IaPadre.inSight = true;
+                            //Debug.Log("Te veo");
+                            if (IaPadre.mode != IA.Mode.Shooting)
                             {
-                                IaPadre.inSight = true;
-                                //Debug.Log("Te veo");
-                                if (IaPadre.mode != IA.Mode.Shooting)
-                                {
-                                    if (IaPadre.points.Length != 0) IaPadre.currentPatrol = agent.destination;
-                                    IaPadre.mode = IA.Mode.Alert;
+                                if (IaPadre.points.Length != 0) IaPadre.currentPatrol = agent.destination;
+                                IaPadre.mode = IA.Mode.Alert;
 
-                                }
-                            }
-                            else
-                            {
-                                
-                                IaPadre.inSight = false;
-                                //Debug.Log("No te veo");
-                                if (IaPadre.mode == IA.Mode.Shooting)
-                                    IaPadre.mode = IA.Mode.Alert;
-                                
                             }
                         }
                         else
                         {
+                                
                             IaPadre.inSight = false;
+                            //Debug.Log("No te veo");
+                            if (IaPadre.mode == IA.Mode.Shooting)
+                                IaPadre.mode = IA.Mode.Alert;
+                                
                         }
                     }
-                    else if (PlayerMovement.Running && (IaPadre.mode == IA.Mode.Patrol || IaPadre.mode == IA.Mode.Alert))
+                    else
                     {
-                        IaPadre.escuchado();
-                    }
-                    else if (PlayerMovement.Running && IaPadre.mode == IA.Mode.Search)
-                    {
-                        IaPadre.escuchaBuscando = true;
-                        agent.destination = player.transform.position;
-                    }
-                    if ((IaPadre.mode == IA.Mode.Shooting) && (PlayerMovement.Running || PlayerMovement.apuntando))
-                    {
-                        IaPadre.disparar = true;
+                        IaPadre.inSight = false;
                     }
                 }
-
-                else if (other.tag == "Enemy" && !playerDentro)
+                else if (PlayerMovement.Running && (IaPadre.mode == IA.Mode.Patrol || IaPadre.mode == IA.Mode.Alert))
                 {
-                    buscaMuertos(other);
+                    IaPadre.escuchado();
                 }
+                else if (PlayerMovement.Running && IaPadre.mode == IA.Mode.Search)
+                {
+                    IaPadre.escuchaBuscando = true;
+                    agent.destination = player.transform.position;
+                }
+                if ((IaPadre.mode == IA.Mode.Shooting) && (PlayerMovement.Running || PlayerMovement.apuntando))
+                {
+                    IaPadre.disparar = true;
+                }
+            }
+
+            else if (other.tag == "Enemy" && !playerDentro)
+            {
+                buscaMuertos(other);
             }
         }
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") playerDentro = true; 
+        if (other.tag == "Player") playerDentro = true;
+        if (other.tag == "Cobertura") irACobertura = true;
     }
 
     public void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player") playerDentro = false;
+        if (other.tag == "Cobertura") irACobertura = false;
     }
 
     public void buscaMuertos(Collider collider)

@@ -13,7 +13,7 @@ public class IA : MonoBehaviour
     public NavMeshAgent agent;
     private GameObject player;
     [HideInInspector] public int fieldOfViewDegrees = 110;
-    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado};
+    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado, Cubrirse};
     public Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
     [HideInInspector] public Vector3 currentPatrol;
@@ -105,6 +105,7 @@ public class IA : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(iamanagement.estoyCubierto);
         if (vida <= 0)
         {
             if (muerto == false)
@@ -118,17 +119,20 @@ public class IA : MonoBehaviour
                 agent.Stop();
                 if (exclamacion.isVisible) exclamacion.enabled = false;
                 if (interrogacion.isVisible) interrogacion.enabled = false;
-                
+
             }
-           /* else{
-                anim.SetBool("Correr", false);
-                anim.SetBool("Caminar", false);
-                anim.SetBool("Disparar", false);
-                anim.SetBool("Apuntar", false);
-            }*/           
+            /* else{
+                 anim.SetBool("Correr", false);
+                 anim.SetBool("Caminar", false);
+                 anim.SetBool("Disparar", false);
+                 anim.SetBool("Apuntar", false);
+             }*/
         }
         else
+            if (!iamanagement.estoyCubierto)
         {
+
+
             zonaAnterior = GameController.zonaAnterior;
             zonaPersonaje = GameController.zona;
             //Debug.Log(gameObject.name + ", " + mode);
@@ -169,11 +173,12 @@ public class IA : MonoBehaviour
                     anim.SetBool("Apuntar", false);
                     Search();
                     break;
-               
                 default:
                     break;
             }
         }
+        else
+            calcularDistanciaCobertura();
     }
 
     private IEnumerator GetHit()
@@ -205,12 +210,11 @@ public class IA : MonoBehaviour
             }
         }
         else
-        {      
+        {    
             agent.Resume();
             disparar = false;
             mode = Mode.Alert;           
         }
-        rigidbody.constraints = RigidbodyConstraints.FreezeRotationY;
     }
 
     private void Alert()
@@ -242,18 +246,6 @@ public class IA : MonoBehaviour
                     escondiendose = true;
                     iamanagement.huir(gameObject);
                  }
-                
-            /*if (PlayerMovement.getMode() != PlayerMovement.Mode.Aiming)
-                agent.destination = player.transform.position;*/
-           /* if(PlayerMovement.getMode() == PlayerMovement.Mode.Aiming)
-            {
-                Transform Objetivo = CoverManagerMal.BuscarMasCercana(transform, (int) sphere.radius);
-                if (Objetivo != null)
-                {
-                    runToCover = true;
-                    agent.destination = Objetivo.position;
-                }
-            }*/
         }
         else
         {
@@ -415,31 +407,13 @@ public class IA : MonoBehaviour
 
     void Alcanzado()
     {
-       
-      /* if (coverManager.BuscarMasCercana(transform, sphere.radius) != null)
-       {
-            Transform Objetivo = coverManager.BuscarMasCercana(transform, sphere.radius);
-            Debug.Log("Corro p'allá");
-            runToCover = true;
-            agent.destination = Objetivo.position;
-            anim.SetBool("Disparar", false);
-            anim.SetBool("Correr", true);
-            agent.Resume();*/
-           /* if (agent.remainingDistance <= 10f)
-            {
-                agent.Stop();
-                anim.SetBool("Disparar", true);
-                anim.SetBool("Correr", false);
-                pupa = false;
-                vida--;
-                return;
-            }*/
-     //   }
         agent.SetDestination(player.transform.position);
         agent.Resume();
         pupa = false;
         vida--;
         mode = Mode.Alert;
+        iamanagement.Coberturas(gameObject);
+       
     }
 
     public void getHit()
@@ -458,6 +432,16 @@ public class IA : MonoBehaviour
         {
             StartCoroutine("tiempoEspera");
         }       
+    }
+
+    public void calcularDistanciaCobertura()
+    {
+        if (agent.remainingDistance <= 3f)
+        {
+            agent.Stop();
+            mode = Mode.Shooting;
+            //iamanagement.estoyCubierto = false;
+        }
     }
 
     void generarLista(int zonaBusqueda)
