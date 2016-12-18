@@ -13,7 +13,7 @@ public class IA : MonoBehaviour
     public NavMeshAgent agent;
     private GameObject player;
     [HideInInspector] public int fieldOfViewDegrees = 110;
-    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado, Tapon, Puerta};
+    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado};
     public Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
     [HideInInspector] public Vector3 currentPatrol;
@@ -110,32 +110,35 @@ public class IA : MonoBehaviour
             if (muerto == false)
             {
                 muerto = true;
+                anim.SetTrigger("Headshot");
                 anim.SetBool("Correr", false);
                 anim.SetBool("Caminar", false);
                 anim.SetBool("Disparar", false);
                 anim.SetBool("Apuntar", false);
-                anim.SetTrigger("Headshot");
                 agent.Stop();
                 if (exclamacion.isVisible) exclamacion.enabled = false;
                 if (interrogacion.isVisible) interrogacion.enabled = false;
                 
             }
-            else{
+           /* else{
                 anim.SetBool("Correr", false);
                 anim.SetBool("Caminar", false);
                 anim.SetBool("Disparar", false);
                 anim.SetBool("Apuntar", false);
-            }
-            
+            }*/           
         }
         else
         {
             zonaAnterior = GameController.zonaAnterior;
             zonaPersonaje = GameController.zona;
-            Debug.Log(gameObject.name + ", " + mode);
+            //Debug.Log(gameObject.name + ", " + mode);
             switch (mode)
             {
                 case Mode.Patrol:
+                    anim.SetBool("Correr", false);
+                    anim.SetBool("Caminar", true);
+                    anim.SetBool("Disparar", false);
+                    anim.SetBool("Apuntar", false);
                     Patrol();
                     if (escuchaAlgo)
                         calcularDistanciaEscuchado();
@@ -158,7 +161,6 @@ public class IA : MonoBehaviour
                     Shooting();
                     break;
                 case Mode.Hit:
-                    Debug.Log("dolor");
                     break;
                 case Mode.Search:
                     anim.SetBool("Correr", false);
@@ -167,9 +169,7 @@ public class IA : MonoBehaviour
                     anim.SetBool("Apuntar", false);
                     Search();
                     break;
-                case Mode.Puerta:
-                    enPuerta();
-                    break;
+               
                 default:
                     break;
             }
@@ -180,7 +180,7 @@ public class IA : MonoBehaviour
     {
         agent.Stop();
         anim.SetTrigger("Hit");
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.5f);
         Alcanzado();
     }
 
@@ -192,7 +192,6 @@ public class IA : MonoBehaviour
         {
             agent.Stop();
             RotateTowards(player.transform);
-            //Debug.Log(ShootTimer);
             
             if (disparar)
             {
@@ -228,7 +227,6 @@ public class IA : MonoBehaviour
             {
                 if (agent.remainingDistance <= 8f)
                     mode = Mode.Shooting;
-                Debug.Log("piñau 1");
             }
             else 
                 if (esCobarde && iamanagement.hayMasGenteApuntando)
@@ -276,7 +274,6 @@ public class IA : MonoBehaviour
                 }
                 if (alertTime >= 8f && empezarBusqueda)
                 {
-                    //Debug.Log("busco");
                     switchGenerarListas();
                     empezarBusqueda = false;
                     agent.destination = nodoDestino.transform.position;
@@ -300,7 +297,6 @@ public class IA : MonoBehaviour
                 generarLista(3);
                 break;
             default:
-                //Debug.Log("Tengo la zona mal puesta");
                 break;
         }
     }
@@ -339,7 +335,6 @@ public class IA : MonoBehaviour
             }
         }
     }
-  
 
     private void nuevoNodo(GameObject nodoDestino)
     {
@@ -347,14 +342,11 @@ public class IA : MonoBehaviour
         if (listaNodos.Count != 0)
         {
             r = UnityEngine.Random.Range(0, listaNodos.Count);
-            //Debug.Log("Random: " + r + " Tamaño: " + listaNodos.Count);
             listaNodos.Remove(nodoDestino);
             nodoDestino = listaNodos[r];
             agent.destination = nodoDestino.transform.position;
         }
-        //Debug.Log(listaNodos.Count);
     }
-
     private IEnumerator esperaBusqueda()
     {
         yield return new WaitForSeconds(2f);
@@ -397,8 +389,6 @@ public class IA : MonoBehaviour
     
         }
     }
-
-
     private void RotateTowards(Transform target)
     {
         Vector3 direction = (target.position - transform.position).normalized;
@@ -435,7 +425,7 @@ public class IA : MonoBehaviour
             anim.SetBool("Disparar", false);
             anim.SetBool("Correr", true);
             agent.Resume();*/
-            if (agent.remainingDistance <= 10f)
+           /* if (agent.remainingDistance <= 10f)
             {
                 agent.Stop();
                 anim.SetBool("Disparar", true);
@@ -443,7 +433,7 @@ public class IA : MonoBehaviour
                 pupa = false;
                 vida--;
                 return;
-            }
+            }*/
      //   }
         agent.SetDestination(player.transform.position);
         agent.Resume();
@@ -460,7 +450,6 @@ public class IA : MonoBehaviour
         anim.SetBool("Correr", false);
         anim.SetBool("Disparar", false);
         StartCoroutine("GetHit");
-        //Debug.Log("Au");
     }
 
     public void calcularDistanciaEscuchado()
@@ -480,12 +469,10 @@ public class IA : MonoBehaviour
         {
             case 1:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona1");
-                //Debug.Log("Genero lista de nodos de zona 1");
                 nodoDestino = vectorNodos[10];
                 break;
             case 2:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona2");
-                //Debug.Log("Genero lista de nodos de zona 2");
                 if (zonaAnterior == 1)
                     nodoDestino = vectorNodos[8];
                 else if (zonaAnterior == 3)
@@ -493,7 +480,6 @@ public class IA : MonoBehaviour
                 break;
             case 3:
                 vectorNodos = GameObject.FindGameObjectsWithTag("VertexZona3");
-                //Debug.Log("Genero lista de nodos de zona 3");
                 nodoDestino = vectorNodos[0];
                 break;
         }
@@ -501,25 +487,5 @@ public class IA : MonoBehaviour
         r = listaNodos.IndexOf(nodoDestino);
     }
 
-    public void enPuerta()
-    {
-
-        if (agent.remainingDistance < 0.3f)
-        {
-            Debug.Log("Acompañeme");
-            agent.Stop();
-            anim.SetBool("Caminar", false);
-            anim.SetBool("Correr", false);
-            if(cuentaPuerta < 6f)
-            {
-                cuentaPuerta += Time.deltaTime;
-            }else
-            {
-                agent.Resume();
-                mode = Mode.Search;
-                agent.destination = player.transform.position;
-                cuentaPuerta = 0;
-            }
-        }
-    }
+    
 }

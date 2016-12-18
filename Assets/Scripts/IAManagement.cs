@@ -50,12 +50,10 @@ public class IAManagement : MonoBehaviour {
                     switch(nodos){
                         case 1:
                             enemigo.GetComponent<NavMeshAgent>().destination = nodo1.transform.position;
-                            enemigo.GetComponent<IA>().mode = IA.Mode.Puerta;
                             nodos++;
                             break;
                         case 2:
                             enemigo.GetComponent<NavMeshAgent>().destination = nodo2.transform.position;
-                            enemigo.GetComponent<IA>().mode = IA.Mode.Puerta;
                             nodos++;
                             break;
                         default:
@@ -74,7 +72,7 @@ public class IAManagement : MonoBehaviour {
         {
             if (enemigo != guardia)
             {
-                if (enemigo.GetComponent<IA>().zonaEnemigo == guardia.GetComponent<IA>().zonaEnemigo && enemigo.GetComponent<IA>().mode != IA.Mode.Puerta && !enemigo.GetComponent<IA>().escondiendose)
+                if (enemigo.GetComponent<IA>().zonaEnemigo == guardia.GetComponent<IA>().zonaEnemigo && !enemigo.GetComponent<IA>().escondiendose)
                 {
                     enemigo.GetComponent<IA>().switchGenerarListas();
                     enemigo.GetComponent<IA>().mode = IA.Mode.Search;
@@ -84,7 +82,6 @@ public class IAManagement : MonoBehaviour {
         if (guardia.GetComponent<IA>().zonaPersonaje == 1 && taponador2.GetComponent<IA>().mode != IA.Mode.Alert)
         {
             taponador2.GetComponent<NavMeshAgent>().destination = taponZona1.transform.position;
-            // taponador2.GetComponent<IA>().mode = IA.Mode.Tapon;
             taponador2.GetComponent<IA>().taponando = true;
             taponador2.GetComponent<IA>().mode = IA.Mode.Patrol;
 

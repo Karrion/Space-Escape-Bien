@@ -62,7 +62,7 @@ public class Deteccion : MonoBehaviour {
                             IaPadre.inSight = false;
                         }
                     }
-                    else if (PlayerMovement.Running && (IaPadre.mode == IA.Mode.Patrol || IaPadre.mode == IA.Mode.Alert || IaPadre.mode == IA.Mode.Tapon))
+                    else if (PlayerMovement.Running && (IaPadre.mode == IA.Mode.Patrol || IaPadre.mode == IA.Mode.Alert))
                     {
                         IaPadre.escuchado();
                     }
@@ -103,10 +103,10 @@ public class Deteccion : MonoBehaviour {
                if (IaPadre.agent.remainingDistance < 2f) {
                     collider.gameObject.GetComponent<IA>().vida = 3;
                     collider.gameObject.GetComponent<IA>().muerto = false;
-                    collider.gameObject.GetComponent<IA>().anim.SetBool("Caminar", true);
-                    collider.gameObject.GetComponent<IA>().anim.SetBool("Caminar", true);
                     collider.gameObject.GetComponent<IA>().mode = IA.Mode.Patrol;
-                    collider.gameObject.GetComponent<IA>().agent.Resume();                                      
+                    collider.gameObject.GetComponent<IA>().anim.SetTrigger("Revivir");
+                    collider.gameObject.GetComponent<IA>().agent.Resume();
+                    
             }
         }
     }

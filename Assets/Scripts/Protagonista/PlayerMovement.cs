@@ -91,7 +91,6 @@ public class PlayerMovement : MonoBehaviour
         MovementInputValue = Input.GetAxis(MovementAxisName);
         TurnInputValue = Input.GetAxis(TurnAxisName);
 
-        //Debug.Log(mode);
         if (!isReloading)
         {
             if (Input.GetKeyDown(KeyCode.C) || (Input.GetKeyDown(KeyCode.LeftControl)))
@@ -120,6 +119,26 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             apuntando = true;
+            Speed = 0;
+            Apuntar();
+            if (Input.GetKey(KeyCode.R))
+            {
+                anim.SetTrigger("Recargar");
+                StartCoroutine("finalizarCarga");
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                anim.SetTrigger("Disparar");
+                if (scriptMirilla.enemigoApuntado == true)
+                {
+                    IA scriptEnemigo;
+                    scriptEnemigo = scriptMirilla.devolverEnemigo().GetComponent<IA>();
+                    Debug.Log("miro enemigo");
+                    if (!scriptEnemigo.muerto)
+                        scriptEnemigo.getHit();
+                }
+            }
+
             if (mode == Mode.Standing)
             {
                 anim.SetBool("Run", false);
@@ -201,29 +220,6 @@ public class PlayerMovement : MonoBehaviour
                 Speed = 0;
             }
         }
-        else
-        {
-            Speed = 0;
-            Apuntar();
-            if (Input.GetKey(KeyCode.R))
-            {
-                anim.SetTrigger("Recargar");
-                StartCoroutine("finalizarCarga");
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                anim.SetTrigger("Disparar");
-                if (scriptMirilla.enemigoApuntado == true)
-                {
-                    IA scriptEnemigo;
-                    scriptEnemigo = scriptMirilla.devolverEnemigo().GetComponent<IA>();
-                    Debug.Log("miro enemigo");
-                    if(!scriptEnemigo.muerto)
-                        scriptEnemigo.getHit();
-                }
-            }
-        }
-
         Vector3 movement = transform.forward * Speed * Time.deltaTime;
         Rigidbody.MovePosition(Rigidbody.position + movement);
 
