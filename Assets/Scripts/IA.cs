@@ -13,7 +13,7 @@ public class IA : MonoBehaviour
     public NavMeshAgent agent;
     private GameObject player;
     [HideInInspector] public int fieldOfViewDegrees = 110;
-    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado, Cubrirse};
+    public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado,Cubriendose};
     public Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
     [HideInInspector] public Vector3 currentPatrol;
@@ -105,7 +105,6 @@ public class IA : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(iamanagement.estoyCubierto);
         if (vida <= 0)
         {
             if (muerto == false)
@@ -129,56 +128,68 @@ public class IA : MonoBehaviour
              }*/
         }
         else
-            if (!iamanagement.estoyCubierto)
         {
-
-
-            zonaAnterior = GameController.zonaAnterior;
-            zonaPersonaje = GameController.zona;
-            //Debug.Log(gameObject.name + ", " + mode);
-            switch (mode)
+            if (!iamanagement.estoyCubierto)
             {
-                case Mode.Patrol:
-                    anim.SetBool("Correr", false);
-                    anim.SetBool("Caminar", true);
-                    anim.SetBool("Disparar", false);
-                    anim.SetBool("Apuntar", false);
-                    Patrol();
-                    if (escuchaAlgo)
-                        calcularDistanciaEscuchado();
-                    break;
-                case Mode.Alert:
-                    if (interrogacion.enabled == true)
-                        interrogacion.enabled = false;
-                    exclamacion.enabled = true;
-                    anim.SetBool("Correr", true);
-                    anim.SetBool("Caminar", false);
-                    anim.SetBool("Disparar", false);
-                    anim.SetBool("Apuntar", false);
-                    Alert();
-                    break;
-                case Mode.Shooting:
+
+
+                zonaAnterior = GameController.zonaAnterior;
+                zonaPersonaje = GameController.zona;
+                //Debug.Log(gameObject.name + ", " + mode);
+                switch (mode)
+                {
+                    case Mode.Patrol:
+                        anim.SetBool("Correr", false);
+                        anim.SetBool("Caminar", true);
+                        anim.SetBool("Disparar", false);
+                        anim.SetBool("Apuntar", false);
+                        Patrol();
+                        if (escuchaAlgo)
+                            calcularDistanciaEscuchado();
+                        break;
+                    case Mode.Alert:
+                        if (interrogacion.enabled == true)
+                            interrogacion.enabled = false;
+                        exclamacion.enabled = true;
+                        anim.SetBool("Correr", true);
+                        anim.SetBool("Caminar", false);
+                        anim.SetBool("Disparar", false);
+                        anim.SetBool("Apuntar", false);
+                        Alert();
+                        break;
+                    case Mode.Shooting:
+                        anim.SetBool("Apuntar", true);
+                        anim.SetBool("Disparar", false);
+                        anim.SetBool("Correr", false);
+                        anim.SetBool("Caminar", false);
+                        Shooting();
+                        break;
+                    case Mode.Hit:
+                        break;
+                    case Mode.Search:
+                        anim.SetBool("Correr", false);
+                        anim.SetBool("Caminar", true);
+                        anim.SetBool("Disparar", false);
+                        anim.SetBool("Apuntar", false);
+                        Search();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                if (mode == Mode.Cubriendose)
+                {
                     anim.SetBool("Apuntar", true);
                     anim.SetBool("Disparar", false);
                     anim.SetBool("Correr", false);
                     anim.SetBool("Caminar", false);
-                    Shooting();
-                    break;
-                case Mode.Hit:
-                    break;
-                case Mode.Search:
-                    anim.SetBool("Correr", false);
-                    anim.SetBool("Caminar", true);
-                    anim.SetBool("Disparar", false);
-                    anim.SetBool("Apuntar", false);
-                    Search();
-                    break;
-                default:
-                    break;
+                    RotateTowards(player.transform);
+                }
+                calcularDistanciaCobertura();
             }
         }
-        else
-            calcularDistanciaCobertura();
     }
 
     private IEnumerator GetHit()
@@ -238,7 +249,6 @@ public class IA : MonoBehaviour
                     if (agent.remainingDistance <= 12f)
                     {
                         mode = Mode.Shooting;
-                        Debug.Log("piñau 2 " + "Hay mas gente apuntando? " + iamanagement.hayMasGenteApuntando);
                     }
                 }
                 else
@@ -411,8 +421,10 @@ public class IA : MonoBehaviour
         agent.Resume();
         pupa = false;
         vida--;
-        mode = Mode.Alert;
-        iamanagement.Coberturas(gameObject);
+        if(mode == Mode.Patrol)
+            mode = Mode.Alert;
+        /*if(sphere.GetComponent<Deteccion>().irACobertura && !escondiendose)
+            iamanagement.Coberturas(gameObject);*/
        
     }
 
@@ -436,10 +448,10 @@ public class IA : MonoBehaviour
 
     public void calcularDistanciaCobertura()
     {
-        if (agent.remainingDistance <= 3f)
+        if (agent.remainingDistance <= 0.3f)
         {
             agent.Stop();
-            mode = Mode.Shooting;
+            mode = Mode.Cubriendose;
             //iamanagement.estoyCubierto = false;
         }
     }

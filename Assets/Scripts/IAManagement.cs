@@ -25,6 +25,7 @@ public class IAManagement : MonoBehaviour {
     public GameObject cobertura2;
     public GameObject cobertura3;
     public bool estoyCubierto;
+    private CoberturaManager coberm;
 
 
 
@@ -170,28 +171,39 @@ public class IAManagement : MonoBehaviour {
     {
         if (guardia.transform.GetChild(0).GetComponent<Deteccion>().irACobertura) {
             estoyCubierto = true;
-            Debug.Log("de camino a la cobertura");
-           // guardia.GetComponent<IA>().mode = IA.Mode.Hit;
             switch (guardia.GetComponent<IA>().zonaEnemigo)
             {
                 case 1:
-                    guardia.GetComponent<NavMeshAgent>().destination = cobertura1.transform.position;
+                    if (cobertura1.transform.GetChild(0).GetComponent<CoberturaManager>().coberturaSegura)
+                    {
+                        guardia.GetComponent<NavMeshAgent>().destination = cobertura1.transform.GetChild(0).transform.position;
+                    }
+                    else if(cobertura1.transform.GetChild(1).GetComponent<CoberturaManager>().coberturaSegura)
+                    {
+                        guardia.GetComponent<NavMeshAgent>().destination = cobertura1.transform.GetChild(1).transform.position;
+                    }
                     break;
                 case 2:
-                    guardia.GetComponent<NavMeshAgent>().destination = cobertura2.transform.position;
+                    if (cobertura2.transform.GetChild(0).GetComponent<CoberturaManager>().coberturaSegura)
+                    {
+                        guardia.GetComponent<NavMeshAgent>().destination = cobertura2.transform.GetChild(0).transform.position;
+                    }
+                    else if (cobertura2.transform.GetChild(1).GetComponent<CoberturaManager>().coberturaSegura)
+                    {
+                        guardia.GetComponent<NavMeshAgent>().destination = cobertura2.transform.GetChild(1).transform.position;
+                    }
                     break;
                 case 3:
-                    guardia.GetComponent<NavMeshAgent>().destination = cobertura3.transform.position;
+                    if (cobertura3.transform.GetChild(0).GetComponent<CoberturaManager>().coberturaSegura)
+                    {
+                        guardia.GetComponent<NavMeshAgent>().destination = cobertura3.transform.GetChild(0).transform.position;
+                    }
+                    else if (cobertura3.transform.GetChild(1).GetComponent<CoberturaManager>().coberturaSegura)
+                    {
+                        guardia.GetComponent<NavMeshAgent>().destination = cobertura3.transform.GetChild(1).transform.position;
+                    }
                     break;
             }
-            
-            /*if (guardia.GetComponent<NavMeshAgent>().remainingDistance < 1f) {
-                Debug.Log("me paro");
-                guardia.GetComponent<NavMeshAgent>().Stop();
-                estoyCubierto = false;
-            } else {
-              //  estoyCubierto = false;
-            };*/
         }
     }
 }

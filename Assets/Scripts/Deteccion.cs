@@ -22,7 +22,7 @@ public class Deteccion : MonoBehaviour {
 
     public void OnTriggerStay(Collider other)
     {
-        if (!IaPadre.pupa && !iam.estoyCubierto && !IaPadre.muerto)
+        if (!IaPadre.pupa && IaPadre.mode != IA.Mode.Cubriendose && !IaPadre.muerto)
         {
             if (other.tag == "Player")
             {
@@ -38,7 +38,6 @@ public class Deteccion : MonoBehaviour {
                         if (hit.transform.CompareTag("Player"))
                         {
                             IaPadre.inSight = true;
-                            //Debug.Log("Te veo");
                             if (IaPadre.mode != IA.Mode.Shooting)
                             {
                                 if (IaPadre.points.Length != 0) IaPadre.currentPatrol = agent.destination;
@@ -50,7 +49,6 @@ public class Deteccion : MonoBehaviour {
                         {
                                 
                             IaPadre.inSight = false;
-                            //Debug.Log("No te veo");
                             if (IaPadre.mode == IA.Mode.Shooting)
                                 IaPadre.mode = IA.Mode.Alert;
                                 
@@ -86,13 +84,18 @@ public class Deteccion : MonoBehaviour {
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player") playerDentro = true;
-        if (other.tag == "Cobertura") irACobertura = true;
+        if (other.tag == "Cobertura") {
+            irACobertura = true;
+        }
     }
 
     public void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player") playerDentro = false;
-        if (other.tag == "Cobertura") irACobertura = false;
+        if (other.tag == "Cobertura")
+        {
+            irACobertura = false;
+        }
     }
 
     public void buscaMuertos(Collider collider)
