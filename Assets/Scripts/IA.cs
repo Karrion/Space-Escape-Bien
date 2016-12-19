@@ -16,7 +16,7 @@ public class IA : MonoBehaviour
     public enum Mode { Alert, Patrol, Shooting, Hit, Search, Escuchado,Cubriendose};
     public Mode mode = Mode.Patrol;
     private float alertTime = 0.0f;
-    private float coverTime = 0.0f;
+    public float coverTime = 0.0f;
     [HideInInspector] public Vector3 currentPatrol;
     [HideInInspector] public bool inSight;
     private GameObject sphereGameObject;
@@ -192,7 +192,6 @@ public class IA : MonoBehaviour
                     RotateTowards(player.transform);
 
                     if (coverTime >= 5f) {
-                        Debug.Log("Dentro");
                         coverTime = 0f;
                         estoyCubierto = false;
                         mode = IA.Mode.Alert;

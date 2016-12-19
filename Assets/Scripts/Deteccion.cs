@@ -106,7 +106,9 @@ public class Deteccion : MonoBehaviour {
                if (IaPadre.agent.remainingDistance < 2f) {
                     collider.gameObject.GetComponent<IA>().vida = 3;
                     collider.gameObject.GetComponent<IA>().muerto = false;
-                    collider.gameObject.GetComponent<IA>().mode = IA.Mode.Patrol;
+                    collider.gameObject.GetComponent<IA>().coverTime = 0f;
+                    collider.gameObject.GetComponent<IA>().estoyCubierto = false;
+                    collider.gameObject.GetComponent<IA>().mode = IA.Mode.Alert;
                     collider.gameObject.GetComponent<IA>().anim.SetTrigger("Revivir");
                     collider.gameObject.GetComponent<IA>().agent.Resume();
                     
