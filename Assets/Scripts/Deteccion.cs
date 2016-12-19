@@ -8,7 +8,7 @@ public class Deteccion : MonoBehaviour {
     NavMeshAgent agent;
     IAManagement iam;
     private bool playerDentro = false;
-    public bool irACobertura;
+    public bool irACobertura = false;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +22,7 @@ public class Deteccion : MonoBehaviour {
 
     public void OnTriggerStay(Collider other)
     {
-        if (!IaPadre.pupa && IaPadre.mode != IA.Mode.Cubriendose && !IaPadre.muerto)
+        if (!IaPadre.pupa && !IaPadre.estoyCubierto/*IaPadre.mode != IA.Mode.Cubriendose*/ && !IaPadre.muerto)
         {
             if (other.tag == "Player")
             {

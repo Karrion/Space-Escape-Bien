@@ -24,7 +24,7 @@ public class IAManagement : MonoBehaviour {
     public GameObject cobertura1;
     public GameObject cobertura2;
     public GameObject cobertura3;
-    public bool estoyCubierto;
+    public bool estoyCubierto = false;
     private CoberturaManager coberm;
 
 
@@ -138,6 +138,7 @@ public class IAManagement : MonoBehaviour {
         }
         if (!hayMasGenteApuntando)
         {
+            Debug.Log("socorro");
             switch (guardia.GetComponent<IA>().zonaAnterior)
             {
                 case 1:
@@ -167,11 +168,10 @@ public class IAManagement : MonoBehaviour {
         guardia.GetComponent<IA>().mode = IA.Mode.Patrol;
     }
 
-    public void Coberturas(GameObject guardia)
+    public bool Coberturas(GameObject guardia)
     {
         if (guardia.transform.GetChild(0).GetComponent<Deteccion>().irACobertura) {
-            estoyCubierto = true;
-            switch (guardia.GetComponent<IA>().zonaEnemigo)
+            switch (guardia.GetComponent<IA>().zonaPersonaje)
             {
                 case 1:
                     if (cobertura1.transform.GetChild(0).GetComponent<CoberturaManager>().coberturaSegura)
@@ -181,6 +181,10 @@ public class IAManagement : MonoBehaviour {
                     else if(cobertura1.transform.GetChild(1).GetComponent<CoberturaManager>().coberturaSegura)
                     {
                         guardia.GetComponent<NavMeshAgent>().destination = cobertura1.transform.GetChild(1).transform.position;
+                    }
+                    else if(guardia.GetComponent<IA>().mode == IA.Mode.Cubriendose)
+                    {
+                        
                     }
                     break;
                 case 2:
@@ -192,6 +196,14 @@ public class IAManagement : MonoBehaviour {
                     {
                         guardia.GetComponent<NavMeshAgent>().destination = cobertura2.transform.GetChild(1).transform.position;
                     }
+                    else if (guardia.GetComponent<IA>().mode == IA.Mode.Cubriendose)
+                    {
+                        Debug.Log("Dentro");
+                        guardia.GetComponent<IA>().mode = IA.Mode.Alert;
+                        guardia.GetComponent<NavMeshAgent>().Resume();
+                        guardia.GetComponent<NavMeshAgent>().destination = GameObject.FindGameObjectWithTag("Player").transform.position;
+                        return false;
+                    }
                     break;
                 case 3:
                     if (cobertura3.transform.GetChild(0).GetComponent<CoberturaManager>().coberturaSegura)
@@ -202,8 +214,18 @@ public class IAManagement : MonoBehaviour {
                     {
                         guardia.GetComponent<NavMeshAgent>().destination = cobertura3.transform.GetChild(1).transform.position;
                     }
+                    else if (guardia.GetComponent<IA>().mode == IA.Mode.Cubriendose)
+                    {
+                        Debug.Log("Dentro");
+                        guardia.GetComponent<IA>().mode = IA.Mode.Alert;
+                        guardia.GetComponent<NavMeshAgent>().Resume();
+                        guardia.GetComponent<NavMeshAgent>().destination = GameObject.FindGameObjectWithTag("Player").transform.position;
+                        return false;
+                    }
                     break;
             }
+            return true;
         }
+        return false;
     }
 }
