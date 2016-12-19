@@ -108,7 +108,7 @@ public class IA : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(gameObject.name + ", " + mode);
+      //  Debug.Log(gameObject.name + ", " + mode);
         if (vida <= 0)
         {
             if (muerto == false)
@@ -264,7 +264,7 @@ public class IA : MonoBehaviour
                         mode = Mode.Shooting;
                     }
                 }
-                else
+                else if(esCobarde && !iamanagement.hayMasGenteApuntando)
                 {
                     escondiendose = true;
                     iamanagement.huir(gameObject);

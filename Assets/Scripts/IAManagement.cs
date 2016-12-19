@@ -30,6 +30,7 @@ public class IAManagement : MonoBehaviour {
 
 
 
+
     public List<GameObject> listaNodosSalas = new List<GameObject>();
     GameObject nodoDestino = null;
     public bool hayMasGenteApuntando = false;
@@ -127,15 +128,16 @@ public class IAManagement : MonoBehaviour {
     }
 
     public void huir(GameObject guardia) {
-        foreach(GameObject enemigo in guardias)
+        /*foreach(GameObject enemigo in guardias)
         {
             if(enemigo.GetComponent<IA>().mode == IA.Mode.Shooting)
             {
                 hayMasGenteApuntando = true;
                 break;
-            }
+            }   
             hayMasGenteApuntando = false;
-        }
+        }*/
+        hayMasGenteApuntando = false;
         if (!hayMasGenteApuntando)
         {
             Debug.Log("socorro");
@@ -198,11 +200,7 @@ public class IAManagement : MonoBehaviour {
                     }
                     else if (guardia.GetComponent<IA>().mode == IA.Mode.Cubriendose)
                     {
-                        Debug.Log("Dentro");
-                        guardia.GetComponent<IA>().mode = IA.Mode.Alert;
-                        guardia.GetComponent<NavMeshAgent>().Resume();
-                        guardia.GetComponent<NavMeshAgent>().destination = GameObject.FindGameObjectWithTag("Player").transform.position;
-                        return false;
+                       
                     }
                     break;
                 case 3:
@@ -216,11 +214,7 @@ public class IAManagement : MonoBehaviour {
                     }
                     else if (guardia.GetComponent<IA>().mode == IA.Mode.Cubriendose)
                     {
-                        Debug.Log("Dentro");
-                        guardia.GetComponent<IA>().mode = IA.Mode.Alert;
-                        guardia.GetComponent<NavMeshAgent>().Resume();
-                        guardia.GetComponent<NavMeshAgent>().destination = GameObject.FindGameObjectWithTag("Player").transform.position;
-                        return false;
+                        
                     }
                     break;
             }
