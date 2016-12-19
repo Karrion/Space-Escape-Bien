@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -27,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
     private float Acceleration = 40f;
     private Animator anim;
     private MeshRenderer meshRenderer;
+    private GameObject[] guardias;
+    private float vida = 50;
+    Text derrota;
 
     private bool isReloading = false;
     [HideInInspector]
@@ -58,7 +63,10 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        guardias = GameObject.FindGameObjectsWithTag("Enemy");
         anim = GetComponent<Animator>();
+        derrota = GameObject.FindGameObjectWithTag("Lose").GetComponent<Text>();
+        derrota.enabled = false;
         meshRenderer = GetComponent<MeshRenderer>();
         scriptMirilla = transform.GetChild(0).GetComponent<Mirilla>();
         deUnaADos = GameObject.FindGameObjectWithTag("DesdeZona1");
@@ -83,11 +91,35 @@ public class PlayerMovement : MonoBehaviour
         initialSpeedLimit = SpeedLimit;
     }
 
+    IEnumerator EsperarAMorir()
+    {
+        yield return new WaitForSeconds(3.1f);
+        Time.timeScale = 0;
+    }
 
 
     void Update()
     {
+        if(vida <= 0)
+        {
+            anim.SetTrigger("Muerto");
+            StartCoroutine("EsperarAMorir");
+            derrota.enabled = true;
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                Time.timeScale = 1;
+                SceneManager.LoadScene("CharacterThirdPerson");
+            }
+        }
 
+        foreach(GameObject enemigo in guardias)
+        {
+            if(enemigo.GetComponent<IA>().mode == IA.Mode.Shooting)
+            {
+                vida -= Time.deltaTime * 3;
+                Debug.Log(vida);
+            }
+        }
         MovementInputValue = Input.GetAxis(MovementAxisName);
         TurnInputValue = Input.GetAxis(TurnAxisName);
 
