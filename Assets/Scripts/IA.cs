@@ -465,9 +465,13 @@ public class IA : MonoBehaviour
     {
         if (agent.remainingDistance <= 0.3f)
         {
-            Debug.Log("cubierto");
+            anim.SetBool("Caminar", false);
             agent.Stop();
             mode = Mode.Cubriendose;
+        }
+        else
+        {
+            anim.SetBool("Caminar", true);
         }
     }
 
