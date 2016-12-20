@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float CrouchLimit = 3f;
     private float initialSpeedLimit;
     private float camRayLength = 100f;
+    public Slider barra;
 
     [HideInInspector]
     public static bool enConducto = false;
@@ -30,8 +31,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private MeshRenderer meshRenderer;
     private GameObject[] guardias;
-    private float vida = 50;
+    private float vida = 100;
     Text derrota;
+    
 
     private bool isReloading = false;
     [HideInInspector]
@@ -117,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
             if(enemigo.GetComponent<IA>().mode == IA.Mode.Shooting)
             {
                 vida -= Time.deltaTime * 3;
+                barra.value = vida;
                 Debug.Log(vida);
             }
         }
